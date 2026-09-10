@@ -1,4 +1,5 @@
-﻿using Countify.Application.Wrappers;
+﻿using AutoMapper;
+using Countify.Application.Wrappers;
 using Countify.Domain.Entities.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,10 @@ public class UpdateUserCommand : IRequest<Response<bool>>
     public string RoleId { get; set; } = string.Empty;
 }
 
-public class UpdateUserCommandHandler(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+public class UpdateUserCommandHandler(
+    UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager,
+    IMapper mapper)
     : IRequestHandler<UpdateUserCommand, Response<bool>>
 {
     public async Task<Response<bool>> Handle(
@@ -30,10 +34,7 @@ public class UpdateUserCommandHandler(UserManager<ApplicationUser> userManager, 
         if (role is null)
             return Response<bool>.Failure("Rol no encontrado.");
 
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
-        user.PhoneNumber = request.Phone;
-        user.IsActive = request.IsActive;
+        mapper.Map(request, user);
 
         var currentRoles = await userManager.GetRolesAsync(user);
 

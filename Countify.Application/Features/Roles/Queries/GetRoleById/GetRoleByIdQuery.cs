@@ -1,4 +1,6 @@
-﻿using Countify.Application.Features.Roles.DTOs;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Countify.Application.Features.Roles.DTOs;
 using Countify.Application.Wrappers;
 using Countify.Domain.Interfaces;
 using MediatR;
@@ -14,7 +16,8 @@ public class GetRoleByIdQuery : IRequest<Response<RoleDetailDto>>
 
 public class GetRoleByIdQueryHandler(
     RoleManager<IdentityRole> roleManager,
-    IUnitOfWork unitOfWork)
+    IUnitOfWork unitOfWork,
+    IMapper mapper)
     : IRequestHandler<GetRoleByIdQuery, Response<RoleDetailDto>>
 {
     public async Task<Response<RoleDetailDto>> Handle(
@@ -27,20 +30,13 @@ public class GetRoleByIdQueryHandler(
         var permissions = await unitOfWork.RolePermissions.Query()
             .Where(rp => rp.RoleId == role.Id)
             .Include(rp => rp.Permission)
-            .Select(rp => new PermissionDto
-            {
-                Id = rp.Permission!.Id,
-                Name = rp.Permission.Name,
-                Description = rp.Permission.Description
-            })
+            .ProjectTo<PermissionDto>(mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return Response<RoleDetailDto>.Success(new RoleDetailDto
-        {
-            Id = role.Id,
-            Name = role.Name!,
-            PermissionCount = permissions.Count,
-            Permissions = permissions
-        });
+        var dto = mapper.Map<RoleDetailDto>(role);
+        dto.PermissionCount = permissions.Count;
+        dto.Permissions = permissions;
+
+        return Response<RoleDetailDto>.Success(dto);
     }
 }

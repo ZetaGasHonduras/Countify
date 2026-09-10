@@ -1,4 +1,5 @@
-﻿using Countify.Application.Extensions;
+﻿using AutoMapper;
+using Countify.Application.Extensions;
 using Countify.Application.Features.Roles.DTOs;
 using Countify.Application.Wrappers;
 using Countify.Domain.Interfaces;
@@ -8,7 +9,7 @@ namespace Countify.Application.Features.Roles.Queries.GetRoles;
 
 public class GetRolesQuery : RequestParameter, IRequest<PaginatedResponse<List<RoleDto>>>;
 
-public class GetRolesQueryHandler(IUnitOfWork unitOfWork)
+public class GetRolesQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
     : IRequestHandler<GetRolesQuery, PaginatedResponse<List<RoleDto>>>
 {
     public async Task<PaginatedResponse<List<RoleDto>>> Handle(
@@ -43,12 +44,9 @@ public class GetRolesQueryHandler(IUnitOfWork unitOfWork)
                     .Where(rp => rp.RoleId == role.Id),
                 cancellationToken);
 
-            dtos.Add(new RoleDto
-            {
-                Id = role.Id,
-                Name = role.Name!,
-                PermissionCount = permissionCount
-            });
+            var dto = mapper.Map<RoleDto>(role);
+            dto.PermissionCount = permissionCount;
+            dtos.Add(dto);
         }
 
         return new PaginatedResponse<List<RoleDto>>(dtos, request.PageNumber, request.PageSize, totalCount);

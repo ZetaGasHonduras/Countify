@@ -1,4 +1,5 @@
-﻿using Countify.Application.Extensions;
+﻿using AutoMapper;
+using Countify.Application.Extensions;
 using Countify.Application.Features.Roles.DTOs;
 using Countify.Application.Features.Users.DTOs;
 using Countify.Application.Wrappers;
@@ -15,7 +16,8 @@ public class GetUsersQuery : RequestParameter, IRequest<PaginatedResponse<List<U
 public class GetUsersQueryHandler(
     IUnitOfWork unitOfWork,
     UserManager<ApplicationUser> userManager,
-    RoleManager<IdentityRole> roleManager)
+    RoleManager<IdentityRole> roleManager,
+    IMapper mapper)
     : IRequestHandler<GetUsersQuery, PaginatedResponse<List<UserDto>>>
 {
     public async Task<PaginatedResponse<List<UserDto>>> Handle(
@@ -57,21 +59,12 @@ public class GetUsersQueryHandler(
             {
                 var role = await roleManager.FindByNameAsync(roleName);
                 if (role is null) continue;
-                roles.Add(new RoleDto { Id = role.Id, Name = role.Name! });
+                roles.Add(mapper.Map<RoleDto>(role));
             }
 
-            dtos.Add(new UserDto
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email!,
-                UserName = user.UserName!,
-                PhoneNumber = user.PhoneNumber,
-                IsActive = user.IsActive,
-                CreatedAt = user.CreatedAt,
-                Roles = roles
-            });
+            var dto = mapper.Map<UserDto>(user);
+            dto.Roles = roles;
+            dtos.Add(dto);
         }
 
         return new PaginatedResponse<List<UserDto>>(dtos, request.PageNumber, request.PageSize, totalCount);

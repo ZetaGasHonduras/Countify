@@ -1,4 +1,4 @@
-﻿namespace Countify.Application.Features.History.DTOs;
+﻿namespace Countify.Application.Features.Historie.DTOs;
 
 public class HistoryDto
 {

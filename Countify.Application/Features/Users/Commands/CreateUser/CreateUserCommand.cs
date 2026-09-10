@@ -1,4 +1,5 @@
-﻿using Countify.Application.Wrappers;
+﻿using AutoMapper;
+using Countify.Application.Wrappers;
 using Countify.Domain.Entities.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,10 @@ public class CreateUserCommand : IRequest<Response<string>>
     public string RoleId { get; set; } = string.Empty;
 }
 
-public class CreateUserCommandHandler(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+public class CreateUserCommandHandler(
+    UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager,
+    IMapper mapper)
     : IRequestHandler<CreateUserCommand, Response<string>>
 {
     public async Task<Response<string>> Handle(
@@ -35,16 +39,9 @@ public class CreateUserCommandHandler(UserManager<ApplicationUser> userManager, 
         if (role is null)
             return Response<string>.Failure("Rol no encontrado.");
 
-        var user = new ApplicationUser
-        {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            UserName = request.Username,
-            PhoneNumber = request.Phone,
-            IsActive = true,
-            CreatedAt = DateTime.UtcNow
-        };
+        var user = mapper.Map<ApplicationUser>(request);
+        user.IsActive = true;
+        user.CreatedAt = DateTime.UtcNow;
 
         var createResponse = await userManager.CreateAsync(user, request.Password);
         if (!createResponse.Succeeded)

@@ -1,5 +1,5 @@
 ﻿using Countify.Api.Authorization.Policies;
-using Countify.Application.Features.History.Queries;
+using Countify.Application.Features.Historie.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -33,26 +33,12 @@ public class GetUserByIdQueryHandler(
         {
             var role = await roleManager.FindByNameAsync(roleName);
             if (role is null) continue;
-            roles.Add(new RoleDto
-            {
-                Id = role.Id,
-                Name = role.Name!
-            });
+            roles.Add(mapper.Map<RoleDto>(role));
         }
 
-        return Response<UserDetailDto>.Success(new UserDetailDto
-        {
-            Id = user.Id,
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Email = user.Email!,
-            UserName = user.UserName!,
-            PhoneNumber = user.PhoneNumber,
-            IsActive = user.IsActive,
-            CreatedAt = user.CreatedAt,
-            LastActivity = user.LastActivity,
-            CreatedBy = user.CreatedBy,
-            Roles = roles
-        });
+        var dto = mapper.Map<UserDetailDto>(user);
+        dto.Roles = roles;
+
+        return Response<UserDetailDto>.Success(dto);
     }
 }

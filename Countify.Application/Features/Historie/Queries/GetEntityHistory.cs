@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Countify.Application.Extensions;
-using Countify.Application.Features.History.DTOs;
+using Countify.Application.Features.Historie.DTOs;
 using Countify.Application.Wrappers;
 using Countify.Domain.Common;
 using Countify.Domain.Interfaces;
 using MediatR;
 
-namespace Countify.Application.Features.History.Queries;
+namespace Countify.Application.Features.Historie.Queries;
 
 public class GetEntityHistoryQuery : RequestParameter, IRequest<Response<List<HistoryDto>>>
 {
