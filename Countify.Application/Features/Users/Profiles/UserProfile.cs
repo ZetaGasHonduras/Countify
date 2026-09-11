@@ -21,7 +21,6 @@ public class UserProfile : Profile
             .ForMember(d => d.PhoneNumber, o => o.MapFrom(s => s.Phone));
 
         CreateMap<UpdateUserCommand, ApplicationUser>()
-            .ForMember(d => d.PhoneNumber, o => o.MapFrom(s => s.Phone))
-            .ForMember(d => d.Email, o => o.Ignore());
+            .ForMember(d => d.PhoneNumber, o => o.MapFrom(s => s.Phone));
     }
 }

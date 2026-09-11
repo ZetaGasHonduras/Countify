@@ -35,6 +35,7 @@ public class UpdateUserCommandHandler(
             return Response<bool>.Failure("Rol no encontrado.");
 
         mapper.Map(request, user);
+        user.NormalizedEmail = userManager.NormalizeEmail(user.Email!);
 
         var currentRoles = await userManager.GetRolesAsync(user);
 
