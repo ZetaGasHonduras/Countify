@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using Countify.Domain.Entities.Auth;
 using Countify.Domain.Interfaces;
+using Countify.Domain.Seeders;
 using Countify.Infrastructure.Persistence;
 using Countify.Infrastructure.Persistence.Services;
+using Countify.Infrastructure.Seeders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +60,11 @@ public static class InfrastructureServiceRegistration
         
         // Repositories
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+        // Seeders (controlados por Seeder:Enabled en appsettings, común a todas las fases)
+        services.Configure<SeederOptions>(
+            configuration.GetSection(SeederOptions.SectionName));
+        services.AddScoped<ISeeder, CatalogSeeder>();
 
         return services;
     }

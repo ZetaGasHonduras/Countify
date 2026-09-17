@@ -22,6 +22,402 @@ namespace Countify.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Account", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("BudgetControlled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("BudgetLine")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsAuxAsset")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAuxCxc")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAuxCxp")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAuxLoan")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsBankAccount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOperable")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ParentCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Accounts", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.AccountingPeriod", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Month")
+                        .IsUnique();
+
+                    b.ToTable("AccountingPeriods", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.CompanySettings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DefaultDepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DefaultProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("FiscalYear")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("RequireConceptTypes")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RequireDepartments")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RequireProjects")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RequireSubProjects")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("UseConceptTypes")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("UseDepartments")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("UseProjects")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("UseSubProjects")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DefaultDepartmentId");
+
+                    b.HasIndex("DefaultProjectId");
+
+                    b.ToTable("CompanySettings", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.DocumentType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentTypes", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Concept")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<decimal>("CreditTotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("DebitTotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("DifferenceAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("EntryGid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("EntryNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observations")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<Guid?>("PeriodId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Reference")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("ReferenceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SourceModule")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PeriodId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("JournalEntries", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntryLine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AppliesToPayableId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AppliesToReceivableId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Concept")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<decimal>("Credit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CustomerName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("Debit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("EntryConceptType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("FixedAssetMovementId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LineGid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("LoanCertificateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SubProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("JournalEntryId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("JournalEntryLines", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProductAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("ProductAccounts", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("GroupId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("Projects", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProjectGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectGroups", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.YearEndClosingEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("GeneratedBy")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PeriodId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("YearEndClosingEntries", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Audit.History", b =>
                 {
                     b.Property<Guid>("Id")
@@ -257,6 +653,240 @@ namespace Countify.Infrastructure.Migrations
                             Id = 9,
                             Description = "Ver historial.",
                             Name = "CanViewHistorie"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "Ver departamentos.",
+                            Name = "CanViewDepartments"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Crear departamentos.",
+                            Name = "CanCreateDepartments"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "Editar departamentos.",
+                            Name = "CanEditDepartments"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "Eliminar departamentos.",
+                            Name = "CanDeleteDepartments"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Description = "Ver grupos de proyectos.",
+                            Name = "CanViewProjectGroups"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Description = "Crear grupos de proyectos.",
+                            Name = "CanCreateProjectGroups"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Description = "Editar grupos de proyectos.",
+                            Name = "CanEditProjectGroups"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Description = "Eliminar grupos de proyectos.",
+                            Name = "CanDeleteProjectGroups"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Description = "Ver proyectos.",
+                            Name = "CanViewProjects"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Description = "Crear proyectos.",
+                            Name = "CanCreateProjects"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Description = "Editar proyectos.",
+                            Name = "CanEditProjects"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Description = "Eliminar proyectos.",
+                            Name = "CanDeleteProjects"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Description = "Ver tipos de documento.",
+                            Name = "CanViewDocumentTypes"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Description = "Crear tipos de documento.",
+                            Name = "CanCreateDocumentTypes"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Description = "Editar tipos de documento.",
+                            Name = "CanEditDocumentTypes"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Description = "Eliminar tipos de documento.",
+                            Name = "CanDeleteDocumentTypes"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Description = "Ver cuentas contables.",
+                            Name = "CanViewAccounts"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Description = "Crear cuentas contables.",
+                            Name = "CanCreateAccounts"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Description = "Editar cuentas contables.",
+                            Name = "CanEditAccounts"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Description = "Eliminar cuentas contables.",
+                            Name = "CanDeleteAccounts"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Description = "Ver cuentas por producto.",
+                            Name = "CanViewProductAccounts"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Description = "Crear cuentas por producto.",
+                            Name = "CanCreateProductAccounts"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Description = "Editar cuentas por producto.",
+                            Name = "CanEditProductAccounts"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Description = "Eliminar cuentas por producto.",
+                            Name = "CanDeleteProductAccounts"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Description = "Ver períodos contables.",
+                            Name = "CanViewAccountingPeriods"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Description = "Crear períodos contables.",
+                            Name = "CanCreateAccountingPeriods"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Description = "Editar períodos contables.",
+                            Name = "CanEditAccountingPeriods"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Description = "Eliminar períodos contables.",
+                            Name = "CanDeleteAccountingPeriods"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Description = "Cerrar períodos contables.",
+                            Name = "CanCloseAccountingPeriods"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Description = "Ver partidas.",
+                            Name = "CanViewJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Description = "Crear partidas.",
+                            Name = "CanCreateJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Description = "Editar partidas.",
+                            Name = "CanEditJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Description = "Eliminar partidas.",
+                            Name = "CanDeleteJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Description = "Aprobar partidas.",
+                            Name = "CanApproveJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Description = "Contabilizar partidas.",
+                            Name = "CanPostJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Description = "Anular partidas.",
+                            Name = "CanVoidJournalEntries"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Description = "Ver configuración contable.",
+                            Name = "CanViewCompanySettings"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Description = "Editar configuración contable.",
+                            Name = "CanEditCompanySettings"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Description = "Ver reportes contables.",
+                            Name = "CanViewReports"
                         });
                 });
 
@@ -319,6 +949,201 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 9
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 10
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 11
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 12
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 13
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 14
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 15
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 16
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 17
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 18
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 19
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 20
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 21
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 22
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 23
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 24
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 25
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 26
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 27
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 28
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 29
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 30
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 31
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 32
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 33
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 34
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 35
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 36
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 37
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 38
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 39
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 40
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 41
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 42
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 43
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 44
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 45
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 46
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 47
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 48
                         });
                 });
 
@@ -478,6 +1303,95 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.CompanySettings", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "DefaultDepartment")
+                        .WithMany()
+                        .HasForeignKey("DefaultDepartmentId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "DefaultProject")
+                        .WithMany()
+                        .HasForeignKey("DefaultProjectId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("DefaultDepartment");
+
+                    b.Navigation("DefaultProject");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntry", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.AccountingPeriod", "Period")
+                        .WithMany()
+                        .HasForeignKey("PeriodId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.DocumentType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Period");
+
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntryLine", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
+                        .WithMany("Lines")
+                        .HasForeignKey("JournalEntryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("JournalEntry");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProductAccount", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Project", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.ProjectGroup", "Group")
+                        .WithMany("Projects")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Group");
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Auth.RolePermission", b =>
                 {
                     b.HasOne("Countify.Domain.Entities.Auth.Permission", "Permission")
@@ -546,6 +1460,16 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntry", b =>
+                {
+                    b.Navigation("Lines");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProjectGroup", b =>
+                {
+                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }

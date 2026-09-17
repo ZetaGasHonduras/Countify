@@ -1,4 +1,6 @@
-﻿using Countify.Infrastructure.Persistence;
+﻿using Countify.Domain.Interfaces;
+using Countify.Domain.Seeders;
+using Countify.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +25,26 @@ public static class DatabaseExtensions
         catch (Exception ex)
         {
             logger.LogError(ex, "An error occurred while migrating the database.");
+            throw;
+        }
+
+        return host;
+    }
+
+    public static IHost SeedDatabase(this IHost host)
+    {
+        using var scope = host.Services.CreateScope();
+
+        try
+        {
+            var seeders = scope.ServiceProvider.GetRequiredService<IEnumerable<ISeeder>>();
+            foreach (var seeder in seeders)
+                seeder.SeedAsync().GetAwaiter().GetResult();
+        }
+        catch (Exception ex)
+        {
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<CountifyDbContext>>();
+            logger.LogError(ex, "An error occurred while running the database seeders.");
             throw;
         }
 

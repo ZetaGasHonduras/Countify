@@ -4,13 +4,18 @@ using Countify.Infrastructure.DependencyInjection;
 using Countify.Infrastructure.Extensions;
 using Quick.AutoInject.DependencyAnnotation;
 using Scalar.AspNetCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -49,6 +54,7 @@ app.Lifetime.ApplicationStarted.Register(() =>
 });
 
 app.MigrateDatabase();
+app.SeedDatabase();
 app.UseHttpsRedirection();
 app.UseCors("CountifyPolicy");
 app.UseAuthentication();

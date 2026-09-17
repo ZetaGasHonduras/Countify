@@ -1,5 +1,6 @@
 ﻿using Countify.Application.Common.Interfaces;
 using Countify.Domain.Common;
+using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,18 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<RolePermission> RolePermissions { get; set; }
     public DbSet<History> Histories { get; set; }
+
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<DocumentType> DocumentTypes { get; set; }
+    public DbSet<AccountingPeriod> AccountingPeriods { get; set; }
+    public DbSet<ProjectGroup> ProjectGroups { get; set; }
+    public DbSet<Project> Projects { get; set; }
+    public DbSet<ProductAccount> ProductAccounts { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<CompanySettings> CompanySettings { get; set; }
+    public DbSet<JournalEntry> JournalEntries { get; set; }
+    public DbSet<JournalEntryLine> JournalEntryLines { get; set; }
+    public DbSet<YearEndClosingEntry> YearEndClosingEntries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
