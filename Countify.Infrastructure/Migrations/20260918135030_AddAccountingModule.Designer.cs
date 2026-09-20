@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Countify.Infrastructure.Migrations
 {
     [DbContext(typeof(CountifyDbContext))]
-    [Migration("20260912134653_AddAccountingModule")]
+    [Migration("20260918135030_AddAccountingModule")]
     partial class AddAccountingModule
     {
         /// <inheritdoc />
@@ -334,21 +334,67 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("JournalEntryLines", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Products", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProductAccount", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AccountId")
+                    b.Property<Guid>("CostAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IncomeAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("InventoryAccountId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("QualityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("CostAccountId");
+
+                    b.HasIndex("IncomeAccountId");
+
+                    b.HasIndex("InventoryAccountId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("QualityId");
+
+                    b.HasIndex("ProductId", "QualityId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ProductAccounts_ProductId_QualityId")
+                        .HasFilter("[QualityId] IS NOT NULL");
 
                     b.ToTable("ProductAccounts", (string)null);
                 });
@@ -398,6 +444,26 @@ namespace Countify.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectGroups", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Quality", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Qualities", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.YearEndClosingEntry", b =>
@@ -1376,13 +1442,44 @@ namespace Countify.Infrastructure.Migrations
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProductAccount", b =>
                 {
-                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "CostAccount")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("CostAccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "IncomeAccount")
+                        .WithMany()
+                        .HasForeignKey("IncomeAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "InventoryAccount")
+                        .WithMany()
+                        .HasForeignKey("InventoryAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Quality", "Quality")
+                        .WithMany()
+                        .HasForeignKey("QualityId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CostAccount");
+
+                    b.Navigation("IncomeAccount");
+
+                    b.Navigation("InventoryAccount");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Quality");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.Project", b =>

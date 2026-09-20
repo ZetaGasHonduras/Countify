@@ -21,12 +21,21 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<AccountingPeriod>? _accountingPeriods;
     private IRepository<ProjectGroup>? _projectGroups;
     private IRepository<Project>? _projects;
+    private IRepository<Product>? _products;
+    private IRepository<Quality>? _qualities;
     private IRepository<ProductAccount>? _productAccounts;
     private IRepository<Department>? _departments;
     private IRepository<CompanySettings>? _companySettings;
+    private IRepository<Budget>? _budgets;
+    private IRepository<BudgetLine>? _budgetLines;
     private IRepository<JournalEntry>? _journalEntries;
     private IRepository<JournalEntryLine>? _journalEntryLines;
     private IRepository<YearEndClosingEntry>? _yearEndClosingEntries;
+    private IRepository<BankAccount>? _bankAccounts;
+    private IRepository<BankTransactionType>? _bankTransactionTypes;
+    private IRepository<BankTransaction>? _bankTransactions;
+    private IRepository<BankReconciliation>? _bankReconciliations;
+    private IRepository<Currency>? _currencies;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -58,6 +67,12 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<Project> Projects =>
         _projects ??= new Repository<Project>(context);
 
+    public IRepository<Product> Products =>
+        _products ??= new Repository<Product>(context);
+
+    public IRepository<Quality> Qualities =>
+        _qualities ??= new Repository<Quality>(context);
+
     public IRepository<ProductAccount> ProductAccounts =>
         _productAccounts ??= new Repository<ProductAccount>(context);
 
@@ -67,6 +82,9 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<CompanySettings> CompanySettings =>
         _companySettings ??= new Repository<CompanySettings>(context);
 
+    public IRepository<Budget> Budgets => _budgets ??= new Repository<Budget>(context);
+    public IRepository<BudgetLine> BudgetLines => _budgetLines ??= new Repository<BudgetLine>(context);
+
     public IRepository<JournalEntry> JournalEntries =>
         _journalEntries ??= new Repository<JournalEntry>(context);
 
@@ -75,6 +93,11 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
 
     public IRepository<YearEndClosingEntry> YearEndClosingEntries =>
         _yearEndClosingEntries ??= new Repository<YearEndClosingEntry>(context);
+    public IRepository<BankAccount> BankAccounts => _bankAccounts ??= new Repository<BankAccount>(context);
+    public IRepository<BankTransactionType> BankTransactionTypes => _bankTransactionTypes ??= new Repository<BankTransactionType>(context);
+    public IRepository<BankTransaction> BankTransactions => _bankTransactions ??= new Repository<BankTransaction>(context);
+    public IRepository<BankReconciliation> BankReconciliations => _bankReconciliations ??= new Repository<BankReconciliation>(context);
+    public IRepository<Currency> Currencies => _currencies ??= new Repository<Currency>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);

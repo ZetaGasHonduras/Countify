@@ -1,8 +1,6 @@
 using Countify.Api.Authorization.Policies;
-using Countify.Application.Features.JournalEntries.Commands.ApproveJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.CreateJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.DeleteJournalEntry;
-using Countify.Application.Features.JournalEntries.Commands.PostJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.UpdateJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.VoidJournalEntry;
 using Countify.Application.Features.JournalEntries.Queries.GetAccountMovements;
@@ -51,16 +49,6 @@ public class JournalEntriesController : BaseController
     [Authorize(JournalEntryPolicies.CanDeleteJournalEntries)]
     public async Task<IActionResult> Delete(Guid id)
         => HandleResult(await Mediator.Send(new DeleteJournalEntryCommand { Id = id }));
-
-    [HttpPost("{id:guid}/approve")]
-    [Authorize(JournalEntryPolicies.CanApproveJournalEntries)]
-    public async Task<IActionResult> Approve(Guid id)
-        => HandleResult(await Mediator.Send(new ApproveJournalEntryCommand { Id = id }));
-
-    [HttpPost("{id:guid}/post")]
-    [Authorize(JournalEntryPolicies.CanPostJournalEntries)]
-    public async Task<IActionResult> Post(Guid id)
-        => HandleResult(await Mediator.Send(new PostJournalEntryCommand { Id = id }));
 
     [HttpPost("{id:guid}/void")]
     [Authorize(JournalEntryPolicies.CanVoidJournalEntries)]

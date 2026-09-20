@@ -1,5 +1,6 @@
 using AutoMapper;
 using Countify.Application.Features.JournalEntries.DTOs;
+using Countify.Application.Features.JournalEntries;
 using Countify.Application.Wrappers;
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Enums;
@@ -38,6 +39,15 @@ public class UpdateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
         if (entry.Status == JournalEntryStatus.Voided)
             return Response<bool>.Failure("No se pueden editar partidas anuladas.");
 
+        if (entry.PeriodId is not null)
+        {
+            var currentPeriod = await unitOfWork.AccountingPeriods.GetByIdAsync(
+                entry.PeriodId.Value, cancellationToken);
+
+            if (currentPeriod?.IsClosed == true)
+                return Response<bool>.Failure("El período de la partida está cerrado; no se puede editar.");
+        }
+
         var type = await unitOfWork.DocumentTypes.GetByIdAsync(request.TypeId, cancellationToken);
         if (type is null)
             return Response<bool>.NotFound($"Tipo de documento {request.TypeId} no encontrado.");
@@ -59,6 +69,11 @@ public class UpdateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
         var ruleError = JournalEntryRules.Validate(true, request.Lines, settings);
         if (ruleError is not null)
             return Response<bool>.Failure(ruleError);
+
+        var budgetError = await BudgetAvailabilityValidator.ValidateAsync(
+            unitOfWork, request.Lines, request.ReferenceDate, request.Id, cancellationToken);
+        if (budgetError is not null)
+            return Response<bool>.Failure(budgetError);
 
         var accountIds = request.Lines.Select(l => l.AccountId).Distinct().ToList();
         var existingAccountIds = await unitOfWork.Accounts.Query()

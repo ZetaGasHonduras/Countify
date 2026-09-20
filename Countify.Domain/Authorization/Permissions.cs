@@ -65,6 +65,31 @@ public class Permissions
     public static readonly Permission CanEditCompanySettings = Permission.Create(47, nameof(CanEditCompanySettings), "Editar configuración contable.");
 
     public static readonly Permission CanViewReports = Permission.Create(48, nameof(CanViewReports), "Ver reportes contables.");
+
+    public static readonly Permission CanViewBudgets = Permission.Create(49, nameof(CanViewBudgets), "Ver presupuestos.");
+    public static readonly Permission CanCreateBudgets = Permission.Create(50, nameof(CanCreateBudgets), "Crear presupuestos.");
+    public static readonly Permission CanEditBudgets = Permission.Create(51, nameof(CanEditBudgets), "Editar presupuestos.");
+    public static readonly Permission CanDeleteBudgets = Permission.Create(52, nameof(CanDeleteBudgets), "Eliminar presupuestos.");
+    public static readonly Permission CanViewBankAccounts = Permission.Create(53, nameof(CanViewBankAccounts), "Ver cuentas bancarias.");
+    public static readonly Permission CanCreateBankAccounts = Permission.Create(54, nameof(CanCreateBankAccounts), "Crear cuentas bancarias.");
+    public static readonly Permission CanEditBankAccounts = Permission.Create(55, nameof(CanEditBankAccounts), "Editar cuentas bancarias.");
+    public static readonly Permission CanDeleteBankAccounts = Permission.Create(56, nameof(CanDeleteBankAccounts), "Eliminar cuentas bancarias.");
+    public static readonly Permission CanViewBankTransactionTypes = Permission.Create(57, nameof(CanViewBankTransactionTypes), "Ver tipos de movimientos bancarios.");
+    public static readonly Permission CanCreateBankTransactionTypes = Permission.Create(58, nameof(CanCreateBankTransactionTypes), "Crear tipos de movimientos bancarios.");
+    public static readonly Permission CanEditBankTransactionTypes = Permission.Create(59, nameof(CanEditBankTransactionTypes), "Editar tipos de movimientos bancarios.");
+    public static readonly Permission CanDeleteBankTransactionTypes = Permission.Create(60, nameof(CanDeleteBankTransactionTypes), "Eliminar tipos de movimientos bancarios.");
+    public static readonly Permission CanViewBankTransactions = Permission.Create(61, nameof(CanViewBankTransactions), "Ver movimientos bancarios.");
+    public static readonly Permission CanCreateBankTransactions = Permission.Create(62, nameof(CanCreateBankTransactions), "Crear movimientos bancarios.");
+    public static readonly Permission CanEditBankTransactions = Permission.Create(63, nameof(CanEditBankTransactions), "Editar movimientos bancarios.");
+    public static readonly Permission CanDeleteBankTransactions = Permission.Create(64, nameof(CanDeleteBankTransactions), "Eliminar movimientos bancarios.");
+    public static readonly Permission CanViewBankReconciliations = Permission.Create(65, nameof(CanViewBankReconciliations), "Ver conciliaciones bancarias.");
+    public static readonly Permission CanCreateBankReconciliations = Permission.Create(66, nameof(CanCreateBankReconciliations), "Crear conciliaciones bancarias.");
+    public static readonly Permission CanEditBankReconciliations = Permission.Create(67, nameof(CanEditBankReconciliations), "Editar conciliaciones bancarias.");
+    public static readonly Permission CanUnreconcileBankTransactions = Permission.Create(68, nameof(CanUnreconcileBankTransactions), "Desmarcar movimientos conciliados.");
+    public static readonly Permission CanViewCurrencies = Permission.Create(69, nameof(CanViewCurrencies), "Ver monedas.");
+    public static readonly Permission CanCreateCurrencies = Permission.Create(70, nameof(CanCreateCurrencies), "Crear monedas.");
+    public static readonly Permission CanEditCurrencies = Permission.Create(71, nameof(CanEditCurrencies), "Editar monedas.");
+    public static readonly Permission CanDeleteCurrencies = Permission.Create(72, nameof(CanDeleteCurrencies), "Eliminar monedas.");
     
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)

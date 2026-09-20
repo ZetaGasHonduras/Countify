@@ -20,16 +20,29 @@ public class CatalogSeeder(
             return;
         }
 
-        await SeedDepartmentsAsync(cancellationToken);
-        await SeedProjectCatalogAsync(cancellationToken);
-        await SeedAccountsAsync(cancellationToken);
-        await SeedDocumentTypeAsync(cancellationToken);
-        await SeedAccountingPeriodsAsync(cancellationToken);
-        await SeedJournalEntriesAsync(cancellationToken);
-        await SeedYearEndClosingEntriesAsync(cancellationToken);
-        await SeedHistoriesAsync(cancellationToken);
-        await SeedCompanySettingsAsync(cancellationToken);
+        if (!options.Value.SeedConfiguration && !options.Value.SeedTransactions)
+        {
+            logger.LogInformation("Catalog seeding skipped: SeedConfiguration=false and SeedTransactions=false.");
+            return;
+        }
 
+        if (options.Value.SeedConfiguration)
+        {
+            await SeedAccountsAsync(cancellationToken);
+            await SeedCurrenciesAsync(cancellationToken);
+            await SeedDocumentTypeAsync(cancellationToken);
+        }
+
+        if (options.Value.SeedTransactions)
+        {
+            await SeedDepartmentsAsync(cancellationToken);
+            await SeedProjectCatalogAsync(cancellationToken);
+            await SeedBanksAsync(cancellationToken);
+            await SeedBudgetsAsync(cancellationToken);
+            await SeedProductCatalogAsync(cancellationToken);
+            await SeedProductAccountsAsync(cancellationToken);
+            await SeedAccountingPeriodsAsync(cancellationToken);
+        }
         await context.SaveChangesAsync(cancellationToken);
         logger.LogInformation("Catalog seed completed.");
     }
@@ -59,6 +72,50 @@ public class CatalogSeeder(
         context.Accounts.AddRange(BasicAccounts.Items);
     }
 
+    private async Task SeedBanksAsync(CancellationToken cancellationToken)
+    {
+        if (!await context.BankAccounts.AnyAsync(cancellationToken))
+            context.BankAccounts.AddRange(BasicBanks.Accounts);
+        else
+        {
+            var seededBank = await context.BankAccounts
+                .FirstOrDefaultAsync(bank => bank.Code == BasicBanks.MainBank.Code, cancellationToken);
+            if (seededBank is not null)
+                seededBank.AccountingAccountId = BasicAccounts.Banks.Id;
+        }
+        if (!await context.BankTransactionTypes.AnyAsync(cancellationToken))
+            context.BankTransactionTypes.AddRange(BasicBanks.TransactionTypes);
+    }
+
+    private async Task SeedCurrenciesAsync(CancellationToken cancellationToken)
+    {
+        if (!await context.Currencies.AnyAsync(cancellationToken))
+            context.Currencies.AddRange(BasicCurrencies.Items);
+    }
+
+    private async Task SeedProductCatalogAsync(CancellationToken cancellationToken)
+    {
+        if (!await context.Products.AnyAsync(cancellationToken))
+            context.Products.AddRange(BasicProducts.Items);
+
+        if (!await context.Qualities.AnyAsync(cancellationToken))
+            context.Qualities.AddRange(BasicQualities.Items);
+    }
+
+    private async Task SeedBudgetsAsync(CancellationToken cancellationToken)
+    {
+        if (await context.Budgets.AnyAsync(cancellationToken)) return;
+        context.Budgets.AddRange(BasicBudgets.Items);
+    }
+
+    private async Task SeedProductAccountsAsync(CancellationToken cancellationToken)
+    {
+        if (await context.ProductAccounts.AnyAsync(cancellationToken))
+            return;
+
+        context.ProductAccounts.AddRange(BasicProductAccounts.Items);
+    }
+
     private async Task SeedDocumentTypeAsync(CancellationToken cancellationToken)
     {
         if (await context.DocumentTypes.AnyAsync(d => d.IsDefault, cancellationToken))
@@ -75,35 +132,4 @@ public class CatalogSeeder(
         context.AccountingPeriods.AddRange(BasicAccountingPeriods.Items);
     }
 
-    private async Task SeedJournalEntriesAsync(CancellationToken cancellationToken)
-    {
-        if (await context.JournalEntries.AnyAsync(cancellationToken))
-            return;
-
-        context.JournalEntries.AddRange(BasicJournalEntries.Items);
-    }
-
-    private async Task SeedHistoriesAsync(CancellationToken cancellationToken)
-    {
-        if (await context.Histories.AnyAsync(cancellationToken))
-            return;
-
-        context.Histories.AddRange(BasicHistories.Items);
-    }
-
-    private async Task SeedYearEndClosingEntriesAsync(CancellationToken cancellationToken)
-    {
-        if (await context.YearEndClosingEntries.AnyAsync(cancellationToken))
-            return;
-
-        context.YearEndClosingEntries.AddRange(BasicYearEndClosingEntries.Items);
-    }
-
-    private async Task SeedCompanySettingsAsync(CancellationToken cancellationToken)
-    {
-        if (await context.CompanySettings.AnyAsync(cancellationToken))
-            return;
-
-        context.CompanySettings.AddRange(BasicCompanySettings.Items);
-    }
 }

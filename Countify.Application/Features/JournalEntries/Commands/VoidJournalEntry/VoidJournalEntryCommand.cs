@@ -23,8 +23,17 @@ public class VoidJournalEntryCommandHandler(IUnitOfWork unitOfWork)
         if (entry.Status == JournalEntryStatus.Voided)
             return Response<bool>.Success(true, 204);
 
-        if (entry.Status is not (JournalEntryStatus.Draft or JournalEntryStatus.Approved or JournalEntryStatus.Posted))
+        if (entry.Status is not JournalEntryStatus.Posted)
             return Response<bool>.Failure($"No se puede anular una partida en estado {entry.Status}.");
+
+        if (entry.PeriodId is not null)
+        {
+            var period = await unitOfWork.AccountingPeriods.GetByIdAsync(
+                entry.PeriodId.Value, cancellationToken);
+
+            if (period?.IsClosed == true)
+                return Response<bool>.Failure("El período de la partida está cerrado; no se puede anular.");
+        }
 
         entry.Status = JournalEntryStatus.Voided;
         await unitOfWork.JournalEntries.UpdateAsync(entry, cancellationToken);

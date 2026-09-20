@@ -31,7 +31,9 @@ public class Repository<T>(CountifyDbContext context) : IRepository<T>
 
     public Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
-        _dbSet.Update(entity);
+        if (_dbSet.Entry(entity).State == EntityState.Detached)
+            _dbSet.Update(entity);
+
         return Task.CompletedTask;
     }
 

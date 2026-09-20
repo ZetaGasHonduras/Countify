@@ -2,6 +2,7 @@ using AutoMapper;
 using Countify.Application.Features.Projects.Commands.CreateProject;
 using Countify.Application.Features.Projects.Commands.CreateProjectGroup;
 using Countify.Application.Features.Projects.Commands.UpdateProject;
+using Countify.Application.Features.Projects.Commands.UpdateProjectGroup;
 using Countify.Application.Features.Projects.DTOs;
 using Countify.Domain.Entities.Accounting;
 
@@ -14,6 +15,7 @@ public class ProjectProfile : Profile
         CreateMap<ProjectGroup, ProjectGroupDto>();
 
         CreateMap<CreateProjectGroupCommand, ProjectGroup>();
+        CreateMap<UpdateProjectGroupCommand, ProjectGroup>();
 
         CreateMap<Project, ProjectDto>();
 

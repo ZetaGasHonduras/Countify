@@ -23,6 +23,15 @@ public class DeleteJournalEntryCommandHandler(IUnitOfWork unitOfWork)
         if (entry.Status == JournalEntryStatus.Voided)
             return Response<bool>.Failure("No se pueden eliminar partidas anuladas.");
 
+        if (entry.PeriodId is not null)
+        {
+            var period = await unitOfWork.AccountingPeriods.GetByIdAsync(
+                entry.PeriodId.Value, cancellationToken);
+
+            if (period?.IsClosed == true)
+                return Response<bool>.Failure("El período de la partida está cerrado; no se puede eliminar.");
+        }
+
         await unitOfWork.JournalEntries.DeleteAsync(entry, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

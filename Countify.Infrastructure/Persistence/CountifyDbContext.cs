@@ -1,4 +1,5 @@
-﻿using Countify.Application.Common.Interfaces;
+﻿using System.Globalization;
+using Countify.Application.Common.Interfaces;
 using Countify.Domain.Common;
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
@@ -21,12 +22,21 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
     public DbSet<AccountingPeriod> AccountingPeriods { get; set; }
     public DbSet<ProjectGroup> ProjectGroups { get; set; }
     public DbSet<Project> Projects { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Quality> Qualities { get; set; }
     public DbSet<ProductAccount> ProductAccounts { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<CompanySettings> CompanySettings { get; set; }
     public DbSet<JournalEntry> JournalEntries { get; set; }
     public DbSet<JournalEntryLine> JournalEntryLines { get; set; }
     public DbSet<YearEndClosingEntry> YearEndClosingEntries { get; set; }
+    public DbSet<Budget> Budgets { get; set; }
+    public DbSet<BudgetLine> BudgetLines { get; set; }
+    public DbSet<BankAccount> BankAccounts { get; set; }
+    public DbSet<BankTransactionType> BankTransactionTypes { get; set; }
+    public DbSet<BankTransaction> BankTransactions { get; set; }
+    public DbSet<BankReconciliation> BankReconciliations { get; set; }
+    public DbSet<Currency> Currencies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -58,6 +68,13 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
         return await base.SaveChangesAsync(cancellationToken);
     }
 
+    private static readonly HashSet<string> IgnoredProperties = new(StringComparer.Ordinal)
+    {
+        nameof(BaseEntity.Id),
+        nameof(JournalEntry.EntryGid),
+        nameof(JournalEntryLine.LineGid)
+    };
+
     private List<History> BuildHistoryEntries()
     {
         var (userId, userName) = currentUserService.GetCurrentUser();
@@ -74,28 +91,15 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
             var entityName = entry.Entity.GetType().Name;
             var entityId = entry.Entity.Id;
 
+            var properties = entry.Properties
+                .Where(p => !IgnoredProperties.Contains(p.Metadata.Name))
+                .ToList();
+
             switch (entry.State)
             {
                 case EntityState.Added:
-                {
-                    histories.AddRange(entry.Properties.Select(prop => new History
-                    {
-                        Id = Guid.NewGuid(),
-                        Entity = entityName,
-                        Property = prop.Metadata.Name,
-                        EntityId = entityId,
-                        Date = now,
-                        UserId = userId,
-                        UserName = userName,
-                        OldValue = string.Empty,
-                        NewValue = prop.CurrentValue?.ToString() ?? string.Empty
-                    }));
-
-                    break;
-                }
-                case EntityState.Modified:
-                {
-                    histories.AddRange(entry.Properties.Where(p => p.IsModified)
+                    histories.AddRange(properties
+                        .Where(prop => !IsNoise(FormatValue(prop.CurrentValue)))
                         .Select(prop => new History
                         {
                             Id = Guid.NewGuid(),
@@ -105,12 +109,29 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
                             Date = now,
                             UserId = userId,
                             UserName = userName,
-                            OldValue = prop.OriginalValue?.ToString() ?? string.Empty,
-                            NewValue = prop.CurrentValue?.ToString() ?? string.Empty
+                            OldValue = string.Empty,
+                            NewValue = FormatValue(prop.CurrentValue)
                         }));
 
                     break;
-                }
+                case EntityState.Modified:
+                    histories.AddRange(properties
+                        .Where(p => p.IsModified &&
+                                    FormatValue(p.OriginalValue) != FormatValue(p.CurrentValue))
+                        .Select(prop => new History
+                        {
+                            Id = Guid.NewGuid(),
+                            Entity = entityName,
+                            Property = prop.Metadata.Name,
+                            EntityId = entityId,
+                            Date = now,
+                            UserId = userId,
+                            UserName = userName,
+                            OldValue = FormatValue(prop.OriginalValue),
+                            NewValue = FormatValue(prop.CurrentValue)
+                        }));
+
+                    break;
                 case EntityState.Deleted:
                     histories.Add(new History
                     {
@@ -129,5 +150,21 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
         }
 
         return histories;
+    }
+
+    private static string FormatValue(object? value)
+    {
+        if (value is null) return string.Empty;
+        if (value is DateTime dateTime) return dateTime.ToString("O");
+        if (value is DateTimeOffset dateTimeOffset) return dateTimeOffset.ToString("O");
+        if (value.GetType().IsEnum) return Enum.GetName(value.GetType(), value) ?? string.Empty;
+        return Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
+    }
+
+    private static bool IsNoise(string formatted)
+    {
+        if (string.IsNullOrWhiteSpace(formatted)) return true;
+        if (formatted == "0" || formatted == "False") return true;
+        return Guid.TryParse(formatted, out var guid) && guid == Guid.Empty;
     }
 }

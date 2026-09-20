@@ -5,4 +5,6 @@ public class SeederOptions
     public const string SectionName = "Seeder";
 
     public bool Enabled { get; set; }
+    public bool SeedConfiguration { get; set; }
+    public bool SeedTransactions { get; set; }
 }

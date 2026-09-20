@@ -79,6 +79,19 @@ namespace Countify.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProjectGroups",
                 columns: table => new
                 {
@@ -89,6 +102,19 @@ namespace Countify.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProjectGroups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Qualities",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Qualities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,25 +129,6 @@ namespace Countify.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_YearEndClosingEntries", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductAccounts",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductAccounts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductAccounts_Accounts_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "Accounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,6 +186,52 @@ namespace Countify.Infrastructure.Migrations
                         principalTable: "ProjectGroups",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QualityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    InventoryAccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IncomeAccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CostAccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductAccounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductAccounts_Accounts_CostAccountId",
+                        column: x => x.CostAccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductAccounts_Accounts_IncomeAccountId",
+                        column: x => x.IncomeAccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductAccounts_Accounts_InventoryAccountId",
+                        column: x => x.InventoryAccountId,
+                        principalTable: "Accounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductAccounts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductAccounts_Qualities_QualityId",
+                        column: x => x.QualityId,
+                        principalTable: "Qualities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -410,9 +463,42 @@ namespace Countify.Infrastructure.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductAccounts_AccountId",
+                name: "IX_ProductAccounts_CostAccountId",
                 table: "ProductAccounts",
-                column: "AccountId");
+                column: "CostAccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductAccounts_IncomeAccountId",
+                table: "ProductAccounts",
+                column: "IncomeAccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductAccounts_InventoryAccountId",
+                table: "ProductAccounts",
+                column: "InventoryAccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductAccounts_ProductId",
+                table: "ProductAccounts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductAccounts_ProductId_QualityId",
+                table: "ProductAccounts",
+                columns: new[] { "ProductId", "QualityId" },
+                unique: true,
+                filter: "[QualityId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductAccounts_QualityId",
+                table: "ProductAccounts",
+                column: "QualityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_Code",
+                table: "Products",
+                column: "Code",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_GroupId",
@@ -446,6 +532,12 @@ namespace Countify.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Qualities");
 
             migrationBuilder.DropTable(
                 name: "AccountingPeriods");

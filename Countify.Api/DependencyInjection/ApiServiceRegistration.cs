@@ -17,9 +17,14 @@ public static class ApiServiceRegistration
         services.ConfigureOptions<AccountingPeriodPolicies>();
         services.ConfigureOptions<JournalEntryPolicies>();
         services.ConfigureOptions<CompanySettingsPolicies>();
+        services.ConfigureOptions<ProductAccountPolicies>();
         services.ConfigureOptions<RolePolicies>();
         services.ConfigureOptions<UserPolicies>();
         services.ConfigureOptions<HistoryPolicies>();
+        services.ConfigureOptions<ReportsPolicies>();
+        services.ConfigureOptions<BudgetPolicies>();
+        services.ConfigureOptions<BankPolicies>();
+        services.ConfigureOptions<CurrencyPolicies>();
 
         services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
         return services;

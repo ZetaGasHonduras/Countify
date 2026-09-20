@@ -18,12 +18,21 @@ public interface IUnitOfWork : IDisposable
     IRepository<AccountingPeriod> AccountingPeriods { get; }
     IRepository<ProjectGroup> ProjectGroups { get; }
     IRepository<Project> Projects { get; }
+    IRepository<Product> Products { get; }
+    IRepository<Quality> Qualities { get; }
     IRepository<ProductAccount> ProductAccounts { get; }
     IRepository<Department> Departments { get; }
     IRepository<CompanySettings> CompanySettings { get; }
     IRepository<JournalEntry> JournalEntries { get; }
     IRepository<JournalEntryLine> JournalEntryLines { get; }
     IRepository<YearEndClosingEntry> YearEndClosingEntries { get; }
+    IRepository<Budget> Budgets { get; }
+    IRepository<BudgetLine> BudgetLines { get; }
+    IRepository<BankAccount> BankAccounts { get; }
+    IRepository<BankTransactionType> BankTransactionTypes { get; }
+    IRepository<BankTransaction> BankTransactions { get; }
+    IRepository<BankReconciliation> BankReconciliations { get; }
+    IRepository<Currency> Currencies { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

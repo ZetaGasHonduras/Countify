@@ -19,6 +19,9 @@ public class CloseAccountingPeriodCommandHandler(IUnitOfWork unitOfWork)
         if (period is null)
             return Response<bool>.NotFound($"Período {request.Id} no encontrado.");
 
+        if (period.IsClosed)
+            return Response<bool>.Failure("El período ya está cerrado.");
+
         period.IsClosed = true;
         await unitOfWork.AccountingPeriods.UpdateAsync(period, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);

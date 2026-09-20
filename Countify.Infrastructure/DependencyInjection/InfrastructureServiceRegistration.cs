@@ -61,10 +61,12 @@ public static class InfrastructureServiceRegistration
         // Repositories
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-        // Seeders (controlados por Seeder:Enabled en appsettings, común a todas las fases)
+        // Seeders controlados por flags independientes en la sección Seeder.
         services.Configure<SeederOptions>(
             configuration.GetSection(SeederOptions.SectionName));
         services.AddScoped<ISeeder, CatalogSeeder>();
+        services.AddScoped<ISeeder, ConfigurationSeeder>();
+        services.AddScoped<ISeeder, TransactionSeeder>();
 
         return services;
     }

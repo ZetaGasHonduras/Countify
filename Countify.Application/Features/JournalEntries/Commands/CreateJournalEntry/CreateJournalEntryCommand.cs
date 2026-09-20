@@ -1,5 +1,6 @@
 using AutoMapper;
 using Countify.Application.Features.JournalEntries.DTOs;
+using Countify.Application.Features.JournalEntries;
 using Countify.Application.Wrappers;
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Enums;
@@ -48,6 +49,11 @@ public class CreateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
         var ruleError = JournalEntryRules.Validate(true, request.Lines, settings);
         if (ruleError is not null)
             return Response<Guid>.Failure(ruleError);
+
+        var budgetError = await BudgetAvailabilityValidator.ValidateAsync(
+            unitOfWork, request.Lines, request.ReferenceDate, null, cancellationToken);
+        if (budgetError is not null)
+            return Response<Guid>.Failure(budgetError);
 
         var accountIds = request.Lines.Select(l => l.AccountId).Distinct().ToList();
         var existingAccountIds = await unitOfWork.Accounts.Query()

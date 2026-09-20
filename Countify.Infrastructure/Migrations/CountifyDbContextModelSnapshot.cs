@@ -104,6 +104,336 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("AccountingPeriods", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("AccountingAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Balance")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CheckNumber")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid>("CurrencyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("CutoffDay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DefaultNdNcText")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Interest")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountingAccountId");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("BankAccounts", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankReconciliation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BankAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("BookBalance")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("ReconciliationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("StatementBalance")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankAccountId");
+
+                    b.ToTable("BankReconciliations", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankTransaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("BankAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BankReconciliationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Beneficiary")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Concept")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid>("CounterpartAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CurrencyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("ExchangeRate")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<Guid?>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("LocalAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Reconciled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Reference")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("TransactionTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TransactionTypeValue")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("Voided")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankReconciliationId");
+
+                    b.HasIndex("CounterpartAccountId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("JournalEntryId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("TransactionTypeId");
+
+                    b.HasIndex("BankAccountId", "Reference")
+                        .IsUnique()
+                        .HasFilter("[Reference] IS NOT NULL");
+
+                    b.ToTable("BankTransactions", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankTransactionType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("MovementType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("BankTransactionTypes", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_BankTransactionTypes_TransactionType", "[TransactionType] IN ('DEBITO', 'CREDITO')");
+                        });
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Budget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("FiscalYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FiscalYear", "Name")
+                        .IsUnique();
+
+                    b.ToTable("Budgets", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BudgetLine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("April")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("August")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("BudgetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("December")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("February")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("January")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("July")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("June")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("March")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("May")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("November")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("October")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("September")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("BudgetId", "AccountId", "DepartmentId", "ProjectId")
+                        .IsUnique();
+
+                    b.ToTable("BudgetLines", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.CompanySettings", b =>
                 {
                     b.Property<Guid>("Id")
@@ -150,6 +480,37 @@ namespace Countify.Infrastructure.Migrations
                     b.HasIndex("DefaultProjectId");
 
                     b.ToTable("CompanySettings", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Currency", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<decimal>("ExchangeRate")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Currencies", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.Department", b =>
@@ -331,21 +692,67 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("JournalEntryLines", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Products", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProductAccount", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AccountId")
+                    b.Property<Guid>("CostAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IncomeAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("InventoryAccountId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("QualityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("CostAccountId");
+
+                    b.HasIndex("IncomeAccountId");
+
+                    b.HasIndex("InventoryAccountId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("QualityId");
+
+                    b.HasIndex("ProductId", "QualityId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_ProductAccounts_ProductId_QualityId")
+                        .HasFilter("[QualityId] IS NOT NULL");
 
                     b.ToTable("ProductAccounts", (string)null);
                 });
@@ -395,6 +802,26 @@ namespace Countify.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectGroups", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Quality", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Qualities", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.YearEndClosingEntry", b =>
@@ -887,6 +1314,150 @@ namespace Countify.Infrastructure.Migrations
                             Id = 48,
                             Description = "Ver reportes contables.",
                             Name = "CanViewReports"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Description = "Ver presupuestos.",
+                            Name = "CanViewBudgets"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Description = "Crear presupuestos.",
+                            Name = "CanCreateBudgets"
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Description = "Editar presupuestos.",
+                            Name = "CanEditBudgets"
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Description = "Eliminar presupuestos.",
+                            Name = "CanDeleteBudgets"
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Description = "Ver cuentas bancarias.",
+                            Name = "CanViewBankAccounts"
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Description = "Crear cuentas bancarias.",
+                            Name = "CanCreateBankAccounts"
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Description = "Editar cuentas bancarias.",
+                            Name = "CanEditBankAccounts"
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Description = "Eliminar cuentas bancarias.",
+                            Name = "CanDeleteBankAccounts"
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Description = "Ver tipos de movimientos bancarios.",
+                            Name = "CanViewBankTransactionTypes"
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Description = "Crear tipos de movimientos bancarios.",
+                            Name = "CanCreateBankTransactionTypes"
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Description = "Editar tipos de movimientos bancarios.",
+                            Name = "CanEditBankTransactionTypes"
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Description = "Eliminar tipos de movimientos bancarios.",
+                            Name = "CanDeleteBankTransactionTypes"
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Description = "Ver movimientos bancarios.",
+                            Name = "CanViewBankTransactions"
+                        },
+                        new
+                        {
+                            Id = 62,
+                            Description = "Crear movimientos bancarios.",
+                            Name = "CanCreateBankTransactions"
+                        },
+                        new
+                        {
+                            Id = 63,
+                            Description = "Editar movimientos bancarios.",
+                            Name = "CanEditBankTransactions"
+                        },
+                        new
+                        {
+                            Id = 64,
+                            Description = "Eliminar movimientos bancarios.",
+                            Name = "CanDeleteBankTransactions"
+                        },
+                        new
+                        {
+                            Id = 65,
+                            Description = "Ver conciliaciones bancarias.",
+                            Name = "CanViewBankReconciliations"
+                        },
+                        new
+                        {
+                            Id = 66,
+                            Description = "Crear conciliaciones bancarias.",
+                            Name = "CanCreateBankReconciliations"
+                        },
+                        new
+                        {
+                            Id = 67,
+                            Description = "Editar conciliaciones bancarias.",
+                            Name = "CanEditBankReconciliations"
+                        },
+                        new
+                        {
+                            Id = 68,
+                            Description = "Desmarcar movimientos conciliados.",
+                            Name = "CanUnreconcileBankTransactions"
+                        },
+                        new
+                        {
+                            Id = 69,
+                            Description = "Ver monedas.",
+                            Name = "CanViewCurrencies"
+                        },
+                        new
+                        {
+                            Id = 70,
+                            Description = "Crear monedas.",
+                            Name = "CanCreateCurrencies"
+                        },
+                        new
+                        {
+                            Id = 71,
+                            Description = "Editar monedas.",
+                            Name = "CanEditCurrencies"
+                        },
+                        new
+                        {
+                            Id = 72,
+                            Description = "Eliminar monedas.",
+                            Name = "CanDeleteCurrencies"
                         });
                 });
 
@@ -1144,6 +1715,126 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 48
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 49
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 50
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 51
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 52
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 53
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 54
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 55
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 56
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 57
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 58
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 59
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 60
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 61
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 62
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 63
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 64
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 65
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 66
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 67
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 68
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 69
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 70
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 71
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 72
                         });
                 });
 
@@ -1303,6 +1994,148 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankAccount", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "AccountingAccount")
+                        .WithMany()
+                        .HasForeignKey("AccountingAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("AccountingAccount");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankReconciliation", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.BankAccount", "BankAccount")
+                        .WithMany()
+                        .HasForeignKey("BankAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BankAccount");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankTransaction", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.BankAccount", "BankAccount")
+                        .WithMany()
+                        .HasForeignKey("BankAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.BankReconciliation", "BankReconciliation")
+                        .WithMany("Transactions")
+                        .HasForeignKey("BankReconciliationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "CounterpartAccount")
+                        .WithMany()
+                        .HasForeignKey("CounterpartAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
+                        .WithMany()
+                        .HasForeignKey("JournalEntryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.BankTransactionType", "TransactionType")
+                        .WithMany()
+                        .HasForeignKey("TransactionTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BankAccount");
+
+                    b.Navigation("BankReconciliation");
+
+                    b.Navigation("CounterpartAccount");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("JournalEntry");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("TransactionType");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BudgetLine", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Budget", "Budget")
+                        .WithMany("Lines")
+                        .HasForeignKey("BudgetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.CompanySettings", b =>
                 {
                     b.HasOne("Countify.Domain.Entities.Accounting.Department", "DefaultDepartment")
@@ -1373,13 +2206,44 @@ namespace Countify.Infrastructure.Migrations
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProductAccount", b =>
                 {
-                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "CostAccount")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("CostAccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "IncomeAccount")
+                        .WithMany()
+                        .HasForeignKey("IncomeAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "InventoryAccount")
+                        .WithMany()
+                        .HasForeignKey("InventoryAccountId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Quality", "Quality")
+                        .WithMany()
+                        .HasForeignKey("QualityId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("CostAccount");
+
+                    b.Navigation("IncomeAccount");
+
+                    b.Navigation("InventoryAccount");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Quality");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.Project", b =>
@@ -1460,6 +2324,16 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.BankReconciliation", b =>
+                {
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.Budget", b =>
+                {
+                    b.Navigation("Lines");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntry", b =>

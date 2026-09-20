@@ -18,7 +18,7 @@ public class JournalEntry : BaseEntity
     public decimal DebitTotal { get; set; }
     public decimal CreditTotal { get; set; }
     public decimal DifferenceAmount { get; set; }
-    public JournalEntryStatus Status { get; set; } = JournalEntryStatus.Draft;
+    public JournalEntryStatus Status { get; set; } = JournalEntryStatus.Posted;
     public SourceModule SourceModule { get; set; } = SourceModule.Manually;
     public Guid EntryGid { get; set; }
     public List<JournalEntryLine> Lines { get; set; } = [];
