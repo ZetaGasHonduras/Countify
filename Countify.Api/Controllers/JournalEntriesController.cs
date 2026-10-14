@@ -3,9 +3,11 @@ using Countify.Application.Features.JournalEntries.Commands.CreateJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.DeleteJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.UpdateJournalEntry;
 using Countify.Application.Features.JournalEntries.Commands.VoidJournalEntry;
+using Countify.Application.Features.Configurations.Queries.GetCompanySettings;
 using Countify.Application.Features.JournalEntries.Queries.GetAccountMovements;
 using Countify.Application.Features.JournalEntries.Queries.GetJournalEntries;
 using Countify.Application.Features.JournalEntries.Queries.GetJournalEntryById;
+using Countify.Infrastructure.TemplateBuilder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +26,18 @@ public class JournalEntriesController : BaseController
     [Authorize(JournalEntryPolicies.CanViewJournalEntries)]
     public async Task<IActionResult> GetById(Guid id)
         => HandleResult(await Mediator.Send(new GetJournalEntryByIdQuery { Id = id }));
+
+    [HttpGet("{id:guid}/export/pdf")]
+    [Authorize(JournalEntryPolicies.CanViewJournalEntries)]
+    public async Task<IActionResult> ExportPdf(Guid id)
+    {
+        var result = await Mediator.Send(new GetJournalEntryByIdQuery { Id = id });
+        if (!result.IsSuccess || result.Data is null) return HandleResult(result);
+
+        var entry = result.Data;
+        var settings = await Mediator.Send(new GetCompanySettingsQuery());
+        return File(JournalEntryPdfBuilder.Build(entry, settings.Data), "application/pdf", $"partida-{entry.EntryNumber}.pdf");
+    }
 
     [HttpGet("account-movements")]
     [Authorize(JournalEntryPolicies.CanViewJournalEntries)]

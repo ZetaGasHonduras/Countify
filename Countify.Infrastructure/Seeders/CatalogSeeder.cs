@@ -42,6 +42,8 @@ public class CatalogSeeder(
             await SeedProductCatalogAsync(cancellationToken);
             await SeedProductAccountsAsync(cancellationToken);
             await SeedAccountingPeriodsAsync(cancellationToken);
+            await SeedCustomerCatalogAsync(cancellationToken);
+            await SeedAccountsReceivableConceptsAsync(cancellationToken);
         }
         await context.SaveChangesAsync(cancellationToken);
         logger.LogInformation("Catalog seed completed.");
@@ -130,6 +132,56 @@ public class CatalogSeeder(
             return;
 
         context.AccountingPeriods.AddRange(BasicAccountingPeriods.Items);
+    }
+
+    private async Task SeedCustomerCatalogAsync(CancellationToken cancellationToken)
+    {
+        if (!await context.CustomerTypes.AnyAsync(cancellationToken))
+        {
+            var arAccount = await context.Accounts
+                .FirstOrDefaultAsync(account => account.Code == BasicAccounts.AccountsReceivable.Code, cancellationToken);
+
+            foreach (var item in BasicCustomerTypes.Items)
+                item.AccountingAccountId = arAccount?.Id;
+
+            context.CustomerTypes.AddRange(BasicCustomerTypes.Items);
+        }
+
+        if (!await context.Customers.AnyAsync(cancellationToken))
+        {
+            var creditType = await context.CustomerTypes
+                .FirstOrDefaultAsync(type => type.Code == BasicCustomerTypes.Credit.Code, cancellationToken);
+            var arAccount = await context.Accounts
+                .FirstOrDefaultAsync(account => account.Code == BasicAccounts.AccountsReceivable.Code, cancellationToken);
+
+            foreach (var item in BasicCustomers.Items)
+            {
+                item.CustomerTypeId = ReferenceEquals(item, BasicCustomers.CashCustomer) ? null : creditType?.Id;
+                item.AccountingAccountId = ReferenceEquals(item, BasicCustomers.CashCustomer) ? null : arAccount?.Id;
+            }
+
+            context.Customers.AddRange(BasicCustomers.Items);
+        }
+    }
+
+    private async Task SeedAccountsReceivableConceptsAsync(CancellationToken cancellationToken)
+    {
+        if (await context.AccountsReceivableConcepts.AnyAsync(cancellationToken))
+            return;
+
+        var arAccount = await context.Accounts
+            .FirstOrDefaultAsync(account => account.Code == BasicAccounts.AccountsReceivable.Code, cancellationToken);
+
+        foreach (var item in BasicAccountsReceivableConcepts.Items)
+        {
+            if (ReferenceEquals(item, BasicAccountsReceivableConcepts.Receipt) ||
+                ReferenceEquals(item, BasicAccountsReceivableConcepts.DownPayment))
+                continue;
+
+            item.AccountId = arAccount?.Id;
+        }
+
+        context.AccountsReceivableConcepts.AddRange(BasicAccountsReceivableConcepts.Items);
     }
 
 }

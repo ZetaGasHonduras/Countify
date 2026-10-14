@@ -8,6 +8,12 @@ namespace Countify.Application.Features.Configurations.Commands.UpdateCompanySet
 
 public class UpdateCompanySettingsCommand : IRequest<Response<bool>>
 {
+    public string CompanyName { get; set; } = string.Empty;
+    public string TaxId { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public string Phone { get; set; } = string.Empty;
+    public string Mobile { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     public int FiscalYear { get; set; }
     public Guid? DefaultProjectId { get; set; }
     public Guid? DefaultDepartmentId { get; set; }
@@ -52,6 +58,12 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
         {
             settings = new CompanySettings
             {
+                CompanyName = request.CompanyName.Trim(),
+                TaxId = request.TaxId.Trim(),
+                Address = request.Address.Trim(),
+                Phone = request.Phone.Trim(),
+                Mobile = request.Mobile.Trim(),
+                Email = request.Email.Trim(),
                 FiscalYear = request.FiscalYear,
                 DefaultProjectId = request.DefaultProjectId,
                 DefaultDepartmentId = request.DefaultDepartmentId,
@@ -69,6 +81,12 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
         }
         else
         {
+            settings.CompanyName = request.CompanyName.Trim();
+            settings.TaxId = request.TaxId.Trim();
+            settings.Address = request.Address.Trim();
+            settings.Phone = request.Phone.Trim();
+            settings.Mobile = request.Mobile.Trim();
+            settings.Email = request.Email.Trim();
             settings.FiscalYear = request.FiscalYear;
             settings.DefaultProjectId = request.DefaultProjectId;
             settings.DefaultDepartmentId = request.DefaultDepartmentId;

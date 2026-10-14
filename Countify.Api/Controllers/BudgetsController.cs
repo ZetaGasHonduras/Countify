@@ -42,9 +42,11 @@ public class BudgetsController(IUnitOfWork unitOfWork) : BaseController
 
     [HttpPut("{id:guid}")]
     [Authorize(BudgetPolicies.CanEditBudgets)]
-    public async Task<IActionResult> Update(Guid id, [FromBody] BudgetRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(Guid id, [FromBody] BudgetRequest request,
+        CancellationToken cancellationToken)
     {
-        var budget = await unitOfWork.Budgets.Query().Include(b => b.Lines).FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
+        var budget = await unitOfWork.Budgets.Query().Include(b => b.Lines)
+            .FirstOrDefaultAsync(b => b.Id == id, cancellationToken);
         if (budget is null) return NotFound(new { error = "Presupuesto no encontrado." });
 
         var validationError = await ValidateRequest(request, cancellationToken, id);
@@ -74,7 +76,8 @@ public class BudgetsController(IUnitOfWork unitOfWork) : BaseController
         return NoContent();
     }
 
-    private async Task<string?> ApplyLines(Budget budget, IEnumerable<BudgetLineRequest> requests, CancellationToken cancellationToken)
+    private async Task<string?> ApplyLines(Budget budget, IEnumerable<BudgetLineRequest> requests,
+        CancellationToken cancellationToken)
     {
         var lines = requests.ToList();
         if (lines.Count == 0) return "El presupuesto debe tener al menos una línea.";
@@ -111,10 +114,12 @@ public class BudgetsController(IUnitOfWork unitOfWork) : BaseController
                 December = request.December
             });
         }
+
         return null;
     }
 
-    private async Task<string?> ValidateRequest(BudgetRequest request, CancellationToken cancellationToken, Guid? currentId = null)
+    private async Task<string?> ValidateRequest(BudgetRequest request, CancellationToken cancellationToken,
+        Guid? currentId = null)
     {
         if (request.FiscalYear is < 2000 or > 2100) return "El año fiscal debe estar entre 2000 y 2100.";
         if (string.IsNullOrWhiteSpace(request.Name) || request.Name.Trim().Length > 200)
@@ -122,7 +127,9 @@ public class BudgetsController(IUnitOfWork unitOfWork) : BaseController
         if (request.Lines is null) return "Las líneas del presupuesto son obligatorias.";
 
         var duplicate = await unitOfWork.Budgets.Query()
-            .AnyAsync(b => b.FiscalYear == request.FiscalYear && b.Name == request.Name.Trim() && (!currentId.HasValue || b.Id != currentId.Value), cancellationToken);
+            .AnyAsync(
+                b => b.FiscalYear == request.FiscalYear && b.Name == request.Name.Trim() &&
+                     (!currentId.HasValue || b.Id != currentId.Value), cancellationToken);
         return duplicate ? "Ya existe un presupuesto con ese año y nombre." : null;
     }
 
@@ -161,9 +168,30 @@ public class BudgetsController(IUnitOfWork unitOfWork) : BaseController
         public decimal November { get; set; }
         public decimal December { get; set; }
 
-        public IEnumerable<decimal> Months() => [January, February, March, April, May, June, July, August, September, October, November, December];
+        public IEnumerable<decimal> Months() =>
+        [
+            January, February, March, April, May, June, July, August, September, October, November, December
+        ];
     }
 
     public sealed record BudgetResponse(Guid Id, int FiscalYear, string Name, List<BudgetLineResponse> Lines);
-    public sealed record BudgetLineResponse(Guid Id, Guid AccountId, Guid DepartmentId, Guid ProjectId, decimal January, decimal February, decimal March, decimal April, decimal May, decimal June, decimal July, decimal August, decimal September, decimal October, decimal November, decimal December, decimal Total);
+
+    public sealed record BudgetLineResponse(
+        Guid Id,
+        Guid AccountId,
+        Guid DepartmentId,
+        Guid ProjectId,
+        decimal January,
+        decimal February,
+        decimal March,
+        decimal April,
+        decimal May,
+        decimal June,
+        decimal July,
+        decimal August,
+        decimal September,
+        decimal October,
+        decimal November,
+        decimal December,
+        decimal Total);
 }

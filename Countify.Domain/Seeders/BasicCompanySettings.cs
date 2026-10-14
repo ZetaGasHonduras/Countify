@@ -7,6 +7,12 @@ public static class BasicCompanySettings
     public static readonly CompanySettings Default = new()
     {
         Id = Guid.Parse("20000000-0000-0000-0000-000000000001"),
+        CompanyName = "",
+        TaxId = "",
+        Address = "",
+        Phone = "",
+        Mobile = "",
+        Email = "",
         FiscalYear = DateTime.UtcNow.Year,
         DefaultProjectId = Guid.Parse("40000000-0000-0000-0000-000000000002"),
         DefaultDepartmentId = Guid.Parse("60000000-0000-0000-0000-000000000002"),

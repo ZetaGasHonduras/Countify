@@ -1,6 +1,7 @@
-﻿using Countify.Domain.Entities.Accounting;
+using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
+using Countify.Domain.Entities.AccountsReceivable;
 using Countify.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Quick.AutoInject.Services;
@@ -36,6 +37,11 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<BankTransaction>? _bankTransactions;
     private IRepository<BankReconciliation>? _bankReconciliations;
     private IRepository<Currency>? _currencies;
+    private IRepository<CustomerType>? _customerTypes;
+    private IRepository<Customer>? _customers;
+    private IRepository<AccountsReceivableConcept>? _accountsReceivableConcepts;
+    private IRepository<AccountsReceivableDocument>? _accountsReceivableDocuments;
+    private IRepository<AccountsReceivableDocumentLine>? _accountsReceivableDocumentLines;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -98,6 +104,11 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<BankTransaction> BankTransactions => _bankTransactions ??= new Repository<BankTransaction>(context);
     public IRepository<BankReconciliation> BankReconciliations => _bankReconciliations ??= new Repository<BankReconciliation>(context);
     public IRepository<Currency> Currencies => _currencies ??= new Repository<Currency>(context);
+    public IRepository<CustomerType> CustomerTypes => _customerTypes ??= new Repository<CustomerType>(context);
+    public IRepository<Customer> Customers => _customers ??= new Repository<Customer>(context);
+    public IRepository<AccountsReceivableConcept> AccountsReceivableConcepts => _accountsReceivableConcepts ??= new Repository<AccountsReceivableConcept>(context);
+    public IRepository<AccountsReceivableDocument> AccountsReceivableDocuments => _accountsReceivableDocuments ??= new Repository<AccountsReceivableDocument>(context);
+    public IRepository<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines => _accountsReceivableDocumentLines ??= new Repository<AccountsReceivableDocumentLine>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);

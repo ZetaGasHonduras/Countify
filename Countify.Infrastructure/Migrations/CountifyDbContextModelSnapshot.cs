@@ -219,6 +219,9 @@ namespace Countify.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid?>("AppliesToReceivableId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("BankAccountId")
                         .HasColumnType("uniqueidentifier");
 
@@ -238,6 +241,10 @@ namespace Countify.Infrastructure.Migrations
 
                     b.Property<Guid>("CurrencyId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CustomerName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -440,14 +447,34 @@ namespace Countify.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("DefaultDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("DefaultProjectId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("FiscalYear")
                         .HasColumnType("int");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("RequireConceptTypes")
                         .HasColumnType("bit");
@@ -460,6 +487,10 @@ namespace Countify.Infrastructure.Migrations
 
                     b.Property<bool>("RequireSubProjects")
                         .HasColumnType("bit");
+
+                    b.Property<string>("TaxId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("UseConceptTypes")
                         .HasColumnType("bit");
@@ -843,6 +874,248 @@ namespace Countify.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("YearEndClosingEntries", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableConcept", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("GeneratePosting")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReceipt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Observations")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("AccountsReceivableConcepts", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppliesTo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid>("ConceptId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CurrencyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("DocumentNo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentNo"));
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("ExchangeRate")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<bool>("IsVoided")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("ReceiptNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Reference")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConceptId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("DocumentNo")
+                        .IsUnique();
+
+                    b.HasIndex("JournalEntryId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("ReceiptNumber")
+                        .IsUnique()
+                        .HasFilter("[ReceiptNumber] IS NOT NULL");
+
+                    b.ToTable("AccountsReceivableDocuments", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocumentLine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("AppliedDocumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppliedDocumentId");
+
+                    b.HasIndex("DocumentId", "AppliedDocumentId")
+                        .IsUnique();
+
+                    b.ToTable("AccountsReceivableDocumentLines", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountingAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("CreditDays")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CreditLimit")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CustomerTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("IdentityDocument")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("TaxId")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountingAccountId");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("CustomerTypeId");
+
+                    b.ToTable("Customers", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.CustomerType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountingAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountingAccountId");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("CustomerTypes", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Audit.History", b =>
@@ -1458,6 +1731,102 @@ namespace Countify.Infrastructure.Migrations
                             Id = 72,
                             Description = "Eliminar monedas.",
                             Name = "CanDeleteCurrencies"
+                        },
+                        new
+                        {
+                            Id = 73,
+                            Description = "Ver tipos de cliente.",
+                            Name = "CanViewCustomerTypes"
+                        },
+                        new
+                        {
+                            Id = 74,
+                            Description = "Crear tipos de cliente.",
+                            Name = "CanCreateCustomerTypes"
+                        },
+                        new
+                        {
+                            Id = 75,
+                            Description = "Editar tipos de cliente.",
+                            Name = "CanEditCustomerTypes"
+                        },
+                        new
+                        {
+                            Id = 76,
+                            Description = "Eliminar tipos de cliente.",
+                            Name = "CanDeleteCustomerTypes"
+                        },
+                        new
+                        {
+                            Id = 77,
+                            Description = "Ver clientes.",
+                            Name = "CanViewCustomers"
+                        },
+                        new
+                        {
+                            Id = 78,
+                            Description = "Crear clientes.",
+                            Name = "CanCreateCustomers"
+                        },
+                        new
+                        {
+                            Id = 79,
+                            Description = "Editar clientes.",
+                            Name = "CanEditCustomers"
+                        },
+                        new
+                        {
+                            Id = 80,
+                            Description = "Eliminar clientes.",
+                            Name = "CanDeleteCustomers"
+                        },
+                        new
+                        {
+                            Id = 81,
+                            Description = "Ver conceptos de cuentas por cobrar.",
+                            Name = "CanViewAccountsReceivableConcepts"
+                        },
+                        new
+                        {
+                            Id = 82,
+                            Description = "Crear conceptos de cuentas por cobrar.",
+                            Name = "CanCreateAccountsReceivableConcepts"
+                        },
+                        new
+                        {
+                            Id = 83,
+                            Description = "Editar conceptos de cuentas por cobrar.",
+                            Name = "CanEditAccountsReceivableConcepts"
+                        },
+                        new
+                        {
+                            Id = 84,
+                            Description = "Eliminar conceptos de cuentas por cobrar.",
+                            Name = "CanDeleteAccountsReceivableConcepts"
+                        },
+                        new
+                        {
+                            Id = 85,
+                            Description = "Ver documentos por cobrar.",
+                            Name = "CanViewAccountsReceivableDocuments"
+                        },
+                        new
+                        {
+                            Id = 86,
+                            Description = "Crear documentos por cobrar.",
+                            Name = "CanCreateAccountsReceivableDocuments"
+                        },
+                        new
+                        {
+                            Id = 87,
+                            Description = "Editar documentos por cobrar.",
+                            Name = "CanEditAccountsReceivableDocuments"
+                        },
+                        new
+                        {
+                            Id = 88,
+                            Description = "Anular documentos por cobrar.",
+                            Name = "CanVoidAccountsReceivableDocuments"
                         });
                 });
 
@@ -1835,6 +2204,86 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 72
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 73
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 74
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 75
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 76
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 77
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 78
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 79
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 80
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 81
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 82
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 83
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 84
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 85
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 86
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 87
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 88
                         });
                 });
 
@@ -2256,6 +2705,110 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("Group");
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableConcept", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableConcept", "Concept")
+                        .WithMany()
+                        .HasForeignKey("ConceptId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.AccountsReceivable.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
+                        .WithMany()
+                        .HasForeignKey("JournalEntryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Concept");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("JournalEntry");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocumentLine", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", "AppliedDocument")
+                        .WithMany()
+                        .HasForeignKey("AppliedDocumentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", "Document")
+                        .WithMany("Lines")
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AppliedDocument");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.Customer", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "AccountingAccount")
+                        .WithMany()
+                        .HasForeignKey("AccountingAccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.AccountsReceivable.CustomerType", "CustomerType")
+                        .WithMany()
+                        .HasForeignKey("CustomerTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("AccountingAccount");
+
+                    b.Navigation("CustomerType");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.CustomerType", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "AccountingAccount")
+                        .WithMany()
+                        .HasForeignKey("AccountingAccountId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("AccountingAccount");
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Auth.RolePermission", b =>
                 {
                     b.HasOne("Countify.Domain.Entities.Auth.Permission", "Permission")
@@ -2344,6 +2897,11 @@ namespace Countify.Infrastructure.Migrations
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.ProjectGroup", b =>
                 {
                     b.Navigation("Projects");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", b =>
+                {
+                    b.Navigation("Lines");
                 });
 #pragma warning restore 612, 618
         }

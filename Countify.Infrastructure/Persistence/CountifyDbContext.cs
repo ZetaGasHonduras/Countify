@@ -1,9 +1,10 @@
-﻿using System.Globalization;
+using System.Globalization;
 using Countify.Application.Common.Interfaces;
 using Countify.Domain.Common;
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
+using Countify.Domain.Entities.AccountsReceivable;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,11 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
     public DbSet<BankTransaction> BankTransactions { get; set; }
     public DbSet<BankReconciliation> BankReconciliations { get; set; }
     public DbSet<Currency> Currencies { get; set; }
+public DbSet<CustomerType> CustomerTypes { get; set; }
+public DbSet<Customer> Customers { get; set; }
+public DbSet<AccountsReceivableConcept> AccountsReceivableConcepts { get; set; }
+public DbSet<AccountsReceivableDocument> AccountsReceivableDocuments { get; set; }
+public DbSet<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -4,6 +4,12 @@ namespace Countify.Domain.Entities.Accounting;
 
 public class CompanySettings : BaseEntity
 {
+    public string CompanyName { get; set; } = string.Empty;
+    public string TaxId { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public string Phone { get; set; } = string.Empty;
+    public string Mobile { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     // Subset of the legacy Controles singleton currently migrated for accounting.
     // Legacy Controles also contains payroll, inventory, billing and integration settings.
     public int FiscalYear { get; set; } = DateTime.UtcNow.Year;

@@ -1,6 +1,7 @@
-﻿using Countify.Domain.Entities.Accounting;
+using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
+using Countify.Domain.Entities.AccountsReceivable;
 using Microsoft.AspNetCore.Identity;
 
 namespace Countify.Domain.Interfaces;
@@ -33,6 +34,11 @@ public interface IUnitOfWork : IDisposable
     IRepository<BankTransaction> BankTransactions { get; }
     IRepository<BankReconciliation> BankReconciliations { get; }
     IRepository<Currency> Currencies { get; }
+    IRepository<CustomerType> CustomerTypes { get; }
+    IRepository<Customer> Customers { get; }
+    IRepository<AccountsReceivableConcept> AccountsReceivableConcepts { get; }
+    IRepository<AccountsReceivableDocument> AccountsReceivableDocuments { get; }
+    IRepository<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

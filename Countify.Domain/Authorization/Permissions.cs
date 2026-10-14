@@ -90,6 +90,26 @@ public class Permissions
     public static readonly Permission CanCreateCurrencies = Permission.Create(70, nameof(CanCreateCurrencies), "Crear monedas.");
     public static readonly Permission CanEditCurrencies = Permission.Create(71, nameof(CanEditCurrencies), "Editar monedas.");
     public static readonly Permission CanDeleteCurrencies = Permission.Create(72, nameof(CanDeleteCurrencies), "Eliminar monedas.");
+
+    public static readonly Permission CanViewCustomerTypes = Permission.Create(73, nameof(CanViewCustomerTypes), "Ver tipos de cliente.");
+    public static readonly Permission CanCreateCustomerTypes = Permission.Create(74, nameof(CanCreateCustomerTypes), "Crear tipos de cliente.");
+    public static readonly Permission CanEditCustomerTypes = Permission.Create(75, nameof(CanEditCustomerTypes), "Editar tipos de cliente.");
+    public static readonly Permission CanDeleteCustomerTypes = Permission.Create(76, nameof(CanDeleteCustomerTypes), "Eliminar tipos de cliente.");
+
+    public static readonly Permission CanViewCustomers = Permission.Create(77, nameof(CanViewCustomers), "Ver clientes.");
+    public static readonly Permission CanCreateCustomers = Permission.Create(78, nameof(CanCreateCustomers), "Crear clientes.");
+    public static readonly Permission CanEditCustomers = Permission.Create(79, nameof(CanEditCustomers), "Editar clientes.");
+    public static readonly Permission CanDeleteCustomers = Permission.Create(80, nameof(CanDeleteCustomers), "Eliminar clientes.");
+
+    public static readonly Permission CanViewAccountsReceivableConcepts = Permission.Create(81, nameof(CanViewAccountsReceivableConcepts), "Ver conceptos de cuentas por cobrar.");
+    public static readonly Permission CanCreateAccountsReceivableConcepts = Permission.Create(82, nameof(CanCreateAccountsReceivableConcepts), "Crear conceptos de cuentas por cobrar.");
+    public static readonly Permission CanEditAccountsReceivableConcepts = Permission.Create(83, nameof(CanEditAccountsReceivableConcepts), "Editar conceptos de cuentas por cobrar.");
+    public static readonly Permission CanDeleteAccountsReceivableConcepts = Permission.Create(84, nameof(CanDeleteAccountsReceivableConcepts), "Eliminar conceptos de cuentas por cobrar.");
+
+    public static readonly Permission CanViewAccountsReceivableDocuments = Permission.Create(85, nameof(CanViewAccountsReceivableDocuments), "Ver documentos por cobrar.");
+    public static readonly Permission CanCreateAccountsReceivableDocuments = Permission.Create(86, nameof(CanCreateAccountsReceivableDocuments), "Crear documentos por cobrar.");
+    public static readonly Permission CanEditAccountsReceivableDocuments = Permission.Create(87, nameof(CanEditAccountsReceivableDocuments), "Editar documentos por cobrar.");
+    public static readonly Permission CanVoidAccountsReceivableDocuments = Permission.Create(88, nameof(CanVoidAccountsReceivableDocuments), "Anular documentos por cobrar.");
     
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)

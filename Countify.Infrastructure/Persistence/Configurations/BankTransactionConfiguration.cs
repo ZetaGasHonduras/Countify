@@ -17,6 +17,7 @@ public class BankTransactionConfiguration : IEntityTypeConfiguration<BankTransac
         builder.Property(x => x.Reference).HasMaxLength(100);
         builder.Property(x => x.Beneficiary).HasMaxLength(200);
         builder.Property(x => x.Concept).HasMaxLength(500);
+        builder.Property(x => x.CustomerName).HasMaxLength(200);
         builder.HasOne(x => x.BankAccount).WithMany().HasForeignKey(x => x.BankAccountId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.TransactionType).WithMany().HasForeignKey(x => x.TransactionTypeId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.Currency).WithMany().HasForeignKey(x => x.CurrencyId).OnDelete(DeleteBehavior.Restrict);

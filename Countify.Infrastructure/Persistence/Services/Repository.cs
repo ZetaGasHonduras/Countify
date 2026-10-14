@@ -29,6 +29,9 @@ public class Repository<T>(CountifyDbContext context) : IRepository<T>
         return entity;
     }
 
+    public async Task AddRangeAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default)
+        => await _dbSet.AddRangeAsync(entities, cancellationToken);
+
     public Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
     {
         if (_dbSet.Entry(entity).State == EntityState.Detached)

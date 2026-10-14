@@ -2,6 +2,8 @@
 using Countify.Application.Features.Auth.Commands.Login;
 using Countify.Application.Features.Auth.Commands.RefreshToken;
 using Countify.Application.Features.Auth.Commands.ResetPassword;
+using Countify.Application.Features.Auth.Queries.GetUserInfo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Countify.Api.Controllers;
@@ -15,6 +17,11 @@ public class AuthController : BaseController
     [HttpPost("refresh-token")]
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
         => HandleResult(await Mediator.Send(command));
+
+    [HttpGet("userinfo")]
+    [Authorize]
+    public async Task<IActionResult> UserInfo()
+        => HandleResult(await Mediator.Send(new GetUserInfoQuery()));
 
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordCommand command)

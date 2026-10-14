@@ -1,4 +1,5 @@
 using AutoMapper;
+using Countify.Application.Features.AccountsReceivableDocuments;
 using Countify.Application.Features.JournalEntries.DTOs;
 using Countify.Application.Features.JournalEntries;
 using Countify.Application.Wrappers;
@@ -56,13 +57,17 @@ public class CreateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
             return Response<Guid>.Failure(budgetError);
 
         var accountIds = request.Lines.Select(l => l.AccountId).Distinct().ToList();
-        var existingAccountIds = await unitOfWork.Accounts.Query()
+        var accounts = await unitOfWork.Accounts.Query()
             .Where(a => accountIds.Contains(a.Id))
-            .Select(a => a.Id)
-            .ToListAsync(cancellationToken);
+            .ToDictionaryAsync(a => a.Id, cancellationToken);
 
-        if (existingAccountIds.Count != accountIds.Count)
+        if (accounts.Count != accountIds.Count)
             return Response<Guid>.Failure("Hay cuentas contables inválidas en las líneas.");
+
+        var auxError = await JournalEntryAuxValidator.ValidateAsync(
+            unitOfWork, request.Lines, accounts, cancellationToken);
+        if (auxError is not null)
+            return Response<Guid>.Failure(auxError);
 
         var departmentIds = request.Lines
             .Where(l => l.DepartmentId.HasValue)
@@ -114,6 +119,19 @@ public class CreateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
         var lines = mapper.Map<List<JournalEntryLine>>(request.Lines);
         foreach (var line in lines)
             line.LineGid = Guid.NewGuid();
+
+        for (var i = 0; i < request.Lines.Count; i++)
+        {
+            var draft = request.Lines[i].PendingDocument;
+            if (draft is null) continue;
+
+            var created = await AccountsReceivableDocumentDraftFactory.CreateAsync(unitOfWork, draft, cancellationToken);
+            if (created.Error is not null)
+                return Response<Guid>.Failure(created.Error);
+
+            lines[i].AppliesToReceivableId = created.Document!.Id;
+            lines[i].CustomerName = $"{created.CustomerCode} - {created.CustomerName}";
+        }
 
         ApplyTotals(entry, lines);
         entry.Lines = lines;
