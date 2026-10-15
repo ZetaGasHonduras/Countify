@@ -13,5 +13,7 @@ public class AccountsReceivableConceptDto
     public string? AccountName { get; set; }
     public bool IsInactive { get; set; }
     public bool GeneratePosting { get; set; }
+    public bool IsReceipt { get; set; }
+    public bool IsFiscalNote { get; set; }
     public string? Observations { get; set; }
 }

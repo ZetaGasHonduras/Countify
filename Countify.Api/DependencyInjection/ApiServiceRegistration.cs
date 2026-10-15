@@ -29,6 +29,7 @@ public static class ApiServiceRegistration
         services.ConfigureOptions<CustomerPolicies>();
         services.ConfigureOptions<AccountsReceivableConceptPolicies>();
         services.ConfigureOptions<AccountsReceivableDocumentPolicies>();
+        services.ConfigureOptions<FiscalControlPolicies>();
 
         services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
         return services;

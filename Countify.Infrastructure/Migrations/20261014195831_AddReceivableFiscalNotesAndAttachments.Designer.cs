@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Countify.Infrastructure.Migrations
 {
     [DbContext(typeof(CountifyDbContext))]
-    [Migration("20260923201709_AddFaseSix")]
-    partial class AddFaseSix
+    [Migration("20261014195831_AddReceivableFiscalNotesAndAttachments")]
+    partial class AddReceivableFiscalNotesAndAttachments
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -592,6 +592,65 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("DocumentTypes", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Accounting.FiscalControl", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Branch")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CAI")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DocumentCode")
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<int>("DocumentType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EmissionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EmissionLimitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmissionPoint")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LastNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observations")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("RangeFrom")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RangeTo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("WarningNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentType");
+
+                    b.ToTable("FiscalControls", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntry", b =>
                 {
                     b.Property<Guid>("Id")
@@ -896,6 +955,9 @@ namespace Countify.Infrastructure.Migrations
                     b.Property<bool>("GeneratePosting")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsFiscalNote")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsInactive")
                         .HasColumnType("bit");
 
@@ -930,8 +992,15 @@ namespace Countify.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("CAI")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<Guid>("ConceptId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("CreditNoteReason")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("CurrencyId")
                         .HasColumnType("uniqueidentifier");
@@ -954,15 +1023,36 @@ namespace Countify.Infrastructure.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("EmissionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("EmissionLimitDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("ExchangeRate")
                         .HasPrecision(18, 6)
                         .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("FiscalConcept")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid?>("FiscalControlId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InvoiceCAI")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsVoided")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("JournalEntryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("NoteNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Notes")
                         .HasMaxLength(500)
@@ -971,8 +1061,19 @@ namespace Countify.Infrastructure.Migrations
                     b.Property<Guid?>("ProjectId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("RangeFrom")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("RangeTo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int?>("ReceiptNumber")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ReceiptNumberAssigned")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Reference")
                         .HasMaxLength(100)
@@ -991,7 +1092,13 @@ namespace Countify.Infrastructure.Migrations
                     b.HasIndex("DocumentNo")
                         .IsUnique();
 
+                    b.HasIndex("FiscalControlId");
+
                     b.HasIndex("JournalEntryId");
+
+                    b.HasIndex("NoteNumber")
+                        .IsUnique()
+                        .HasFilter("[NoteNumber] IS NOT NULL");
 
                     b.HasIndex("ProjectId");
 
@@ -1000,6 +1107,46 @@ namespace Countify.Infrastructure.Migrations
                         .HasFilter("[ReceiptNumber] IS NOT NULL");
 
                     b.ToTable("AccountsReceivableDocuments", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocumentAttachment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(260)
+                        .HasColumnType("nvarchar(260)");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("StoragePath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("UploadedBy")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("UploadedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.ToTable("AccountsReceivableDocumentAttachments", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocumentLine", b =>
@@ -1830,6 +1977,42 @@ namespace Countify.Infrastructure.Migrations
                             Id = 88,
                             Description = "Anular documentos por cobrar.",
                             Name = "CanVoidAccountsReceivableDocuments"
+                        },
+                        new
+                        {
+                            Id = 89,
+                            Description = "Ver controles fiscales.",
+                            Name = "CanViewFiscalControls"
+                        },
+                        new
+                        {
+                            Id = 90,
+                            Description = "Crear controles fiscales.",
+                            Name = "CanCreateFiscalControls"
+                        },
+                        new
+                        {
+                            Id = 91,
+                            Description = "Editar controles fiscales.",
+                            Name = "CanEditFiscalControls"
+                        },
+                        new
+                        {
+                            Id = 92,
+                            Description = "Eliminar controles fiscales.",
+                            Name = "CanDeleteFiscalControls"
+                        },
+                        new
+                        {
+                            Id = 93,
+                            Description = "Editar el correlativo de recibo.",
+                            Name = "CanEditReceiptNumber"
+                        },
+                        new
+                        {
+                            Id = 94,
+                            Description = "Gestionar adjuntos de documentos por cobrar.",
+                            Name = "CanManageAccountsReceivableAttachments"
                         });
                 });
 
@@ -2287,6 +2470,36 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 88
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 89
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 90
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 91
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 92
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 93
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 94
                         });
                 });
 
@@ -2743,6 +2956,11 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Countify.Domain.Entities.Accounting.FiscalControl", "FiscalControl")
+                        .WithMany()
+                        .HasForeignKey("FiscalControlId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
                         .WithMany()
                         .HasForeignKey("JournalEntryId")
@@ -2761,9 +2979,22 @@ namespace Countify.Infrastructure.Migrations
 
                     b.Navigation("Department");
 
+                    b.Navigation("FiscalControl");
+
                     b.Navigation("JournalEntry");
 
                     b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocumentAttachment", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", "Document")
+                        .WithMany("Attachments")
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocumentLine", b =>
@@ -2904,6 +3135,8 @@ namespace Countify.Infrastructure.Migrations
 
             modelBuilder.Entity("Countify.Domain.Entities.AccountsReceivable.AccountsReceivableDocument", b =>
                 {
+                    b.Navigation("Attachments");
+
                     b.Navigation("Lines");
                 });
 #pragma warning restore 612, 618

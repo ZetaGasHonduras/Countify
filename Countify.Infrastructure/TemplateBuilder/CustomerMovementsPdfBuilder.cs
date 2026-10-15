@@ -49,7 +49,7 @@ public static class CustomerMovementsPdfBuilder
                         columns.ConstantColumn(60);
                         columns.ConstantColumn(60);
                         columns.ConstantColumn(60);
-                        columns.RelativeColumn(1.2f);
+                        columns.ConstantColumn(42);
                     });
 
                     table.Header(header =>
@@ -63,6 +63,7 @@ public static class CustomerMovementsPdfBuilder
                         HeaderCell(header.Cell(), "Débito");
                         HeaderCell(header.Cell(), "Crédito");
                         HeaderCell(header.Cell(), "Saldo Acum.");
+                        HeaderCell(header.Cell(), "Días");
                     });
 
                     foreach (var movement in dto.Movements)
@@ -77,6 +78,7 @@ public static class CustomerMovementsPdfBuilder
                         BodyCell(table.Cell(), Money(movement.Debit), true);
                         BodyCell(table.Cell(), Money(movement.Credit), true);
                         BodyCell(table.Cell(), Money(movement.RunningBalance), true);
+                        BodyCell(table.Cell(), movement.IsVoided || movement.IsCredit ? "" : movement.DaysOverdue?.ToString() ?? "", true);
 
                         foreach (var line in movement.Applications)
                         {
@@ -89,8 +91,32 @@ public static class CustomerMovementsPdfBuilder
                             BodyCell(table.Cell(), "", true);
                             BodyCell(table.Cell(), "", true);
                             BodyCell(table.Cell(), "", true);
+                            BodyCell(table.Cell(), "", true);
                         }
                     }
+                });
+
+                column.Item().PaddingTop(10).Text($"Antigüedad de Saldos al {dto.Aging.AsOfDate:yyyy-MM-dd}")
+                    .Bold().FontSize(11).FontColor(Colors.Blue.Darken2);
+
+                column.Item().Table(table =>
+                {
+                    table.ColumnsDefinition(columns =>
+                    {
+                        foreach (var _ in dto.Aging.Buckets) columns.RelativeColumn();
+                        columns.RelativeColumn();
+                    });
+
+                    table.Header(header =>
+                    {
+                        foreach (var bucket in dto.Aging.Buckets)
+                            HeaderCell(header.Cell(), bucket.Label);
+                        HeaderCell(header.Cell(), "TOTAL");
+                    });
+
+                    foreach (var bucket in dto.Aging.Buckets)
+                        BodyCell(table.Cell(), Money(bucket.Amount), true);
+                    BodyCell(table.Cell(), Money(dto.Aging.TotalOutstanding), true);
                 });
             });
 

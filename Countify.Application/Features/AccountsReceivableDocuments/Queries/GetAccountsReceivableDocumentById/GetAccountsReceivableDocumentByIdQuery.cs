@@ -31,6 +31,7 @@ public class GetAccountsReceivableDocumentByIdQueryHandler(IUnitOfWork unitOfWor
                 .Include(d => d.Lines)
                     .ThenInclude(l => l.AppliedDocument)
                         .ThenInclude(a => a.Currency)
+                .Include(d => d.Attachments)
                 .Where(d => d.Id == request.Id),
             cancellationToken);
 

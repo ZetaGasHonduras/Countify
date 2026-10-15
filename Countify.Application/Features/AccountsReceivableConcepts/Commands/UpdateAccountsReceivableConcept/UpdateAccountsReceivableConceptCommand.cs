@@ -14,6 +14,8 @@ public class UpdateAccountsReceivableConceptCommand : IRequest<Response<bool>>
     public Guid? AccountId { get; set; }
     public bool IsInactive { get; set; }
     public bool GeneratePosting { get; set; }
+    public bool IsReceipt { get; set; }
+    public bool IsFiscalNote { get; set; }
     public string? Observations { get; set; }
 }
 

@@ -1,10 +1,12 @@
 ﻿using System.Text;
+using Countify.Application.Common.Interfaces;
 using Countify.Domain.Entities.Auth;
 using Countify.Domain.Interfaces;
 using Countify.Domain.Seeders;
 using Countify.Infrastructure.Persistence;
 using Countify.Infrastructure.Persistence.Services;
 using Countify.Infrastructure.Seeders;
+using Countify.Infrastructure.Storage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +62,10 @@ public static class InfrastructureServiceRegistration
         
         // Repositories
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+        // Almacenamiento de adjuntos
+        services.Configure<FileStorageOptions>(configuration.GetSection(FileStorageOptions.SectionName));
+        services.AddScoped<IFileStorage, LocalFileStorage>();
 
         // Seeders controlados por flags independientes en la sección Seeder.
         services.Configure<SeederOptions>(

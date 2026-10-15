@@ -47,6 +47,33 @@ public class AccountsReceivableDocumentConfiguration : IEntityTypeConfiguration<
         builder.HasIndex(x => x.ReceiptNumber)
             .IsUnique();
 
+        builder.Property(x => x.NoteNumber)
+            .HasMaxLength(50);
+
+        builder.HasIndex(x => x.NoteNumber)
+            .IsUnique()
+            .HasFilter("[NoteNumber] IS NOT NULL");
+
+        builder.Property(x => x.InvoiceCAI)
+            .HasMaxLength(100);
+
+        builder.Property(x => x.CAI)
+            .HasMaxLength(100);
+
+        builder.Property(x => x.RangeFrom)
+            .HasMaxLength(50);
+
+        builder.Property(x => x.RangeTo)
+            .HasMaxLength(50);
+
+        builder.Property(x => x.FiscalConcept)
+            .HasMaxLength(200);
+
+        builder.HasOne(x => x.FiscalControl)
+            .WithMany()
+            .HasForeignKey(x => x.FiscalControlId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasOne(x => x.Customer)
             .WithMany()
             .HasForeignKey(x => x.CustomerId)

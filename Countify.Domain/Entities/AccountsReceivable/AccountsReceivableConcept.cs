@@ -18,5 +18,9 @@ public class AccountsReceivableConcept : BaseEntity
     public bool IsInactive { get; set; }
     public bool GeneratePosting { get; set; }
     public bool IsReceipt { get; set; }
+
+    /// <summary>Indica que el concepto genera una nota fiscal (crédito o débito) con datos de CAI.</summary>
+    public bool IsFiscalNote { get; set; }
+
     public string? Observations { get; set; }
 }

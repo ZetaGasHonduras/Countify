@@ -11,6 +11,8 @@ internal sealed class AccountsReceivableDocumentPolicies : IConfigureOptions<Aut
     internal const string CanCreateAccountsReceivableDocuments = nameof(CanCreateAccountsReceivableDocuments);
     internal const string CanEditAccountsReceivableDocuments = nameof(CanEditAccountsReceivableDocuments);
     internal const string CanVoidAccountsReceivableDocuments = nameof(CanVoidAccountsReceivableDocuments);
+    internal const string CanEditReceiptNumber = nameof(CanEditReceiptNumber);
+    internal const string CanManageAccountsReceivableAttachments = nameof(CanManageAccountsReceivableAttachments);
 
     public void Configure(AuthorizationOptions options)
     {
@@ -22,5 +24,9 @@ internal sealed class AccountsReceivableDocumentPolicies : IConfigureOptions<Aut
             p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanEditAccountsReceivableDocuments)));
         options.AddPolicy(CanVoidAccountsReceivableDocuments,
             p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanVoidAccountsReceivableDocuments)));
+        options.AddPolicy(CanEditReceiptNumber,
+            p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanEditReceiptNumber)));
+        options.AddPolicy(CanManageAccountsReceivableAttachments,
+            p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanManageAccountsReceivableAttachments)));
     }
 }

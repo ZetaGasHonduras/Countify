@@ -42,6 +42,8 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<AccountsReceivableConcept>? _accountsReceivableConcepts;
     private IRepository<AccountsReceivableDocument>? _accountsReceivableDocuments;
     private IRepository<AccountsReceivableDocumentLine>? _accountsReceivableDocumentLines;
+    private IRepository<AccountsReceivableDocumentAttachment>? _accountsReceivableDocumentAttachments;
+    private IRepository<FiscalControl>? _fiscalControls;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -109,6 +111,8 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<AccountsReceivableConcept> AccountsReceivableConcepts => _accountsReceivableConcepts ??= new Repository<AccountsReceivableConcept>(context);
     public IRepository<AccountsReceivableDocument> AccountsReceivableDocuments => _accountsReceivableDocuments ??= new Repository<AccountsReceivableDocument>(context);
     public IRepository<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines => _accountsReceivableDocumentLines ??= new Repository<AccountsReceivableDocumentLine>(context);
+    public IRepository<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments => _accountsReceivableDocumentAttachments ??= new Repository<AccountsReceivableDocumentAttachment>(context);
+    public IRepository<FiscalControl> FiscalControls => _fiscalControls ??= new Repository<FiscalControl>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);

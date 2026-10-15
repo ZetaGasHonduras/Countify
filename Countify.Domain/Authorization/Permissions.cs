@@ -110,7 +110,15 @@ public class Permissions
     public static readonly Permission CanCreateAccountsReceivableDocuments = Permission.Create(86, nameof(CanCreateAccountsReceivableDocuments), "Crear documentos por cobrar.");
     public static readonly Permission CanEditAccountsReceivableDocuments = Permission.Create(87, nameof(CanEditAccountsReceivableDocuments), "Editar documentos por cobrar.");
     public static readonly Permission CanVoidAccountsReceivableDocuments = Permission.Create(88, nameof(CanVoidAccountsReceivableDocuments), "Anular documentos por cobrar.");
-    
+
+    public static readonly Permission CanViewFiscalControls = Permission.Create(89, nameof(CanViewFiscalControls), "Ver controles fiscales.");
+    public static readonly Permission CanCreateFiscalControls = Permission.Create(90, nameof(CanCreateFiscalControls), "Crear controles fiscales.");
+    public static readonly Permission CanEditFiscalControls = Permission.Create(91, nameof(CanEditFiscalControls), "Editar controles fiscales.");
+    public static readonly Permission CanDeleteFiscalControls = Permission.Create(92, nameof(CanDeleteFiscalControls), "Eliminar controles fiscales.");
+
+    public static readonly Permission CanEditReceiptNumber = Permission.Create(93, nameof(CanEditReceiptNumber), "Editar el correlativo de recibo.");
+    public static readonly Permission CanManageAccountsReceivableAttachments = Permission.Create(94, nameof(CanManageAccountsReceivableAttachments), "Gestionar adjuntos de documentos por cobrar.");
+
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(fieldInfo => fieldInfo.FieldType == typeof(Permission))

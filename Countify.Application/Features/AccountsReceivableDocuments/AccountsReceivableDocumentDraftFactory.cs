@@ -41,22 +41,14 @@ internal static class AccountsReceivableDocumentDraftFactory
         };
 
         if (concept.IsReceipt)
-            document.ReceiptNumber = await NextReceiptNumber(unitOfWork, cancellationToken);
+        {
+            document.ReceiptNumber = await FiscalNoteNumberingFactory.NextReceiptNumberAsync(unitOfWork, cancellationToken);
+            document.ReceiptNumberAssigned = true;
+        }
 
         await unitOfWork.AccountsReceivableDocuments.AddAsync(document, cancellationToken);
 
         return DraftCreationResult.Success(document, customer.Code, customer.Name);
-    }
-
-    private static async Task<int> NextReceiptNumber(IUnitOfWork unitOfWork, CancellationToken cancellationToken)
-    {
-        var last = await unitOfWork.AccountsReceivableDocuments.FirstOrDefaultAsync(
-            unitOfWork.AccountsReceivableDocuments.Query()
-                .Where(d => d.ReceiptNumber != null)
-                .OrderByDescending(d => d.ReceiptNumber),
-            cancellationToken);
-
-        return (last?.ReceiptNumber ?? 0) + 1;
     }
 }
 

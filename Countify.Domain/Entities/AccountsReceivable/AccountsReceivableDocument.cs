@@ -1,5 +1,6 @@
 using Countify.Domain.Common;
 using Countify.Domain.Entities.Accounting;
+using Countify.Domain.Enums;
 
 namespace Countify.Domain.Entities.AccountsReceivable;
 
@@ -25,7 +26,38 @@ public class AccountsReceivableDocument : BaseEntity
     public string? Notes { get; set; }
     public bool IsVoided { get; set; }
     public int? ReceiptNumber { get; set; }
+
+    /// <summary>Indica si el correlativo del recibo ya fue asignado (legacy: CorrelativoAsignado).</summary>
+    public bool ReceiptNumberAssigned { get; set; }
+
     public Guid? JournalEntryId { get; set; }
     public JournalEntry? JournalEntry { get; set; }
+
+    // --- Datos fiscales (aplican a Notas de Crédito y Débito) ---
+
+    public Guid? FiscalControlId { get; set; }
+    public FiscalControl? FiscalControl { get; set; }
+
+    /// <summary>Número de la nota (legacy: NumeroDeNotaDeCreditos / NumeroDeNotaDebito).</summary>
+    public string? NoteNumber { get; set; }
+
+    /// <summary>CAI del documento que se afecta, normalmente la factura (legacy: CAIFactura).</summary>
+    public string? InvoiceCAI { get; set; }
+
+    /// <summary>CAI propio de la nota.</summary>
+    public string? CAI { get; set; }
+
+    public string? RangeFrom { get; set; }
+    public string? RangeTo { get; set; }
+    public DateTime? EmissionDate { get; set; }
+    public DateTime? EmissionLimitDate { get; set; }
+
+    /// <summary>Motivo de la nota de crédito (legacy: MotivoNotaCredito).</summary>
+    public CreditNoteReason? CreditNoteReason { get; set; }
+
+    /// <summary>Concepto libre de la nota (legacy: Concepto).</summary>
+    public string? FiscalConcept { get; set; }
+
     public ICollection<AccountsReceivableDocumentLine> Lines { get; set; } = new List<AccountsReceivableDocumentLine>();
+    public ICollection<AccountsReceivableDocumentAttachment> Attachments { get; set; } = new List<AccountsReceivableDocumentAttachment>();
 }

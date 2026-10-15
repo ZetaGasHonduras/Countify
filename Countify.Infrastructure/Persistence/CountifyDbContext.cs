@@ -43,6 +43,8 @@ public DbSet<Customer> Customers { get; set; }
 public DbSet<AccountsReceivableConcept> AccountsReceivableConcepts { get; set; }
 public DbSet<AccountsReceivableDocument> AccountsReceivableDocuments { get; set; }
 public DbSet<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; set; }
+public DbSet<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments { get; set; }
+public DbSet<FiscalControl> FiscalControls { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

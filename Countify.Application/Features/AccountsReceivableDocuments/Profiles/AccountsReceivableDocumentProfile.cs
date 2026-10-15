@@ -15,6 +15,7 @@ public class AccountsReceivableDocumentProfile : Profile
             .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.Customer != null ? s.Customer.Name : null))
             .ForMember(d => d.ConceptDescription, o => o.MapFrom(s => s.Concept != null ? s.Concept.Description : null))
             .ForMember(d => d.IsCredit, o => o.MapFrom(s => s.Concept != null && s.Concept.Type == AccountsReceivableConceptType.Credit))
+            .ForMember(d => d.IsFiscalNote, o => o.MapFrom(s => s.Concept != null && s.Concept.IsFiscalNote))
             .ForMember(d => d.DepartmentName, o => o.MapFrom(s => s.Department != null ? s.Department.Name : null))
             .ForMember(d => d.ProjectName, o => o.MapFrom(s => s.Project != null ? s.Project.Name : null))
             .ForMember(d => d.CurrencyCode, o => o.MapFrom(s => s.Currency != null ? s.Currency.Code : null))
@@ -36,5 +37,6 @@ public class AccountsReceivableDocumentProfile : Profile
 
         CreateMap<CreateAccountsReceivableDocumentCommand, AccountsReceivableDocument>();
         CreateMap<UpdateAccountsReceivableDocumentCommand, AccountsReceivableDocument>();
+        CreateMap<AccountsReceivableDocumentAttachment, AccountsReceivableDocumentAttachmentDto>();
     }
 }

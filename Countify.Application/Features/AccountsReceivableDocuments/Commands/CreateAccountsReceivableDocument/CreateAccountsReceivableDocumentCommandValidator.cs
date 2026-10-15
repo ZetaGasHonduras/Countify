@@ -16,5 +16,6 @@ public class CreateAccountsReceivableDocumentCommandValidator : AbstractValidato
         RuleFor(x => x.Reference).MaximumLength(100);
         RuleFor(x => x.AppliesTo).MaximumLength(50);
         RuleFor(x => x.Notes).MaximumLength(500);
+        RuleFor(x => x.FiscalConcept).MaximumLength(200);
     }
 }

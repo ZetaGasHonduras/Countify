@@ -1,6 +1,7 @@
 using AutoMapper;
 using Countify.Application.Wrappers;
 using Countify.Domain.Entities.AccountsReceivable;
+using Countify.Domain.Enums;
 using Countify.Domain.Interfaces;
 using MediatR;
 
@@ -20,6 +21,10 @@ public class CreateAccountsReceivableDocumentCommand : IRequest<Response<Guid>>
     public decimal ExchangeRate { get; set; } = 1;
     public decimal Amount { get; set; }
     public string? Notes { get; set; }
+
+    // Solo para notas fiscales (crédito/débito)
+    public CreditNoteReason? CreditNoteReason { get; set; }
+    public string? FiscalConcept { get; set; }
 }
 
 public class CreateAccountsReceivableDocumentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
@@ -47,7 +52,14 @@ public class CreateAccountsReceivableDocumentCommandHandler(IUnitOfWork unitOfWo
         var document = mapper.Map<AccountsReceivableDocument>(request);
 
         if (concept.IsReceipt)
-            document.ReceiptNumber = await NextReceiptNumber(unitOfWork, cancellationToken);
+        {
+            document.ReceiptNumber = await FiscalNoteNumberingFactory.NextReceiptNumberAsync(unitOfWork, cancellationToken);
+            document.ReceiptNumberAssigned = true;
+        }
+
+        var fiscalError = await FiscalNoteNumberingFactory.AssignAsync(unitOfWork, document, concept, cancellationToken);
+        if (fiscalError is not null)
+            return Response<Guid>.Failure(fiscalError);
 
         await unitOfWork.AccountsReceivableDocuments.AddAsync(document, cancellationToken);
 
@@ -62,16 +74,5 @@ public class CreateAccountsReceivableDocumentCommandHandler(IUnitOfWork unitOfWo
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Response<Guid>.Success(document.Id, 201);
-    }
-
-    private static async Task<int> NextReceiptNumber(IUnitOfWork unitOfWork, CancellationToken cancellationToken)
-    {
-        var last = await unitOfWork.AccountsReceivableDocuments.FirstOrDefaultAsync(
-            unitOfWork.AccountsReceivableDocuments.Query()
-                .Where(d => d.ReceiptNumber != null)
-                .OrderByDescending(d => d.ReceiptNumber),
-            cancellationToken);
-
-        return (last?.ReceiptNumber ?? 0) + 1;
     }
 }

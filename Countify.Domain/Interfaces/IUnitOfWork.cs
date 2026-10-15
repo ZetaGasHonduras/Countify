@@ -39,6 +39,8 @@ public interface IUnitOfWork : IDisposable
     IRepository<AccountsReceivableConcept> AccountsReceivableConcepts { get; }
     IRepository<AccountsReceivableDocument> AccountsReceivableDocuments { get; }
     IRepository<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; }
+    IRepository<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments { get; }
+    IRepository<FiscalControl> FiscalControls { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

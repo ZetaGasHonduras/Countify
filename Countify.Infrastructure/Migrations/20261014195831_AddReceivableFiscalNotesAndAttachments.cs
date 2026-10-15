@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Countify.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddFaseSix : Migration
+    public partial class AddReceivableFiscalNotesAndAttachments : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,7 @@ namespace Countify.Infrastructure.Migrations
                     IsInactive = table.Column<bool>(type: "bit", nullable: false),
                     GeneratePosting = table.Column<bool>(type: "bit", nullable: false),
                     IsReceipt = table.Column<bool>(type: "bit", nullable: false),
+                    IsFiscalNote = table.Column<bool>(type: "bit", nullable: false),
                     Observations = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
@@ -68,6 +69,30 @@ namespace Countify.Infrastructure.Migrations
                         principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FiscalControls",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DocumentType = table.Column<int>(type: "int", nullable: false),
+                    Branch = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    EmissionPoint = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    DocumentCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
+                    CAI = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    RangeFrom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    RangeTo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    EmissionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmissionLimitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    LastNumber = table.Column<int>(type: "int", nullable: false),
+                    WarningNumber = table.Column<int>(type: "int", nullable: false),
+                    Observations = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FiscalControls", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,7 +151,18 @@ namespace Countify.Infrastructure.Migrations
                     Notes = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     IsVoided = table.Column<bool>(type: "bit", nullable: false),
                     ReceiptNumber = table.Column<int>(type: "int", nullable: true),
-                    JournalEntryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    ReceiptNumberAssigned = table.Column<bool>(type: "bit", nullable: false),
+                    JournalEntryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    FiscalControlId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    NoteNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    InvoiceCAI = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CAI = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    RangeFrom = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    RangeTo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    EmissionDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmissionLimitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreditNoteReason = table.Column<int>(type: "int", nullable: true),
+                    FiscalConcept = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,6 +192,12 @@ namespace Countify.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_AccountsReceivableDocuments_FiscalControls_FiscalControlId",
+                        column: x => x.FiscalControlId,
+                        principalTable: "FiscalControls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_AccountsReceivableDocuments_JournalEntries_JournalEntryId",
                         column: x => x.JournalEntryId,
                         principalTable: "JournalEntries",
@@ -167,6 +209,30 @@ namespace Countify.Infrastructure.Migrations
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AccountsReceivableDocumentAttachments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DocumentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(260)", maxLength: 260, nullable: false),
+                    ContentType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Size = table.Column<long>(type: "bigint", nullable: false),
+                    StoragePath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    UploadedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UploadedBy = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccountsReceivableDocumentAttachments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccountsReceivableDocumentAttachments_AccountsReceivableDocuments_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "AccountsReceivableDocuments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,7 +281,13 @@ namespace Countify.Infrastructure.Migrations
                     { 85, "Ver documentos por cobrar.", "CanViewAccountsReceivableDocuments" },
                     { 86, "Crear documentos por cobrar.", "CanCreateAccountsReceivableDocuments" },
                     { 87, "Editar documentos por cobrar.", "CanEditAccountsReceivableDocuments" },
-                    { 88, "Anular documentos por cobrar.", "CanVoidAccountsReceivableDocuments" }
+                    { 88, "Anular documentos por cobrar.", "CanVoidAccountsReceivableDocuments" },
+                    { 89, "Ver controles fiscales.", "CanViewFiscalControls" },
+                    { 90, "Crear controles fiscales.", "CanCreateFiscalControls" },
+                    { 91, "Editar controles fiscales.", "CanEditFiscalControls" },
+                    { 92, "Eliminar controles fiscales.", "CanDeleteFiscalControls" },
+                    { 93, "Editar el correlativo de recibo.", "CanEditReceiptNumber" },
+                    { 94, "Gestionar adjuntos de documentos por cobrar.", "CanManageAccountsReceivableAttachments" }
                 });
 
             migrationBuilder.InsertData(
@@ -238,13 +310,24 @@ namespace Countify.Infrastructure.Migrations
                     { 85, "f3d1e2c4-0000-0000-0000-000000000001" },
                     { 86, "f3d1e2c4-0000-0000-0000-000000000001" },
                     { 87, "f3d1e2c4-0000-0000-0000-000000000001" },
-                    { 88, "f3d1e2c4-0000-0000-0000-000000000001" }
+                    { 88, "f3d1e2c4-0000-0000-0000-000000000001" },
+                    { 89, "f3d1e2c4-0000-0000-0000-000000000001" },
+                    { 90, "f3d1e2c4-0000-0000-0000-000000000001" },
+                    { 91, "f3d1e2c4-0000-0000-0000-000000000001" },
+                    { 92, "f3d1e2c4-0000-0000-0000-000000000001" },
+                    { 93, "f3d1e2c4-0000-0000-0000-000000000001" },
+                    { 94, "f3d1e2c4-0000-0000-0000-000000000001" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountsReceivableConcepts_AccountId",
                 table: "AccountsReceivableConcepts",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountsReceivableDocumentAttachments_DocumentId",
+                table: "AccountsReceivableDocumentAttachments",
+                column: "DocumentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountsReceivableDocumentLines_AppliedDocumentId",
@@ -284,9 +367,21 @@ namespace Countify.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_AccountsReceivableDocuments_FiscalControlId",
+                table: "AccountsReceivableDocuments",
+                column: "FiscalControlId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AccountsReceivableDocuments_JournalEntryId",
                 table: "AccountsReceivableDocuments",
                 column: "JournalEntryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountsReceivableDocuments_NoteNumber",
+                table: "AccountsReceivableDocuments",
+                column: "NoteNumber",
+                unique: true,
+                filter: "[NoteNumber] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccountsReceivableDocuments_ProjectId",
@@ -326,11 +421,19 @@ namespace Countify.Infrastructure.Migrations
                 table: "CustomerTypes",
                 column: "Code",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FiscalControls_DocumentType",
+                table: "FiscalControls",
+                column: "DocumentType");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AccountsReceivableDocumentAttachments");
+
             migrationBuilder.DropTable(
                 name: "AccountsReceivableDocumentLines");
 
@@ -342,6 +445,9 @@ namespace Countify.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "FiscalControls");
 
             migrationBuilder.DropTable(
                 name: "CustomerTypes");
@@ -427,6 +533,36 @@ namespace Countify.Infrastructure.Migrations
                 keyValues: new object[] { 88, "f3d1e2c4-0000-0000-0000-000000000001" });
 
             migrationBuilder.DeleteData(
+                table: "RolePermissions",
+                keyColumns: new[] { "PermissionId", "RoleId" },
+                keyValues: new object[] { 89, "f3d1e2c4-0000-0000-0000-000000000001" });
+
+            migrationBuilder.DeleteData(
+                table: "RolePermissions",
+                keyColumns: new[] { "PermissionId", "RoleId" },
+                keyValues: new object[] { 90, "f3d1e2c4-0000-0000-0000-000000000001" });
+
+            migrationBuilder.DeleteData(
+                table: "RolePermissions",
+                keyColumns: new[] { "PermissionId", "RoleId" },
+                keyValues: new object[] { 91, "f3d1e2c4-0000-0000-0000-000000000001" });
+
+            migrationBuilder.DeleteData(
+                table: "RolePermissions",
+                keyColumns: new[] { "PermissionId", "RoleId" },
+                keyValues: new object[] { 92, "f3d1e2c4-0000-0000-0000-000000000001" });
+
+            migrationBuilder.DeleteData(
+                table: "RolePermissions",
+                keyColumns: new[] { "PermissionId", "RoleId" },
+                keyValues: new object[] { 93, "f3d1e2c4-0000-0000-0000-000000000001" });
+
+            migrationBuilder.DeleteData(
+                table: "RolePermissions",
+                keyColumns: new[] { "PermissionId", "RoleId" },
+                keyValues: new object[] { 94, "f3d1e2c4-0000-0000-0000-000000000001" });
+
+            migrationBuilder.DeleteData(
                 table: "Permissions",
                 keyColumn: "Id",
                 keyValue: 73);
@@ -505,6 +641,36 @@ namespace Countify.Infrastructure.Migrations
                 table: "Permissions",
                 keyColumn: "Id",
                 keyValue: 88);
+
+            migrationBuilder.DeleteData(
+                table: "Permissions",
+                keyColumn: "Id",
+                keyValue: 89);
+
+            migrationBuilder.DeleteData(
+                table: "Permissions",
+                keyColumn: "Id",
+                keyValue: 90);
+
+            migrationBuilder.DeleteData(
+                table: "Permissions",
+                keyColumn: "Id",
+                keyValue: 91);
+
+            migrationBuilder.DeleteData(
+                table: "Permissions",
+                keyColumn: "Id",
+                keyValue: 92);
+
+            migrationBuilder.DeleteData(
+                table: "Permissions",
+                keyColumn: "Id",
+                keyValue: 93);
+
+            migrationBuilder.DeleteData(
+                table: "Permissions",
+                keyColumn: "Id",
+                keyValue: 94);
 
             migrationBuilder.DropColumn(
                 name: "AppliesToReceivableId",

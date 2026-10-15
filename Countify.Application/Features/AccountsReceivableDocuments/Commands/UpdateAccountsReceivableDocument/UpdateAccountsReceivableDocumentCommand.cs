@@ -1,5 +1,6 @@
 using AutoMapper;
 using Countify.Application.Wrappers;
+using Countify.Domain.Enums;
 using Countify.Domain.Interfaces;
 using MediatR;
 
@@ -20,6 +21,10 @@ public class UpdateAccountsReceivableDocumentCommand : IRequest<Response<bool>>
     public decimal ExchangeRate { get; set; } = 1;
     public decimal Amount { get; set; }
     public string? Notes { get; set; }
+
+    // Solo para notas fiscales (crédito/débito)
+    public CreditNoteReason? CreditNoteReason { get; set; }
+    public string? FiscalConcept { get; set; }
 }
 
 public class UpdateAccountsReceivableDocumentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
@@ -54,7 +59,14 @@ public class UpdateAccountsReceivableDocumentCommandHandler(IUnitOfWork unitOfWo
         mapper.Map(request, document);
 
         if (concept.IsReceipt && document.ReceiptNumber is null)
-            document.ReceiptNumber = await NextReceiptNumber(unitOfWork, cancellationToken);
+        {
+            document.ReceiptNumber = await FiscalNoteNumberingFactory.NextReceiptNumberAsync(unitOfWork, cancellationToken);
+            document.ReceiptNumberAssigned = true;
+        }
+
+        var fiscalError = await FiscalNoteNumberingFactory.AssignAsync(unitOfWork, document, concept, cancellationToken);
+        if (fiscalError is not null)
+            return Response<bool>.Failure(fiscalError);
 
         await unitOfWork.AccountsReceivableDocuments.UpdateAsync(document, cancellationToken);
 
@@ -69,16 +81,5 @@ public class UpdateAccountsReceivableDocumentCommandHandler(IUnitOfWork unitOfWo
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Response<bool>.Success(true, 204);
-    }
-
-    private static async Task<int> NextReceiptNumber(IUnitOfWork unitOfWork, CancellationToken cancellationToken)
-    {
-        var last = await unitOfWork.AccountsReceivableDocuments.FirstOrDefaultAsync(
-            unitOfWork.AccountsReceivableDocuments.Query()
-                .Where(d => d.ReceiptNumber != null)
-                .OrderByDescending(d => d.ReceiptNumber),
-            cancellationToken);
-
-        return (last?.ReceiptNumber ?? 0) + 1;
     }
 }
