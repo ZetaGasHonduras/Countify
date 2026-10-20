@@ -29,6 +29,7 @@ public class BankTransaction : BaseEntity
     public Guid CounterpartAccountId { get; set; }
     public Account? CounterpartAccount { get; set; }
     public Guid? AppliesToReceivableId { get; set; }
+    public Guid? AppliesToPayableId { get; set; }
     public string? CustomerName { get; set; }
     public Guid? BankReconciliationId { get; set; }
     public BankReconciliation? BankReconciliation { get; set; }

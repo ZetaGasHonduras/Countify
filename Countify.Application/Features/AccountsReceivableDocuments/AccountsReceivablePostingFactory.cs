@@ -32,8 +32,9 @@ internal static class AccountsReceivablePostingFactory
 
         if (document.JournalEntryId is null)
         {
-            var periodEntries = unitOfWork.JournalEntries.Query().Where(e => e.PeriodId == period.Id);
-            var max = await periodEntries.Select(e => (int?)e.EntryNumber).MaxAsync(cancellationToken);
+            // Numeración global correlativa (legacy: Documento era PK autoincrementada).
+            var max = await unitOfWork.JournalEntries.Query()
+                .Select(e => (int?)e.EntryNumber).MaxAsync(cancellationToken);
 
             var journal = new JournalEntry
             {

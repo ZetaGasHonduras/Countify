@@ -1,7 +1,9 @@
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
+using Countify.Domain.Entities.AccountsPayable;
 using Countify.Domain.Entities.AccountsReceivable;
+using Countify.Domain.Entities.Billing;
 using Microsoft.AspNetCore.Identity;
 
 namespace Countify.Domain.Interfaces;
@@ -41,6 +43,17 @@ public interface IUnitOfWork : IDisposable
     IRepository<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; }
     IRepository<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments { get; }
     IRepository<FiscalControl> FiscalControls { get; }
+    IRepository<SupplierType> SupplierTypes { get; }
+    IRepository<Supplier> Suppliers { get; }
+    IRepository<SupplierFiscalData> SupplierFiscalData { get; }
+    IRepository<PayableConcept> PayableConcepts { get; }
+    IRepository<PayableDocument> PayableDocuments { get; }
+    IRepository<PayableDocumentLine> PayableDocumentLines { get; }
+    IRepository<PayableDocumentAttachment> PayableDocumentAttachments { get; }
+    IRepository<PaymentMethod> PaymentMethods { get; }
+    IRepository<Invoice> Invoices { get; }
+    IRepository<InvoiceLine> InvoiceLines { get; }
+    IRepository<InvoicePayment> InvoicePayments { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

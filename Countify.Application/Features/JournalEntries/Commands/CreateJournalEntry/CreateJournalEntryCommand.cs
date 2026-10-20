@@ -1,5 +1,6 @@
 using AutoMapper;
 using Countify.Application.Features.AccountsReceivableDocuments;
+using Countify.Application.Features.PayableDocuments;
 using Countify.Application.Features.JournalEntries.DTOs;
 using Countify.Application.Features.JournalEntries;
 using Countify.Application.Wrappers;
@@ -101,13 +102,10 @@ public class CreateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
                 return Response<Guid>.Failure("Hay proyectos inválidos en las líneas.");
         }
 
-        var periodEntries = unitOfWork.JournalEntries.Query();
-        var maxNumber = period is null
-            ? await periodEntries.Select(e => (int?)e.EntryNumber).MaxAsync(cancellationToken)
-            : await periodEntries
-                .Where(e => e.PeriodId == period.Id)
-                .Select(e => (int?)e.EntryNumber)
-                .MaxAsync(cancellationToken);
+        // Numeración global correlativa (legacy: CntDocumentos.Documento = [Key(true)] autoincrementado).
+        var maxNumber = await unitOfWork.JournalEntries.Query()
+            .Select(e => (int?)e.EntryNumber)
+            .MaxAsync(cancellationToken);
 
         var entry = mapper.Map<JournalEntry>(request);
         entry.EntryGid = Guid.NewGuid();
@@ -122,15 +120,26 @@ public class CreateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
 
         for (var i = 0; i < request.Lines.Count; i++)
         {
-            var draft = request.Lines[i].PendingDocument;
-            if (draft is null) continue;
+            if (request.Lines[i].PendingDocument is { } draft)
+            {
+                var created = await AccountsReceivableDocumentDraftFactory.CreateAsync(unitOfWork, draft, cancellationToken);
+                if (created.Error is not null)
+                    return Response<Guid>.Failure(created.Error);
 
-            var created = await AccountsReceivableDocumentDraftFactory.CreateAsync(unitOfWork, draft, cancellationToken);
-            if (created.Error is not null)
-                return Response<Guid>.Failure(created.Error);
+                lines[i].AppliesToReceivableId = created.Document!.Id;
+                lines[i].CustomerName = $"{created.CustomerCode} - {created.CustomerName}";
+            }
 
-            lines[i].AppliesToReceivableId = created.Document!.Id;
-            lines[i].CustomerName = $"{created.CustomerCode} - {created.CustomerName}";
+            // Legacy: CntDocDetCrearCXP — cuenta auxiliar de CxP crea/aplica su documento.
+            if (request.Lines[i].PendingPayableDocument is { } payableDraft)
+            {
+                var createdPayable = await PayableDocumentDraftFactory.CreateAsync(unitOfWork, payableDraft, cancellationToken);
+                if (createdPayable.Error is not null)
+                    return Response<Guid>.Failure(createdPayable.Error);
+
+                lines[i].AppliesToPayableId = createdPayable.Document!.Id;
+                lines[i].CustomerName = $"{createdPayable.SupplierCode} - {createdPayable.SupplierName}";
+            }
         }
 
         ApplyTotals(entry, lines);

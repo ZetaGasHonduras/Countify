@@ -1,5 +1,6 @@
 using AutoMapper;
 using Countify.Application.Features.AccountsReceivableDocuments;
+using Countify.Application.Features.PayableDocuments;
 using Countify.Application.Features.JournalEntries.DTOs;
 using Countify.Application.Features.JournalEntries;
 using Countify.Application.Wrappers;
@@ -130,15 +131,26 @@ public class UpdateJournalEntryCommandHandler(IUnitOfWork unitOfWork, IMapper ma
 
         for (var i = 0; i < request.Lines.Count; i++)
         {
-            var draft = request.Lines[i].PendingDocument;
-            if (draft is null) continue;
+            if (request.Lines[i].PendingDocument is { } draft)
+            {
+                var created = await AccountsReceivableDocumentDraftFactory.CreateAsync(unitOfWork, draft, cancellationToken);
+                if (created.Error is not null)
+                    return Response<bool>.Failure(created.Error);
 
-            var created = await AccountsReceivableDocumentDraftFactory.CreateAsync(unitOfWork, draft, cancellationToken);
-            if (created.Error is not null)
-                return Response<bool>.Failure(created.Error);
+                newLines[i].AppliesToReceivableId = created.Document!.Id;
+                newLines[i].CustomerName = $"{created.CustomerCode} - {created.CustomerName}";
+            }
 
-            newLines[i].AppliesToReceivableId = created.Document!.Id;
-            newLines[i].CustomerName = $"{created.CustomerCode} - {created.CustomerName}";
+            // Legacy: CntDocDetCrearCXP — cuenta auxiliar de CxP crea/aplica su documento.
+            if (request.Lines[i].PendingPayableDocument is { } payableDraft)
+            {
+                var createdPayable = await PayableDocumentDraftFactory.CreateAsync(unitOfWork, payableDraft, cancellationToken);
+                if (createdPayable.Error is not null)
+                    return Response<bool>.Failure(createdPayable.Error);
+
+                newLines[i].AppliesToPayableId = createdPayable.Document!.Id;
+                newLines[i].CustomerName = $"{createdPayable.SupplierCode} - {createdPayable.SupplierName}";
+            }
         }
 
         foreach (var oldLine in entry.Lines.ToList())

@@ -4,7 +4,9 @@ using Countify.Domain.Common;
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
+using Countify.Domain.Entities.AccountsPayable;
 using Countify.Domain.Entities.AccountsReceivable;
+using Countify.Domain.Entities.Billing;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +47,19 @@ public DbSet<AccountsReceivableDocument> AccountsReceivableDocuments { get; set;
 public DbSet<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; set; }
 public DbSet<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments { get; set; }
 public DbSet<FiscalControl> FiscalControls { get; set; }
+
+    public DbSet<SupplierType> SupplierTypes { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<SupplierFiscalData> SupplierFiscalData { get; set; }
+    public DbSet<PayableConcept> PayableConcepts { get; set; }
+    public DbSet<PayableDocument> PayableDocuments { get; set; }
+    public DbSet<PayableDocumentLine> PayableDocumentLines { get; set; }
+    public DbSet<PayableDocumentAttachment> PayableDocumentAttachments { get; set; }
+
+    public DbSet<PaymentMethod> PaymentMethods { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<InvoiceLine> InvoiceLines { get; set; }
+    public DbSet<InvoicePayment> InvoicePayments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

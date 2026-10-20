@@ -1,4 +1,4 @@
-﻿using Countify.Api.Authorization.Handlers;
+using Countify.Api.Authorization.Handlers;
 using Countify.Api.Authorization.Policies;
 using Microsoft.AspNetCore.Authorization;
 
@@ -30,6 +30,12 @@ public static class ApiServiceRegistration
         services.ConfigureOptions<AccountsReceivableConceptPolicies>();
         services.ConfigureOptions<AccountsReceivableDocumentPolicies>();
         services.ConfigureOptions<FiscalControlPolicies>();
+        services.ConfigureOptions<SupplierTypePolicies>();
+        services.ConfigureOptions<SupplierPolicies>();
+        services.ConfigureOptions<PayableConceptPolicies>();
+        services.ConfigureOptions<PayableDocumentPolicies>();
+        services.ConfigureOptions<PaymentMethodPolicies>();
+        services.ConfigureOptions<InvoicePolicies>();
 
         services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
         return services;

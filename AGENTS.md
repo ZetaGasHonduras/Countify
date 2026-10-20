@@ -5,7 +5,7 @@ Código limpio, ordenado por capas y pensado para generalizar a futuras entidade
 ## Flujo de trabajo (obligatorio)
 - **No ejecutar** `dotnet build` ni correr la app: el usuario compila y reporta los errores.
 - **No generar migraciones** con `dotnet ef` (compila internamente): el usuario las genera/aplica manualmente.
-- **`ROADMAP.md` y `API-CONTRACT-FASE1.md`** (en OneDrive, carpeta del cliente) son **solo lectura** y la fuente de verdad. Desviaciones se **reportan**, no se editan.
+- **`ROADMAP.md`** (hub graphify: `C:\Users\gfmen\OneDrive\Documents\Proyecto X\Countify-GlobalGraph\ROADMAP.md`) es la **fuente de verdad única** del roadmap maestro, planes de fase y contrato API (Apéndice A). Trátalo como documento vivo: actualiza la sección de fase correspondiente al avanzar. Desviaciones grandes se reportan antes de implementar.
 - Al terminar una tarea, reportar para que el usuario compile y pase errores.
 
 ## Arquitectura / capas
@@ -36,7 +36,7 @@ Código limpio, ordenado por capas y pensado para generalizar a futuras entidade
   - `SubProjectId?` columna Guid nullable **sin FK** (entidad futura; era "Motorista").
   - `EntryConceptType?` enum → valores **1=Débito, 2=Crédito, 3=Otro** (se expone como `int?` en DTO, sin endpoint de catálogo).
 - `CompanySettings` usa flags bool `Use*`/`Require*` (`Use*` activa la dimensión, `Require*` la obliga; Require implica Use). Seed: `UseDepartments=true`, `UseProjects=true`.
-- Reglas de línea: `debit XOR credit` (>0), monto ≥0, `debitSum==creditSum` (Draft admite desbalance; Approved/Posted exigen cuadre), período abierto para crear/postear, `EntryNumber = max+1` del período. Flujo: `Draft → Approved → Posted | Voided` (void idempotente); edit/delete solo `Draft`.
+- Reglas de línea: `debit XOR credit` (>0), monto ≥0, `debitSum==creditSum` (Draft admite desbalance; Approved/Posted exigen cuadre), período abierto para crear/postear, `EntryNumber = max+1` **global** (legacy: `Documento` era PK `[Key(true)]` autoincrementada; índice único `IX_JournalEntries_EntryNumber` en BD). Flujo: `Draft → Approved → Posted | Voided` (void idempotente); edit/delete solo `Draft`.
 
 ## Contrato API (FASE 1)
 - JSON camelCase, fechas ISO 8601, **paginación 0-based**, errores `{ statusCode, message }`.

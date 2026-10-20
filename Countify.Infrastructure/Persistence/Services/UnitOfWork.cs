@@ -1,7 +1,9 @@
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.Audit;
 using Countify.Domain.Entities.Auth;
+using Countify.Domain.Entities.AccountsPayable;
 using Countify.Domain.Entities.AccountsReceivable;
+using Countify.Domain.Entities.Billing;
 using Countify.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Quick.AutoInject.Services;
@@ -44,6 +46,17 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<AccountsReceivableDocumentLine>? _accountsReceivableDocumentLines;
     private IRepository<AccountsReceivableDocumentAttachment>? _accountsReceivableDocumentAttachments;
     private IRepository<FiscalControl>? _fiscalControls;
+    private IRepository<SupplierType>? _supplierTypes;
+    private IRepository<Supplier>? _suppliers;
+    private IRepository<SupplierFiscalData>? _supplierFiscalData;
+    private IRepository<PayableConcept>? _payableConcepts;
+    private IRepository<PayableDocument>? _payableDocuments;
+    private IRepository<PayableDocumentLine>? _payableDocumentLines;
+    private IRepository<PayableDocumentAttachment>? _payableDocumentAttachments;
+    private IRepository<PaymentMethod>? _paymentMethods;
+    private IRepository<Invoice>? _invoices;
+    private IRepository<InvoiceLine>? _invoiceLines;
+    private IRepository<InvoicePayment>? _invoicePayments;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -113,6 +126,17 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines => _accountsReceivableDocumentLines ??= new Repository<AccountsReceivableDocumentLine>(context);
     public IRepository<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments => _accountsReceivableDocumentAttachments ??= new Repository<AccountsReceivableDocumentAttachment>(context);
     public IRepository<FiscalControl> FiscalControls => _fiscalControls ??= new Repository<FiscalControl>(context);
+    public IRepository<SupplierType> SupplierTypes => _supplierTypes ??= new Repository<SupplierType>(context);
+    public IRepository<Supplier> Suppliers => _suppliers ??= new Repository<Supplier>(context);
+    public IRepository<SupplierFiscalData> SupplierFiscalData => _supplierFiscalData ??= new Repository<SupplierFiscalData>(context);
+    public IRepository<PayableConcept> PayableConcepts => _payableConcepts ??= new Repository<PayableConcept>(context);
+    public IRepository<PayableDocument> PayableDocuments => _payableDocuments ??= new Repository<PayableDocument>(context);
+    public IRepository<PayableDocumentLine> PayableDocumentLines => _payableDocumentLines ??= new Repository<PayableDocumentLine>(context);
+    public IRepository<PayableDocumentAttachment> PayableDocumentAttachments => _payableDocumentAttachments ??= new Repository<PayableDocumentAttachment>(context);
+    public IRepository<PaymentMethod> PaymentMethods => _paymentMethods ??= new Repository<PaymentMethod>(context);
+    public IRepository<Invoice> Invoices => _invoices ??= new Repository<Invoice>(context);
+    public IRepository<InvoiceLine> InvoiceLines => _invoiceLines ??= new Repository<InvoiceLine>(context);
+    public IRepository<InvoicePayment> InvoicePayments => _invoicePayments ??= new Repository<InvoicePayment>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);

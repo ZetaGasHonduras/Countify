@@ -1,0 +1,12 @@
+namespace Countify.Application.Features.PayableDocuments.DTOs;
+
+public class PayableDocumentAttachmentDto
+{
+    public Guid Id { get; set; }
+    public Guid DocumentId { get; set; }
+    public string FileName { get; set; } = string.Empty;
+    public string? ContentType { get; set; }
+    public long Size { get; set; }
+    public DateTime UploadedOn { get; set; }
+    public string? UploadedBy { get; set; }
+}

@@ -1,6 +1,7 @@
 namespace Countify.Application.Features.JournalEntries.DTOs;
 
 using Countify.Application.Features.AccountsReceivableDocuments.DTOs;
+using Countify.Application.Features.PayableDocuments.DTOs;
 
 public class JournalEntryLineRequest
 {
@@ -18,4 +19,5 @@ public class JournalEntryLineRequest
     public Guid? FixedAssetMovementId { get; set; }
     public string? CustomerName { get; set; }
     public AccountsReceivableDocumentDraftRequest? PendingDocument { get; set; }
+    public PayableDocumentDraftRequest? PendingPayableDocument { get; set; }
 }

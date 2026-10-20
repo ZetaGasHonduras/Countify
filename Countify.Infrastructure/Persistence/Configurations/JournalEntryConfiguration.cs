@@ -43,6 +43,10 @@ public class JournalEntryConfiguration : IEntityTypeConfiguration<JournalEntry>
 
         builder.HasIndex(e => e.PeriodId);
 
+        // Legacy: CntDocumentos.Documento era PK [Key(true)] autoincrementada → número
+        // único global. El índice lo garantiza en BD (las fábricas usan max+1 global).
+        builder.HasIndex(e => e.EntryNumber).IsUnique();
+
         builder.HasOne(e => e.Type)
             .WithMany()
             .HasForeignKey(e => e.TypeId)

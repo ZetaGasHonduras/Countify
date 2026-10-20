@@ -31,6 +31,7 @@ public class CatalogSeeder(
             await SeedAccountsAsync(cancellationToken);
             await SeedCurrenciesAsync(cancellationToken);
             await SeedDocumentTypeAsync(cancellationToken);
+            await SeedPaymentMethodsAsync(cancellationToken);
         }
 
         if (options.Value.SeedTransactions)
@@ -43,10 +44,20 @@ public class CatalogSeeder(
             await SeedProductAccountsAsync(cancellationToken);
             await SeedAccountingPeriodsAsync(cancellationToken);
             await SeedCustomerCatalogAsync(cancellationToken);
+            await SeedSupplierCatalogAsync(cancellationToken);
             await SeedAccountsReceivableConceptsAsync(cancellationToken);
+            await SeedPayableConceptsAsync(cancellationToken);
         }
         await context.SaveChangesAsync(cancellationToken);
         logger.LogInformation("Catalog seed completed.");
+    }
+
+    private async Task SeedPaymentMethodsAsync(CancellationToken cancellationToken)
+    {
+        if (await context.PaymentMethods.AnyAsync(cancellationToken))
+            return;
+
+        context.PaymentMethods.AddRange(BasicPaymentMethods.Items);
     }
 
     private async Task SeedDepartmentsAsync(CancellationToken cancellationToken)
@@ -183,5 +194,68 @@ public class CatalogSeeder(
 
         context.AccountsReceivableConcepts.AddRange(BasicAccountsReceivableConcepts.Items);
     }
+
+    private async Task SeedPayableConceptsAsync(CancellationToken cancellationToken)
+    {
+        if (await context.PayableConcepts.AnyAsync(cancellationToken))
+            return;
+
+        var apAccount = await context.Accounts
+            .FirstOrDefaultAsync(account => account.Code == BasicAccounts.SuppliersPayableLocal.Code, cancellationToken);
+
+        foreach (var item in BasicPayableConcepts.Items)
+        {
+            // Solo la compra lleva cuenta por defecto; el pago usa la cuenta del proveedor (FASE 4.4).
+            if (ReferenceEquals(item, BasicPayableConcepts.Payment))
+                continue;
+
+            item.AccountId = apAccount?.Id;
+        }
+
+        context.PayableConcepts.AddRange(BasicPayableConcepts.Items);
+    }
+
+    private async Task SeedSupplierCatalogAsync(CancellationToken cancellationToken)
+    {
+        if (!await context.SupplierTypes.AnyAsync(cancellationToken))
+        {
+            var accountIds = await GetSupplierAccountIdsAsync(cancellationToken);
+
+            foreach (var item in BasicSupplierTypes.Items)
+            {
+                if (BasicSupplierTypes.AccountCodesByTypeCode.TryGetValue(item.Code, out var accountCode))
+                    item.AccountingAccountId = accountIds.GetValueOrDefault(accountCode);
+            }
+
+            context.SupplierTypes.AddRange(BasicSupplierTypes.Items);
+        }
+
+        if (!await context.Suppliers.AnyAsync(cancellationToken))
+        {
+            var creditType = await context.SupplierTypes
+                .FirstOrDefaultAsync(type => type.Code == BasicSupplierTypes.Default.Code, cancellationToken);
+            var foreignType = await context.SupplierTypes
+                .FirstOrDefaultAsync(type => type.Code == BasicSupplierTypes.Foreign.Code, cancellationToken);
+            var accountIds = await GetSupplierAccountIdsAsync(cancellationToken);
+
+            foreach (var item in BasicSuppliers.Items)
+            {
+                var typeCode = BasicSuppliers.TypeCodes.GetValueOrDefault(item);
+                item.SupplierTypeId = typeCode == BasicSupplierTypes.Foreign.Code ? foreignType?.Id : creditType?.Id;
+
+                if (BasicSuppliers.AccountCodes.TryGetValue(item, out var accountCode))
+                    item.AccountingAccountId = accountIds.GetValueOrDefault(accountCode);
+            }
+
+            context.Suppliers.AddRange(BasicSuppliers.Items);
+            context.SupplierFiscalData.Add(BasicSuppliers.ProviderGeneralFiscal);
+        }
+    }
+
+    private async Task<Dictionary<string, Guid?>> GetSupplierAccountIdsAsync(CancellationToken cancellationToken)
+        => await context.Accounts
+            .Where(account => account.Code == BasicAccounts.SuppliersPayableLocal.Code
+                           || account.Code == BasicAccounts.SuppliersPayableForeign.Code)
+            .ToDictionaryAsync(account => account.Code, account => (Guid?)account.Id, cancellationToken);
 
 }

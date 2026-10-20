@@ -10,6 +10,8 @@ public static class BasicAccounts
     public static readonly Account Cash = NewAccount(4, "1.1.1.001", "Caja General", operable: true);
     public static readonly Account Banks = NewAccount(7, "1.1.2.001", "Cuenta de Cheques", operable: true, bank: true);
     public static readonly Account AccountsReceivable = NewAccount(11, "1.1.3.001", "Cuenta por Cobrar Clientes", operable: true, auxCxc: true);
+    public static readonly Account SuppliersPayableLocal = NewAccount(55, "2.1.1.1.001", "Locales", operable: true, auxCxp: true);
+    public static readonly Account SuppliersPayableForeign = NewAccount(56, "2.1.1.1.002", "Extranjeros", operable: true, auxCxp: true);
     public static readonly Account FurnitureAndEquipment = NewAccount(30, "1.2.1.1.002", "Instalaciones", operable: true, auxAsset: true);
     public static readonly Account ServiceRevenue = NewAccount(100, "4.1.1", "Ventas brutas", operable: true);
     public static readonly Account CostOfSales = NewAccount(107, "5.1.1", "Costo de venta = costo directo", operable: true);

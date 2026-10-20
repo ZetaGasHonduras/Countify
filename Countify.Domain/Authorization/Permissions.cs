@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Countify.Domain.Entities.Auth;
 
 namespace Countify.Domain.Authorization;
@@ -118,6 +118,44 @@ public class Permissions
 
     public static readonly Permission CanEditReceiptNumber = Permission.Create(93, nameof(CanEditReceiptNumber), "Editar el correlativo de recibo.");
     public static readonly Permission CanManageAccountsReceivableAttachments = Permission.Create(94, nameof(CanManageAccountsReceivableAttachments), "Gestionar adjuntos de documentos por cobrar.");
+
+    // CxP - Tipos de Proveedor
+    public static readonly Permission CanViewSupplierTypes = Permission.Create(95, nameof(CanViewSupplierTypes), "Ver tipos de proveedor.");
+    public static readonly Permission CanCreateSupplierTypes = Permission.Create(96, nameof(CanCreateSupplierTypes), "Crear tipos de proveedor.");
+    public static readonly Permission CanEditSupplierTypes = Permission.Create(97, nameof(CanEditSupplierTypes), "Editar tipos de proveedor.");
+    public static readonly Permission CanDeleteSupplierTypes = Permission.Create(98, nameof(CanDeleteSupplierTypes), "Eliminar tipos de proveedor.");
+
+    // CxP - Proveedores
+    public static readonly Permission CanViewSuppliers = Permission.Create(99, nameof(CanViewSuppliers), "Ver proveedores.");
+    public static readonly Permission CanCreateSuppliers = Permission.Create(100, nameof(CanCreateSuppliers), "Crear proveedores.");
+    public static readonly Permission CanEditSuppliers = Permission.Create(101, nameof(CanEditSuppliers), "Editar proveedores.");
+    public static readonly Permission CanDeleteSuppliers = Permission.Create(102, nameof(CanDeleteSuppliers), "Eliminar proveedores.");
+
+    // CxP - Conceptos
+    public static readonly Permission CanViewPayableConcepts = Permission.Create(103, nameof(CanViewPayableConcepts), "Ver conceptos de cuentas por pagar.");
+    public static readonly Permission CanCreatePayableConcepts = Permission.Create(104, nameof(CanCreatePayableConcepts), "Crear conceptos de cuentas por pagar.");
+    public static readonly Permission CanEditPayableConcepts = Permission.Create(105, nameof(CanEditPayableConcepts), "Editar conceptos de cuentas por pagar.");
+    public static readonly Permission CanDeletePayableConcepts = Permission.Create(106, nameof(CanDeletePayableConcepts), "Eliminar conceptos de cuentas por pagar.");
+
+    // CxP - Documentos por Pagar
+    public static readonly Permission CanViewPayableDocuments = Permission.Create(107, nameof(CanViewPayableDocuments), "Ver documentos por pagar.");
+    public static readonly Permission CanCreatePayableDocuments = Permission.Create(108, nameof(CanCreatePayableDocuments), "Crear documentos por pagar.");
+    public static readonly Permission CanEditPayableDocuments = Permission.Create(109, nameof(CanEditPayableDocuments), "Editar documentos por pagar.");
+    public static readonly Permission CanVoidPayableDocuments = Permission.Create(110, nameof(CanVoidPayableDocuments), "Anular documentos por pagar.");
+    public static readonly Permission CanManagePayableAttachments = Permission.Create(111, nameof(CanManagePayableAttachments), "Gestionar adjuntos de documentos por pagar.");
+
+    // Facturación - Métodos de Pago
+    public static readonly Permission CanViewPaymentMethods = Permission.Create(112, nameof(CanViewPaymentMethods), "Ver métodos de pago.");
+    public static readonly Permission CanCreatePaymentMethods = Permission.Create(113, nameof(CanCreatePaymentMethods), "Crear métodos de pago.");
+    public static readonly Permission CanEditPaymentMethods = Permission.Create(114, nameof(CanEditPaymentMethods), "Editar métodos de pago.");
+    public static readonly Permission CanDeletePaymentMethods = Permission.Create(115, nameof(CanDeletePaymentMethods), "Eliminar métodos de pago.");
+
+    // Facturación - Facturas
+    public static readonly Permission CanViewInvoices = Permission.Create(116, nameof(CanViewInvoices), "Ver facturas.");
+    public static readonly Permission CanCreateInvoices = Permission.Create(117, nameof(CanCreateInvoices), "Crear facturas.");
+    public static readonly Permission CanEditInvoices = Permission.Create(118, nameof(CanEditInvoices), "Editar facturas.");
+    public static readonly Permission CanVoidInvoices = Permission.Create(119, nameof(CanVoidInvoices), "Anular facturas.");
+    public static readonly Permission CanManageInvoicePayments = Permission.Create(120, nameof(CanManageInvoicePayments), "Totalizar/pagar facturas.");
 
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)

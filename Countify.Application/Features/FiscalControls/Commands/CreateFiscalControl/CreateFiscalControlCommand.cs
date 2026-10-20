@@ -31,7 +31,8 @@ public class CreateFiscalControlCommandHandler(IUnitOfWork unitOfWork, IMapper m
         CreateFiscalControlCommand request, CancellationToken cancellationToken)
     {
         var exists = await unitOfWork.FiscalControls.ExistsAsync(
-            c => c.DocumentType == request.DocumentType && c.Branch == request.Branch && c.EmissionPoint == request.EmissionPoint,
+            c => c.DocumentType == request.DocumentType && c.Branch == request.Branch &&
+                 c.EmissionPoint == request.EmissionPoint,
             cancellationToken);
 
         if (exists)

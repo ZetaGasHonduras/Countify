@@ -21,6 +21,11 @@ internal static class JournalEntryAuxValidator
             {
                 return $"La cuenta {account.Code} es auxiliar de CxC: aplique un documento de cuentas por cobrar antes de guardar.";
             }
+
+            if (account.IsAuxCxp && !line.AppliesToPayableId.HasValue && line.PendingPayableDocument is null)
+            {
+                return $"La cuenta {account.Code} es auxiliar de CxP: aplique un documento de cuentas por pagar antes de guardar.";
+            }
         }
 
         var appliesIds = lines
@@ -29,18 +34,40 @@ internal static class JournalEntryAuxValidator
             .Distinct()
             .ToList();
 
-        if (appliesIds.Count == 0) return null;
+        if (appliesIds.Count > 0)
+        {
+            var docs = await unitOfWork.AccountsReceivableDocuments.Query()
+                .Where(d => appliesIds.Contains(d.Id))
+                .ToListAsync(cancellationToken);
 
-        var docs = await unitOfWork.AccountsReceivableDocuments.Query()
-            .Where(d => appliesIds.Contains(d.Id))
+            foreach (var id in appliesIds)
+            {
+                var doc = docs.FirstOrDefault(d => d.Id == id);
+                if (doc is null || doc.IsVoided)
+                {
+                    return "Un documento de cuentas por cobrar vinculado no existe o está anulado.";
+                }
+            }
+        }
+
+        var appliesPayableIds = lines
+            .Where(l => l.AppliesToPayableId.HasValue)
+            .Select(l => l.AppliesToPayableId!.Value)
+            .Distinct()
+            .ToList();
+
+        if (appliesPayableIds.Count == 0) return null;
+
+        var payableDocs = await unitOfWork.PayableDocuments.Query()
+            .Where(d => appliesPayableIds.Contains(d.Id))
             .ToListAsync(cancellationToken);
 
-        foreach (var id in appliesIds)
+        foreach (var id in appliesPayableIds)
         {
-            var doc = docs.FirstOrDefault(d => d.Id == id);
+            var doc = payableDocs.FirstOrDefault(d => d.Id == id);
             if (doc is null || doc.IsVoided)
             {
-                return "Un documento de cuentas por cobrar vinculado no existe o está anulado.";
+                return "Un documento de cuentas por pagar vinculado no existe o está anulado.";
             }
         }
 
