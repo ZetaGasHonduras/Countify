@@ -20,4 +20,12 @@ public class CompanySettingsDto
     public bool RequireSubProjects { get; set; }
     public bool UseConceptTypes { get; set; }
     public bool RequireConceptTypes { get; set; }
+
+    // Cuentas para la partida mensual de ventas (legacy: Controles).
+    public Guid? SalesLocalAccountId { get; set; }
+    public Guid? SalesForeignAccountId { get; set; }
+    public Guid? ReceivableLocalAccountId { get; set; }
+    public Guid? ReceivableForeignAccountId { get; set; }
+    public Guid? CashAccountId { get; set; }
+    public Guid? TaxPayableAccountId { get; set; }
 }

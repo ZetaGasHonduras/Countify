@@ -60,6 +60,7 @@ public DbSet<FiscalControl> FiscalControls { get; set; }
     public DbSet<Invoice> Invoices { get; set; }
     public DbSet<InvoiceLine> InvoiceLines { get; set; }
     public DbSet<InvoicePayment> InvoicePayments { get; set; }
+    public DbSet<SalesJournalBatch> SalesJournalBatches { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

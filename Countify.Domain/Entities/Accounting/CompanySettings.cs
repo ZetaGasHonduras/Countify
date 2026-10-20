@@ -26,4 +26,18 @@ public class CompanySettings : BaseEntity
     public bool RequireSubProjects { get; set; }
     public bool UseConceptTypes { get; set; }
     public bool RequireConceptTypes { get; set; }
+
+    // --- Cuentas para la partida mensual de ventas (legacy: Controles) ---
+    public Guid? SalesLocalAccountId { get; set; }
+    public Account? SalesLocalAccount { get; set; }
+    public Guid? SalesForeignAccountId { get; set; }
+    public Account? SalesForeignAccount { get; set; }
+    public Guid? ReceivableLocalAccountId { get; set; }
+    public Account? ReceivableLocalAccount { get; set; }
+    public Guid? ReceivableForeignAccountId { get; set; }
+    public Account? ReceivableForeignAccount { get; set; }
+    public Guid? CashAccountId { get; set; }
+    public Account? CashAccount { get; set; }
+    public Guid? TaxPayableAccountId { get; set; }
+    public Account? TaxPayableAccount { get; set; }
 }

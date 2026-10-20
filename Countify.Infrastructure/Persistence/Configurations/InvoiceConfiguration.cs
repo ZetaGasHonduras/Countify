@@ -51,5 +51,6 @@ public class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.HasOne(x => x.Currency).WithMany().HasForeignKey(x => x.CurrencyId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.FiscalControl).WithMany().HasForeignKey(x => x.FiscalControlId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(x => x.ReceivableDocument).WithMany().HasForeignKey(x => x.ReceivableDocumentId).OnDelete(DeleteBehavior.SetNull);
+        builder.HasOne(x => x.SalesBatch).WithMany().HasForeignKey(x => x.SalesBatchId).OnDelete(DeleteBehavior.SetNull);
     }
 }

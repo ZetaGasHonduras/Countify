@@ -57,6 +57,7 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<Invoice>? _invoices;
     private IRepository<InvoiceLine>? _invoiceLines;
     private IRepository<InvoicePayment>? _invoicePayments;
+    private IRepository<SalesJournalBatch>? _salesJournalBatches;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -137,6 +138,7 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<Invoice> Invoices => _invoices ??= new Repository<Invoice>(context);
     public IRepository<InvoiceLine> InvoiceLines => _invoiceLines ??= new Repository<InvoiceLine>(context);
     public IRepository<InvoicePayment> InvoicePayments => _invoicePayments ??= new Repository<InvoicePayment>(context);
+    public IRepository<SalesJournalBatch> SalesJournalBatches => _salesJournalBatches ??= new Repository<SalesJournalBatch>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);

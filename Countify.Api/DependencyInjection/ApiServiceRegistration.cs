@@ -36,6 +36,7 @@ public static class ApiServiceRegistration
         services.ConfigureOptions<PayableDocumentPolicies>();
         services.ConfigureOptions<PaymentMethodPolicies>();
         services.ConfigureOptions<InvoicePolicies>();
+        services.ConfigureOptions<SalesJournalBatchPolicies>();
 
         services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
         return services;

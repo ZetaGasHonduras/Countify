@@ -157,6 +157,10 @@ public class Permissions
     public static readonly Permission CanVoidInvoices = Permission.Create(119, nameof(CanVoidInvoices), "Anular facturas.");
     public static readonly Permission CanManageInvoicePayments = Permission.Create(120, nameof(CanManageInvoicePayments), "Totalizar/pagar facturas.");
 
+    // Facturación - Partida de Ventas mensual
+    public static readonly Permission CanViewSalesJournalBatches = Permission.Create(121, nameof(CanViewSalesJournalBatches), "Ver partidas de ventas.");
+    public static readonly Permission CanCreateSalesJournalBatches = Permission.Create(122, nameof(CanCreateSalesJournalBatches), "Generar partidas de ventas.");
+
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(fieldInfo => fieldInfo.FieldType == typeof(Permission))

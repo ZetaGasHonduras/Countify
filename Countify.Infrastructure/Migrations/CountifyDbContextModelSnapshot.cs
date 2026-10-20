@@ -454,6 +454,9 @@ namespace Countify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("CashAccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -479,6 +482,12 @@ namespace Countify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ReceivableForeignAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ReceivableLocalAccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("RequireConceptTypes")
                         .HasColumnType("bit");
 
@@ -491,9 +500,18 @@ namespace Countify.Infrastructure.Migrations
                     b.Property<bool>("RequireSubProjects")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("SalesForeignAccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SalesLocalAccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("TaxId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TaxPayableAccountId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("UseConceptTypes")
                         .HasColumnType("bit");
@@ -509,9 +527,21 @@ namespace Countify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CashAccountId");
+
                     b.HasIndex("DefaultDepartmentId");
 
                     b.HasIndex("DefaultProjectId");
+
+                    b.HasIndex("ReceivableForeignAccountId");
+
+                    b.HasIndex("ReceivableLocalAccountId");
+
+                    b.HasIndex("SalesForeignAccountId");
+
+                    b.HasIndex("SalesLocalAccountId");
+
+                    b.HasIndex("TaxPayableAccountId");
 
                     b.ToTable("CompanySettings", (string)null);
                 });
@@ -2552,6 +2582,18 @@ namespace Countify.Infrastructure.Migrations
                             Id = 120,
                             Description = "Totalizar/pagar facturas.",
                             Name = "CanManageInvoicePayments"
+                        },
+                        new
+                        {
+                            Id = 121,
+                            Description = "Ver partidas de ventas.",
+                            Name = "CanViewSalesJournalBatches"
+                        },
+                        new
+                        {
+                            Id = 122,
+                            Description = "Generar partidas de ventas.",
+                            Name = "CanCreateSalesJournalBatches"
                         });
                 });
 
@@ -3169,6 +3211,16 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 120
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 121
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 122
                         });
                 });
 
@@ -3279,6 +3331,9 @@ namespace Countify.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<Guid?>("SalesBatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal>("SubTotal")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
@@ -3323,6 +3378,8 @@ namespace Countify.Infrastructure.Migrations
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("ReceivableDocumentId");
+
+                    b.HasIndex("SalesBatchId");
 
                     b.ToTable("Invoices", (string)null);
                 });
@@ -3447,6 +3504,32 @@ namespace Countify.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("PaymentMethods", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Billing.SalesJournalBatch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("PeriodFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PeriodTo")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JournalEntryId");
+
+                    b.ToTable("SalesJournalBatches", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -3749,6 +3832,10 @@ namespace Countify.Infrastructure.Migrations
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.CompanySettings", b =>
                 {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "CashAccount")
+                        .WithMany()
+                        .HasForeignKey("CashAccountId");
+
                     b.HasOne("Countify.Domain.Entities.Accounting.Department", "DefaultDepartment")
                         .WithMany()
                         .HasForeignKey("DefaultDepartmentId")
@@ -3759,9 +3846,41 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("DefaultProjectId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "ReceivableForeignAccount")
+                        .WithMany()
+                        .HasForeignKey("ReceivableForeignAccountId");
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "ReceivableLocalAccount")
+                        .WithMany()
+                        .HasForeignKey("ReceivableLocalAccountId");
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "SalesForeignAccount")
+                        .WithMany()
+                        .HasForeignKey("SalesForeignAccountId");
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "SalesLocalAccount")
+                        .WithMany()
+                        .HasForeignKey("SalesLocalAccountId");
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "TaxPayableAccount")
+                        .WithMany()
+                        .HasForeignKey("TaxPayableAccountId");
+
+                    b.Navigation("CashAccount");
+
                     b.Navigation("DefaultDepartment");
 
                     b.Navigation("DefaultProject");
+
+                    b.Navigation("ReceivableForeignAccount");
+
+                    b.Navigation("ReceivableLocalAccount");
+
+                    b.Navigation("SalesForeignAccount");
+
+                    b.Navigation("SalesLocalAccount");
+
+                    b.Navigation("TaxPayableAccount");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Accounting.JournalEntry", b =>
@@ -4168,6 +4287,11 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("ReceivableDocumentId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("Countify.Domain.Entities.Billing.SalesJournalBatch", "SalesBatch")
+                        .WithMany()
+                        .HasForeignKey("SalesBatchId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.Navigation("Currency");
 
                     b.Navigation("Customer");
@@ -4179,6 +4303,8 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("Project");
 
                     b.Navigation("ReceivableDocument");
+
+                    b.Navigation("SalesBatch");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Billing.InvoiceLine", b =>
@@ -4216,6 +4342,16 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("Invoice");
 
                     b.Navigation("PaymentMethod");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Billing.SalesJournalBatch", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
+                        .WithMany()
+                        .HasForeignKey("JournalEntryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("JournalEntry");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

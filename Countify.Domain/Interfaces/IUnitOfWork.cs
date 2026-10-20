@@ -54,6 +54,7 @@ public interface IUnitOfWork : IDisposable
     IRepository<Invoice> Invoices { get; }
     IRepository<InvoiceLine> InvoiceLines { get; }
     IRepository<InvoicePayment> InvoicePayments { get; }
+    IRepository<SalesJournalBatch> SalesJournalBatches { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

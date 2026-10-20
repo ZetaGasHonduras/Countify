@@ -87,5 +87,9 @@ public class Invoice : BaseEntity
     public Guid? ReceivableDocumentId { get; set; }
     public AccountsReceivableDocument? ReceivableDocument { get; set; }
 
+    /// <summary>Lote de la partida de ventas mensual que contabilizó esta factura.</summary>
+    public Guid? SalesBatchId { get; set; }
+    public SalesJournalBatch? SalesBatch { get; set; }
+
     public ICollection<InvoiceLine> Lines { get; set; } = new List<InvoiceLine>();
 }

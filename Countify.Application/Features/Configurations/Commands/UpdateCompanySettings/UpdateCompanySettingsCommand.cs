@@ -25,6 +25,12 @@ public class UpdateCompanySettingsCommand : IRequest<Response<bool>>
     public bool RequireSubProjects { get; set; }
     public bool UseConceptTypes { get; set; }
     public bool RequireConceptTypes { get; set; }
+    public Guid? SalesLocalAccountId { get; set; }
+    public Guid? SalesForeignAccountId { get; set; }
+    public Guid? ReceivableLocalAccountId { get; set; }
+    public Guid? ReceivableForeignAccountId { get; set; }
+    public Guid? CashAccountId { get; set; }
+    public Guid? TaxPayableAccountId { get; set; }
 }
 
 public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
@@ -51,6 +57,18 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
                 return Response<bool>.Failure("El departamento predeterminado indicado no existe.");
         }
 
+        var accountIds = new[]
+        {
+            request.SalesLocalAccountId, request.SalesForeignAccountId,
+            request.ReceivableLocalAccountId, request.ReceivableForeignAccountId,
+            request.CashAccountId, request.TaxPayableAccountId,
+        };
+        foreach (var accountId in accountIds.Where(a => a is not null).Select(a => a!.Value).Distinct())
+        {
+            if (!await unitOfWork.Accounts.ExistsAsync(a => a.Id == accountId, cancellationToken))
+                return Response<bool>.Failure("Una de las cuentas de ventas indicadas no existe.");
+        }
+
         var settings = await unitOfWork.CompanySettings.Query()
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -74,7 +92,13 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
                 UseSubProjects = request.UseSubProjects,
                 RequireSubProjects = request.RequireSubProjects,
                 UseConceptTypes = request.UseConceptTypes,
-                RequireConceptTypes = request.RequireConceptTypes
+                RequireConceptTypes = request.RequireConceptTypes,
+                SalesLocalAccountId = request.SalesLocalAccountId,
+                SalesForeignAccountId = request.SalesForeignAccountId,
+                ReceivableLocalAccountId = request.ReceivableLocalAccountId,
+                ReceivableForeignAccountId = request.ReceivableForeignAccountId,
+                CashAccountId = request.CashAccountId,
+                TaxPayableAccountId = request.TaxPayableAccountId
             };
 
             await unitOfWork.CompanySettings.AddAsync(settings, cancellationToken);
@@ -98,6 +122,12 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
             settings.RequireSubProjects = request.RequireSubProjects;
             settings.UseConceptTypes = request.UseConceptTypes;
             settings.RequireConceptTypes = request.RequireConceptTypes;
+            settings.SalesLocalAccountId = request.SalesLocalAccountId;
+            settings.SalesForeignAccountId = request.SalesForeignAccountId;
+            settings.ReceivableLocalAccountId = request.ReceivableLocalAccountId;
+            settings.ReceivableForeignAccountId = request.ReceivableForeignAccountId;
+            settings.CashAccountId = request.CashAccountId;
+            settings.TaxPayableAccountId = request.TaxPayableAccountId;
 
             await unitOfWork.CompanySettings.UpdateAsync(settings, cancellationToken);
         }
