@@ -4,6 +4,7 @@ using Countify.Domain.Entities.Auth;
 using Countify.Domain.Entities.AccountsPayable;
 using Countify.Domain.Entities.AccountsReceivable;
 using Countify.Domain.Entities.Billing;
+using Countify.Domain.Entities.Inventory;
 using Microsoft.AspNetCore.Identity;
 
 namespace Countify.Domain.Interfaces;
@@ -55,6 +56,9 @@ public interface IUnitOfWork : IDisposable
     IRepository<InvoiceLine> InvoiceLines { get; }
     IRepository<InvoicePayment> InvoicePayments { get; }
     IRepository<SalesJournalBatch> SalesJournalBatches { get; }
+    IRepository<Warehouse> Warehouses { get; }
+    IRepository<Location> Locations { get; }
+    IRepository<InventoryMovementType> InventoryMovementTypes { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

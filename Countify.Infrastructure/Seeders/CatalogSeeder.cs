@@ -32,6 +32,7 @@ public class CatalogSeeder(
             await SeedCurrenciesAsync(cancellationToken);
             await SeedDocumentTypeAsync(cancellationToken);
             await SeedPaymentMethodsAsync(cancellationToken);
+            await SeedInventoryCatalogAsync(cancellationToken);
         }
 
         if (options.Value.SeedTransactions)
@@ -58,6 +59,18 @@ public class CatalogSeeder(
             return;
 
         context.PaymentMethods.AddRange(BasicPaymentMethods.Items);
+    }
+
+    private async Task SeedInventoryCatalogAsync(CancellationToken cancellationToken)
+    {
+        if (!await context.InventoryMovementTypes.AnyAsync(cancellationToken))
+            context.InventoryMovementTypes.AddRange(BasicInventoryCatalog.MovementTypes);
+
+        if (!await context.Warehouses.AnyAsync(cancellationToken))
+            context.Warehouses.Add(BasicInventoryCatalog.DefaultWarehouse);
+
+        if (!await context.Locations.AnyAsync(cancellationToken))
+            context.Locations.Add(BasicInventoryCatalog.DefaultLocation);
     }
 
     private async Task SeedDepartmentsAsync(CancellationToken cancellationToken)

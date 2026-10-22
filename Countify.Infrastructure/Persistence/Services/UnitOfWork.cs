@@ -4,6 +4,7 @@ using Countify.Domain.Entities.Auth;
 using Countify.Domain.Entities.AccountsPayable;
 using Countify.Domain.Entities.AccountsReceivable;
 using Countify.Domain.Entities.Billing;
+using Countify.Domain.Entities.Inventory;
 using Countify.Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Quick.AutoInject.Services;
@@ -58,6 +59,9 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<InvoiceLine>? _invoiceLines;
     private IRepository<InvoicePayment>? _invoicePayments;
     private IRepository<SalesJournalBatch>? _salesJournalBatches;
+    private IRepository<Warehouse>? _warehouses;
+    private IRepository<Location>? _locations;
+    private IRepository<InventoryMovementType>? _inventoryMovementTypes;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -139,6 +143,9 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<InvoiceLine> InvoiceLines => _invoiceLines ??= new Repository<InvoiceLine>(context);
     public IRepository<InvoicePayment> InvoicePayments => _invoicePayments ??= new Repository<InvoicePayment>(context);
     public IRepository<SalesJournalBatch> SalesJournalBatches => _salesJournalBatches ??= new Repository<SalesJournalBatch>(context);
+    public IRepository<Warehouse> Warehouses => _warehouses ??= new Repository<Warehouse>(context);
+    public IRepository<Location> Locations => _locations ??= new Repository<Location>(context);
+    public IRepository<InventoryMovementType> InventoryMovementTypes => _inventoryMovementTypes ??= new Repository<InventoryMovementType>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);

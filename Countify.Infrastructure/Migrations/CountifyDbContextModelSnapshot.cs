@@ -2594,6 +2594,78 @@ namespace Countify.Infrastructure.Migrations
                             Id = 122,
                             Description = "Generar partidas de ventas.",
                             Name = "CanCreateSalesJournalBatches"
+                        },
+                        new
+                        {
+                            Id = 123,
+                            Description = "Ver almacenes.",
+                            Name = "CanViewWarehouses"
+                        },
+                        new
+                        {
+                            Id = 124,
+                            Description = "Crear almacenes.",
+                            Name = "CanCreateWarehouses"
+                        },
+                        new
+                        {
+                            Id = 125,
+                            Description = "Editar almacenes.",
+                            Name = "CanEditWarehouses"
+                        },
+                        new
+                        {
+                            Id = 126,
+                            Description = "Eliminar almacenes.",
+                            Name = "CanDeleteWarehouses"
+                        },
+                        new
+                        {
+                            Id = 127,
+                            Description = "Ver ubicaciones.",
+                            Name = "CanViewLocations"
+                        },
+                        new
+                        {
+                            Id = 128,
+                            Description = "Crear ubicaciones.",
+                            Name = "CanCreateLocations"
+                        },
+                        new
+                        {
+                            Id = 129,
+                            Description = "Editar ubicaciones.",
+                            Name = "CanEditLocations"
+                        },
+                        new
+                        {
+                            Id = 130,
+                            Description = "Eliminar ubicaciones.",
+                            Name = "CanDeleteLocations"
+                        },
+                        new
+                        {
+                            Id = 131,
+                            Description = "Ver tipos de movimiento de inventario.",
+                            Name = "CanViewInventoryMovementTypes"
+                        },
+                        new
+                        {
+                            Id = 132,
+                            Description = "Crear tipos de movimiento de inventario.",
+                            Name = "CanCreateInventoryMovementTypes"
+                        },
+                        new
+                        {
+                            Id = 133,
+                            Description = "Editar tipos de movimiento de inventario.",
+                            Name = "CanEditInventoryMovementTypes"
+                        },
+                        new
+                        {
+                            Id = 134,
+                            Description = "Eliminar tipos de movimiento de inventario.",
+                            Name = "CanDeleteInventoryMovementTypes"
                         });
                 });
 
@@ -3221,6 +3293,66 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 122
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 123
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 124
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 125
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 126
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 127
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 128
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 129
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 130
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 131
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 132
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 133
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 134
                         });
                 });
 
@@ -3530,6 +3662,131 @@ namespace Countify.Infrastructure.Migrations
                     b.HasIndex("JournalEntryId");
 
                     b.ToTable("SalesJournalBatches", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovementType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("ChecksStock")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("Direction")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("GeneratesPosting")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSystem")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("InventoryMovementTypes", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.Location", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ManageNegativeStock")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Observations")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("WarehouseId", "Code")
+                        .IsUnique();
+
+                    b.ToTable("Locations", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.Warehouse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Warehouses", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -4354,6 +4611,31 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("JournalEntry");
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.Location", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Inventory.Warehouse", "Warehouse")
+                        .WithMany("Locations")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -4447,6 +4729,11 @@ namespace Countify.Infrastructure.Migrations
             modelBuilder.Entity("Countify.Domain.Entities.Billing.Invoice", b =>
                 {
                     b.Navigation("Lines");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.Warehouse", b =>
+                {
+                    b.Navigation("Locations");
                 });
 #pragma warning restore 612, 618
         }

@@ -161,6 +161,20 @@ public class Permissions
     public static readonly Permission CanViewSalesJournalBatches = Permission.Create(121, nameof(CanViewSalesJournalBatches), "Ver partidas de ventas.");
     public static readonly Permission CanCreateSalesJournalBatches = Permission.Create(122, nameof(CanCreateSalesJournalBatches), "Generar partidas de ventas.");
 
+    // Inventarios - Catálogos
+    public static readonly Permission CanViewWarehouses = Permission.Create(123, nameof(CanViewWarehouses), "Ver almacenes.");
+    public static readonly Permission CanCreateWarehouses = Permission.Create(124, nameof(CanCreateWarehouses), "Crear almacenes.");
+    public static readonly Permission CanEditWarehouses = Permission.Create(125, nameof(CanEditWarehouses), "Editar almacenes.");
+    public static readonly Permission CanDeleteWarehouses = Permission.Create(126, nameof(CanDeleteWarehouses), "Eliminar almacenes.");
+    public static readonly Permission CanViewLocations = Permission.Create(127, nameof(CanViewLocations), "Ver ubicaciones.");
+    public static readonly Permission CanCreateLocations = Permission.Create(128, nameof(CanCreateLocations), "Crear ubicaciones.");
+    public static readonly Permission CanEditLocations = Permission.Create(129, nameof(CanEditLocations), "Editar ubicaciones.");
+    public static readonly Permission CanDeleteLocations = Permission.Create(130, nameof(CanDeleteLocations), "Eliminar ubicaciones.");
+    public static readonly Permission CanViewInventoryMovementTypes = Permission.Create(131, nameof(CanViewInventoryMovementTypes), "Ver tipos de movimiento de inventario.");
+    public static readonly Permission CanCreateInventoryMovementTypes = Permission.Create(132, nameof(CanCreateInventoryMovementTypes), "Crear tipos de movimiento de inventario.");
+    public static readonly Permission CanEditInventoryMovementTypes = Permission.Create(133, nameof(CanEditInventoryMovementTypes), "Editar tipos de movimiento de inventario.");
+    public static readonly Permission CanDeleteInventoryMovementTypes = Permission.Create(134, nameof(CanDeleteInventoryMovementTypes), "Eliminar tipos de movimiento de inventario.");
+
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(fieldInfo => fieldInfo.FieldType == typeof(Permission))

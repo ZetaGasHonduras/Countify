@@ -7,6 +7,7 @@ using Countify.Domain.Entities.Auth;
 using Countify.Domain.Entities.AccountsPayable;
 using Countify.Domain.Entities.AccountsReceivable;
 using Countify.Domain.Entities.Billing;
+using Countify.Domain.Entities.Inventory;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -61,6 +62,9 @@ public DbSet<FiscalControl> FiscalControls { get; set; }
     public DbSet<InvoiceLine> InvoiceLines { get; set; }
     public DbSet<InvoicePayment> InvoicePayments { get; set; }
     public DbSet<SalesJournalBatch> SalesJournalBatches { get; set; }
+    public DbSet<Warehouse> Warehouses { get; set; }
+    public DbSet<Location> Locations { get; set; }
+    public DbSet<InventoryMovementType> InventoryMovementTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

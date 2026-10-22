@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "Countify.Api/DependencyInjection/ApiServiceRegistration.cs": {
-    "mtime": 1792007109.9140544,
-    "seen": 1792007155.6631646,
-    "ast_hash": "c61977aeeec7d8388c9ad3f730e43876",
+    "mtime": 1792507615.3700101,
+    "seen": 1792526174.6348283,
+    "ast_hash": "09d00529fb5e992b228172e9f1a1ad48",
     "semantic_hash": ""
   },
   "Countify.Api/Middleware/ExceptionHandlerMiddleware.cs": {
@@ -546,9 +546,9 @@
     "semantic_hash": "7ebc33cb6e543daa629a8c1b933cbc17"
   },
   "Countify.Application/Features/Banks/BankFeatures.cs": {
-    "mtime": 1790185530.0350494,
-    "seen": 1790186209.6030798,
-    "ast_hash": "4997f9150bfb26513d236f10f40b2318",
+    "mtime": 1792417568.1850402,
+    "seen": 1792526174.6349454,
+    "ast_hash": "4e3e3d2e137d3d449998e30b796eb81c",
     "semantic_hash": ""
   },
   "Countify.Application/Features/Configurations/Commands/UpdateCompanySettings/UpdateCompanySettingsCommand.cs": {
@@ -714,9 +714,9 @@
     "semantic_hash": "a14f6b50da20eebe16c4735ae7953f86"
   },
   "Countify.Application/Features/JournalEntries/Commands/CreateJournalEntry/CreateJournalEntryCommand.cs": {
-    "mtime": 1790185672.1513271,
-    "seen": 1790186209.6031244,
-    "ast_hash": "84c626bf61cd8c01f7c0b79c419d289e",
+    "mtime": 1792417563.5772746,
+    "seen": 1792526174.6350281,
+    "ast_hash": "b4ea024736dcb30006ac20228c67ae8c",
     "semantic_hash": ""
   },
   "Countify.Application/Features/JournalEntries/Commands/CreateJournalEntry/CreateJournalEntryCommandValidator.cs": {
@@ -738,9 +738,9 @@
     "semantic_hash": "c2110f090bfdf8dbf717acc4e82fa077"
   },
   "Countify.Application/Features/JournalEntries/Commands/UpdateJournalEntry/UpdateJournalEntryCommand.cs": {
-    "mtime": 1790185677.3311646,
-    "seen": 1790186209.6031284,
-    "ast_hash": "8581462da36485a8191a5f8fe35bf1ce",
+    "mtime": 1792385625.0917816,
+    "seen": 1792526174.6350331,
+    "ast_hash": "2a43f193750f47da1d8a4a7df8b3f0d8",
     "semantic_hash": ""
   },
   "Countify.Application/Features/JournalEntries/Commands/UpdateJournalEntry/UpdateJournalEntryCommandValidator.cs": {
@@ -786,9 +786,9 @@
     "semantic_hash": "648697362942cb0a0b20f0690a605e70"
   },
   "Countify.Application/Features/JournalEntries/DTOs/JournalEntryLineRequest.cs": {
-    "mtime": 1790185924.4636402,
-    "seen": 1790186209.6031358,
-    "ast_hash": "431857a0e70555e09b1bf829b09f0bd0",
+    "mtime": 1792385532.9392579,
+    "seen": 1792526174.635043,
+    "ast_hash": "edc546dc85e32e9139ae40654b1c4da6",
     "semantic_hash": ""
   },
   "Countify.Application/Features/JournalEntries/JournalEntryRules.cs": {
@@ -1230,9 +1230,9 @@
     "semantic_hash": "f1669d648a62e6b71287373b9def9cd3"
   },
   "Countify.Domain/Authorization/Permissions.cs": {
-    "mtime": 1792097459.162367,
-    "seen": 1792100001.0076146,
-    "ast_hash": "9d045e10f123f2ec43db8dff8d452bb5",
+    "mtime": 1792525675.7923102,
+    "seen": 1792526174.6352234,
+    "ast_hash": "86eeaf873786ead10072fc579168cf22",
     "semantic_hash": ""
   },
   "Countify.Domain/Common/BaseEntity.cs": {
@@ -1278,9 +1278,9 @@
     "semantic_hash": "b492fdf1a4fa4f500a2b37058e406c04"
   },
   "Countify.Domain/Entities/Accounting/BankTransaction.cs": {
-    "mtime": 1790183606.4697597,
-    "seen": 1790184000.8709924,
-    "ast_hash": "cdff8a0ee7c2013fcb21b6bf1b6e28e1",
+    "mtime": 1792385529.030051,
+    "seen": 1792526174.6352324,
+    "ast_hash": "aeb058d632917037794d697ab4385bc3",
     "semantic_hash": ""
   },
   "Countify.Domain/Entities/Accounting/BankTransactionType.cs": {
@@ -1428,9 +1428,9 @@
     "semantic_hash": "081867598bf063e449c3175c248953a3"
   },
   "Countify.Domain/Interfaces/IUnitOfWork.cs": {
-    "mtime": 1792096900.6177192,
-    "seen": 1792100001.0076592,
-    "ast_hash": "00aeb620655ede84e43269043cbd485a",
+    "mtime": 1792525655.9013782,
+    "seen": 1792526174.6352875,
+    "ast_hash": "334f5cc52d87b7d930bfbe213f73f076",
     "semantic_hash": ""
   },
   "Countify.Domain/Interfaces/SeederOptions.cs": {
@@ -1446,9 +1446,9 @@
     "semantic_hash": "948adc87f9c99d350150bc394d3f89c1"
   },
   "Countify.Domain/Seeders/BasicAccounts.cs": {
-    "mtime": 1790172737.7560065,
-    "seen": 1790173165.3374135,
-    "ast_hash": "33f55083c9db8f1dca4dbae2e4a16a73",
+    "mtime": 1792385035.8811204,
+    "seen": 1792526174.6352906,
+    "ast_hash": "9c08c9ab78a688737b5ad6bb5a97644b",
     "semantic_hash": ""
   },
   "Countify.Domain/Seeders/BasicBanks.cs": {
@@ -1614,9 +1614,9 @@
     "semantic_hash": "b1ca3d853fce60d9a8fe4992ddeae6df"
   },
   "Countify.Infrastructure/Migrations/CountifyDbContextModelSnapshot.cs": {
-    "mtime": 1792098667.520672,
-    "seen": 1792100001.0076985,
-    "ast_hash": "54733dfd962ef1bf714c07ef2676463c",
+    "mtime": 1792525816.4792907,
+    "seen": 1792526174.6353557,
+    "ast_hash": "32678953a71ef5624b1571d6d8b6153e",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Configurations/AccountConfiguration.cs": {
@@ -1698,10 +1698,10 @@
     "semantic_hash": "2fc3e4ecbde2ba07341bcc31a1ea4da8"
   },
   "Countify.Infrastructure/Persistence/Configurations/JournalEntryConfiguration.cs": {
-    "mtime": 1789159319.2712252,
-    "seen": 1789825500.0902574,
-    "ast_hash": "2f4f36cb813019c9ba3e8dae173e70f9",
-    "semantic_hash": "2f4f36cb813019c9ba3e8dae173e70f9"
+    "mtime": 1792417660.7762556,
+    "seen": 1792526174.635382,
+    "ast_hash": "35a86f4e97e0663c5e5e4aabe5821db8",
+    "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Configurations/JournalEntryLineConfiguration.cs": {
     "mtime": 1789160624.4476902,
@@ -1770,9 +1770,9 @@
     "semantic_hash": "dd1890e0de38921b5fe61f22063fbf8c"
   },
   "Countify.Infrastructure/Persistence/CountifyDbContext.cs": {
-    "mtime": 1792096878.54144,
-    "seen": 1792100001.0077322,
-    "ast_hash": "ed83bb3ae89aa8270e35c98d8d93e271",
+    "mtime": 1792525655.0268693,
+    "seen": 1792526174.6354036,
+    "ast_hash": "959470a205acb5eacf2705c2c0b7a348",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/CountifyDbContextFactory.cs": {
@@ -1788,15 +1788,15 @@
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Services/UnitOfWork.cs": {
-    "mtime": 1792097459.162367,
-    "seen": 1792100001.0077353,
-    "ast_hash": "96f4fdcafd3ecaae90799bae051cc69b",
+    "mtime": 1792525668.9576752,
+    "seen": 1792526174.6354065,
+    "ast_hash": "a6b170f45cc649ce26bfce7b41e4e35f",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/CatalogSeeder.cs": {
-    "mtime": 1790180244.4399114,
-    "seen": 1790180998.4954755,
-    "ast_hash": "69793d6552103639f412a98282d2d823",
+    "mtime": 1792505703.6371646,
+    "seen": 1792526174.6354077,
+    "ast_hash": "c6ccb96cc99f2be88fb5a295c9ee9a82",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/ConfigurationSeeder.cs": {
@@ -1842,15 +1842,9 @@
     "semantic_hash": "9223f57538ddd4a52af0efebc409d0b2"
   },
   "AGENTS.md": {
-    "mtime": 1789391727.5371263,
-    "seen": 1789845987.033025,
-    "ast_hash": "a45f815a4b0868d316c208bae3deff1b",
-    "semantic_hash": ""
-  },
-  "BANKING_PHASE5.md": {
-    "mtime": 1789752683.566367,
-    "seen": 1789845987.033036,
-    "ast_hash": "82d99a67695ce240c0629e2c8be2ee1d",
+    "mtime": 1792418027.5348904,
+    "seen": 1792526174.6354253,
+    "ast_hash": "45ee6473b087def59ec98ea66b9ac578",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Migrations/20260919192955_RenameBankOpeningBalanceToBalance.Designer.cs": {
@@ -2262,9 +2256,9 @@
     "semantic_hash": ""
   },
   "Countify.Application/Features/JournalEntries/JournalEntryAuxValidator.cs": {
-    "mtime": 1790185667.9701211,
-    "seen": 1790186209.6031365,
-    "ast_hash": "4898b6550f01b633b86ad36a964c565f",
+    "mtime": 1792385568.049685,
+    "seen": 1792526174.635044,
+    "ast_hash": "c156a247cf33eb9c86e82cafc4766d2d",
     "semantic_hash": ""
   },
   "Countify.Application/Features/AccountsReceivableDocuments/AccountsReceivableDocumentDraftFactory.cs": {
@@ -2298,9 +2292,9 @@
     "semantic_hash": ""
   },
   "Countify.Application/Features/AccountsReceivableDocuments/AccountsReceivablePostingFactory.cs": {
-    "mtime": 1790194230.5959523,
-    "seen": 1792006004.0861526,
-    "ast_hash": "eac4d4666b15ac94037bb8e9e2de179f",
+    "mtime": 1792417565.500523,
+    "seen": 1792526174.6348784,
+    "ast_hash": "d8ac37dd59dbb77f6886fc34fa4ce823",
     "semantic_hash": ""
   },
   "Countify.Application/Features/Reports/DTOs/IncomeStatementDto.cs": {
@@ -2370,9 +2364,9 @@
     "semantic_hash": ""
   },
   "Countify.Application/Features/FiscalControls/Commands/CreateFiscalControl/CreateFiscalControlCommand.cs": {
-    "mtime": 1792007044.2160559,
-    "seen": 1792007155.6632903,
-    "ast_hash": "12eb2e3cc2de4791d0997fde42dc737b",
+    "mtime": 1792385831.056,
+    "seen": 1792526174.6349947,
+    "ast_hash": "c9dd31243ae13eadd2c0cf2f53c4d177",
     "semantic_hash": ""
   },
   "Countify.Application/Features/FiscalControls/Commands/CreateFiscalControl/CreateFiscalControlCommandValidator.cs": {
@@ -2463,12 +2457,6 @@
     "mtime": 1792007078.3630495,
     "seen": 1792007155.663499,
     "ast_hash": "613c48edbcecdb7236399f3616fc3fa7",
-    "semantic_hash": ""
-  },
-  "AccountsReceivable-Fase3-Plan.md": {
-    "mtime": 1792010857.005112,
-    "seen": 1792010883.2300737,
-    "ast_hash": "ffa4d56c98c711419827195435f59b99",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Migrations/20261014195831_AddReceivableFiscalNotesAndAttachments.Designer.cs": {
@@ -2597,10 +2585,724 @@
     "ast_hash": "9b17ef437c5c6fdcbf21e4065a14a196",
     "semantic_hash": ""
   },
-  "AccountsPayable-Fase4-Plan.md": {
-    "mtime": 1792095631.4094145,
-    "seen": 1792100001.0077507,
-    "ast_hash": "0fddb1971185d12ac034e275e0758c6e",
+  "Countify.Api/Authorization/Policies/InvoicePolicies.cs": {
+    "mtime": 1792525678.6702836,
+    "seen": 1792526174.6347332,
+    "ast_hash": "e14dc7226a7659f8b1079d7513ba4181",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Authorization/Policies/PayableConceptPolicies.cs": {
+    "mtime": 1792359554.627681,
+    "seen": 1792526174.6347382,
+    "ast_hash": "852d5269d471477fdca959150346b1bd",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Authorization/Policies/PayableDocumentPolicies.cs": {
+    "mtime": 1792368498.9600728,
+    "seen": 1792526174.6347399,
+    "ast_hash": "68b2497e46078488bd924a2f6e12efa8",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Authorization/Policies/PaymentMethodPolicies.cs": {
+    "mtime": 1792505662.8039002,
+    "seen": 1792526174.6347415,
+    "ast_hash": "ea2481e79d8672fb99559bebd5bab0d3",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Authorization/Policies/SupplierPolicies.cs": {
+    "mtime": 1792358058.0389981,
+    "seen": 1792526174.634754,
+    "ast_hash": "7469aaf50b9a17b180ac1834b036cf35",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/InvoicesController.cs": {
+    "mtime": 1792525750.1101348,
+    "seen": 1792526174.634799,
+    "ast_hash": "a468656052f3846e626e42799c7c30da",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/PayableConceptsController.cs": {
+    "mtime": 1792359560.0277205,
+    "seen": 1792526174.6348035,
+    "ast_hash": "8a7a77f97a9517382a90cf8935a29778",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/PayableDocumentsController.cs": {
+    "mtime": 1792378080.808169,
+    "seen": 1792526174.6348052,
+    "ast_hash": "387403b2d449b779397942e326c85d95",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/PaymentMethodsController.cs": {
+    "mtime": 1792505759.2061472,
+    "seen": 1792526174.6348062,
+    "ast_hash": "e13a8b1f9edbd148723f2cc64e6fecbf",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/SuppliersController.cs": {
+    "mtime": 1792358062.955776,
+    "seen": 1792526174.6348224,
+    "ast_hash": "d14d29fb1e9979621f0f8b1696666c13",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/CreateInvoice/CreateInvoiceCommand.cs": {
+    "mtime": 1792507941.1478567,
+    "seen": 1792526174.6350086,
+    "ast_hash": "522d2cf609e78bea8f56c043e6ac1f98",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/CreateInvoice/CreateInvoiceCommandValidator.cs": {
+    "mtime": 1792507861.8903005,
+    "seen": 1792526174.6350098,
+    "ast_hash": "5b43adac3a5c6061535776b547381376",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/MarkInvoicePrinted/MarkInvoicePrintedCommand.cs": {
+    "mtime": 1792507851.047928,
+    "seen": 1792526174.6350107,
+    "ast_hash": "c2b254da8db1f543c9a373f3b15656b4",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/SetInvoicePayments/SetInvoicePaymentsCommand.cs": {
+    "mtime": 1792525702.8422184,
+    "seen": 1792526174.6350117,
+    "ast_hash": "144df5375e98b26d857f2da6d47708f8",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/SetInvoicePayments/SetInvoicePaymentsCommandValidator.cs": {
+    "mtime": 1792525704.6580737,
+    "seen": 1792526174.6350129,
+    "ast_hash": "dd41c0bf53a20e14eb69e163a0e50c97",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/UpdateInvoice/UpdateInvoiceCommand.cs": {
+    "mtime": 1792507838.990728,
+    "seen": 1792526174.635014,
+    "ast_hash": "e16f199cf1bc619812ab3236119bfae3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/UpdateInvoice/UpdateInvoiceCommandValidator.cs": {
+    "mtime": 1792507830.37081,
+    "seen": 1792526174.635015,
+    "ast_hash": "e71017b6652455087470f273e8e9f7af",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/VoidInvoice/VoidInvoiceCommand.cs": {
+    "mtime": 1792507842.229682,
+    "seen": 1792526174.6350157,
+    "ast_hash": "6ce4dc3d186fc168c84a2e599fcf9ef6",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Commands/VoidInvoice/VoidInvoiceCommandValidator.cs": {
+    "mtime": 1792507843.4013464,
+    "seen": 1792526174.6350167,
+    "ast_hash": "5130ba52b69ff1d255e32a8c419fafec",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/DTOs/InvoiceDto.cs": {
+    "mtime": 1792507667.6394565,
+    "seen": 1792526174.6350179,
+    "ast_hash": "a46fd093d2b43d9d1006bebb7b5b82e3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/DTOs/InvoiceLineDto.cs": {
+    "mtime": 1792507669.4858603,
+    "seen": 1792526174.6350188,
+    "ast_hash": "036257d37cd2cc9745edf6d9753115cb",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/DTOs/InvoicePaymentDto.cs": {
+    "mtime": 1792525689.6077962,
+    "seen": 1792526174.6350198,
+    "ast_hash": "e7cbd75452d7f454774a247fd8013f53",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/InvoiceNumberingFactory.cs": {
+    "mtime": 1792507996.1684937,
+    "seen": 1792526174.6350207,
+    "ast_hash": "e972142858e96935901314e916025fda",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/InvoiceTotals.cs": {
+    "mtime": 1792507460.1966672,
+    "seen": 1792526174.6350217,
+    "ast_hash": "90459d2f51930b96f8a8417b2e25b7f1",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Profiles/InvoiceProfile.cs": {
+    "mtime": 1792525716.6632144,
+    "seen": 1792526174.6350222,
+    "ast_hash": "4d7a0e770047cf23541e4874380d5cae",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Queries/GetInvoiceById/GetInvoiceByIdQuery.cs": {
+    "mtime": 1792507892.0130107,
+    "seen": 1792526174.635023,
+    "ast_hash": "b34d4d6235c0ba597fb8bc2d5c8602dd",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Queries/GetInvoicePayments/GetInvoicePaymentsQuery.cs": {
+    "mtime": 1792525714.909259,
+    "seen": 1792526174.6350238,
+    "ast_hash": "7be5af7dbe6bad41df069108801151a9",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/Queries/GetInvoices/GetInvoicesQuery.cs": {
+    "mtime": 1792507888.6896908,
+    "seen": 1792526174.6350245,
+    "ast_hash": "04319be101b75960eff1fc4d02ad5dfb",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Invoices/ReceivableLinkHelper.cs": {
+    "mtime": 1792507788.3604913,
+    "seen": 1792526174.6350255,
+    "ast_hash": "0f266c70bf9eefd014b39be431ed0531",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Commands/CreatePayableConcept/CreatePayableConceptCommand.cs": {
+    "mtime": 1792359587.0444694,
+    "seen": 1792526174.6350508,
+    "ast_hash": "cdead77045a7643575fbf2d3c074416d",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Commands/CreatePayableConcept/CreatePayableConceptCommandValidator.cs": {
+    "mtime": 1792359589.0920675,
+    "seen": 1792526174.6350517,
+    "ast_hash": "295efd9d850abc2604559ceb0652938c",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Commands/DeletePayableConcept/DeletePayableConceptCommand.cs": {
+    "mtime": 1792359597.8708622,
+    "seen": 1792526174.6350532,
+    "ast_hash": "9611ffe00f028841e19442a6d7bea17e",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Commands/UpdatePayableConcept/UpdatePayableConceptCommand.cs": {
+    "mtime": 1792359593.4539037,
+    "seen": 1792526174.635054,
+    "ast_hash": "d215f14e7d67297b2f873ec222326197",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Commands/UpdatePayableConcept/UpdatePayableConceptCommandValidator.cs": {
+    "mtime": 1792359595.2492168,
+    "seen": 1792526174.635055,
+    "ast_hash": "5a5993371acd081316d11378d8fdb499",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/DTOs/PayableConceptDto.cs": {
+    "mtime": 1792359582.454031,
+    "seen": 1792526174.635056,
+    "ast_hash": "bd385cc2d868bfd5a50665bdb552b8be",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Profiles/PayableConceptProfile.cs": {
+    "mtime": 1792359604.0053291,
+    "seen": 1792526174.635057,
+    "ast_hash": "ebe1c7e31a5c7e1fb9e05aecc6d48269",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableConcepts/Queries/GetPayableConcepts/GetPayableConceptsQuery.cs": {
+    "mtime": 1792359600.7984757,
+    "seen": 1792526174.6350582,
+    "ast_hash": "7298008c8e7626469320c3f80d9b8ef9",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/CreatePayableDocumentLines/CreatePayableDocumentLinesCommand.cs": {
+    "mtime": 1792368633.3394692,
+    "seen": 1792526174.6350594,
+    "ast_hash": "7f6427bef0d07c0b2cc9eac89b775eb5",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/CreatePayableDocument/CreatePayableDocumentCommand.cs": {
+    "mtime": 1792368598.6251633,
+    "seen": 1792526174.6350603,
+    "ast_hash": "e8089c2f0daca8ab6e41e11cac87df67",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/CreatePayableDocument/CreatePayableDocumentCommandValidator.cs": {
+    "mtime": 1792368601.1670332,
+    "seen": 1792526174.6350615,
+    "ast_hash": "9ce8f741bffaed58cd627bc6ed6a63a2",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/DeletePayableDocumentAttachment/DeletePayableDocumentAttachmentCommand.cs": {
+    "mtime": 1792368671.8199906,
+    "seen": 1792526174.6350627,
+    "ast_hash": "53b45573d3302a4afc6458400986ee92",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/DeletePayableDocumentLine/DeletePayableDocumentLineCommand.cs": {
+    "mtime": 1792368641.4160635,
+    "seen": 1792526174.635064,
+    "ast_hash": "dd1594003996740fa7a135628d84fea2",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/UpdatePayableDocumentLine/UpdatePayableDocumentLineCommand.cs": {
+    "mtime": 1792368638.7269025,
+    "seen": 1792526174.6350648,
+    "ast_hash": "4b76e0af9c03424dcd75cb4c5cddeb92",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/UpdatePayableDocument/UpdatePayableDocumentCommand.cs": {
+    "mtime": 1792368609.7189689,
+    "seen": 1792526174.635066,
+    "ast_hash": "483f39dd0461a72d0066c7d70f7e2084",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/UpdatePayableDocument/UpdatePayableDocumentCommandValidator.cs": {
+    "mtime": 1792368612.3177464,
+    "seen": 1792526174.6350672,
+    "ast_hash": "544962d2ef3e894cb708a7d17d8903ec",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/UploadPayableDocumentAttachment/UploadPayableDocumentAttachmentCommand.cs": {
+    "mtime": 1792368668.3425777,
+    "seen": 1792526174.6350682,
+    "ast_hash": "e526822c40a7a45b97be28a2bd927b6a",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Commands/VoidPayableDocument/VoidPayableDocumentCommand.cs": {
+    "mtime": 1792368616.1280212,
+    "seen": 1792526174.6350694,
+    "ast_hash": "8700369dff07efdad18c577330e24baf",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/DTOs/PayableDocumentAttachmentContentDto.cs": {
+    "mtime": 1792368562.943915,
+    "seen": 1792526174.6350706,
+    "ast_hash": "934502bb9cb76eb1bb41c118935607c7",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/DTOs/PayableDocumentAttachmentDto.cs": {
+    "mtime": 1792368561.4239912,
+    "seen": 1792526174.6350887,
+    "ast_hash": "58558a78bfe018bd86a8af3810fd027f",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/DTOs/PayableDocumentDraftRequest.cs": {
+    "mtime": 1792385522.5376573,
+    "seen": 1792526174.6350896,
+    "ast_hash": "fca22fd05e5809a5bf7dce5fd13b3c4c",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/DTOs/PayableDocumentDto.cs": {
+    "mtime": 1792368556.8389192,
+    "seen": 1792526174.6350913,
+    "ast_hash": "343fa241a6a3e09447889e2be8af7a66",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/DTOs/PayableDocumentLineDto.cs": {
+    "mtime": 1792368559.4365375,
+    "seen": 1792526174.6350925,
+    "ast_hash": "963d7377901dc453626b3792bf41b357",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/DTOs/SupplierMovementsDto.cs": {
+    "mtime": 1792377991.78554,
+    "seen": 1792526174.6350935,
+    "ast_hash": "a533b57620f9d870be2ada30c8f39cb3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/PayableDocumentDraftFactory.cs": {
+    "mtime": 1792385562.6560729,
+    "seen": 1792526174.6350946,
+    "ast_hash": "7fb05044ab5096842a932edc7e4d8c14",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/PayableDocumentTotals.cs": {
+    "mtime": 1792368564.722664,
+    "seen": 1792526174.6350954,
+    "ast_hash": "c077f09e73659881cac62e9ccf9c0c67",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/PayablePostingFactory.cs": {
+    "mtime": 1792417567.0750031,
+    "seen": 1792526174.6350965,
+    "ast_hash": "4f2b712a7a57ffbeafb8456377787281",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Profiles/PayableDocumentProfile.cs": {
+    "mtime": 1792368731.998299,
+    "seen": 1792526174.6350975,
+    "ast_hash": "2c94ac650948aac2598fe7f651601283",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Queries/GetPayableDocumentAttachment/GetPayableDocumentAttachmentQuery.cs": {
+    "mtime": 1792368715.6371515,
+    "seen": 1792526174.6350987,
+    "ast_hash": "3285087bfc8982aacaa4709586ce9f78",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Queries/GetPayableDocumentById/GetPayableDocumentByIdQuery.cs": {
+    "mtime": 1792368703.4313054,
+    "seen": 1792526174.6351,
+    "ast_hash": "3c3fe44ec88fea5a5a287e866c91c4cd",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Queries/GetPayableDocuments/GetPayableDocumentsQuery.cs": {
+    "mtime": 1792368683.8430955,
+    "seen": 1792526174.635101,
+    "ast_hash": "dbe7a0b982b906d644245adf3a4039e7",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Queries/GetPendingPayableDocuments/GetPendingPayableDocumentsQuery.cs": {
+    "mtime": 1792368710.8936079,
+    "seen": 1792526174.6351023,
+    "ast_hash": "8d3de56ef1c0d86d07658f3047f786b5",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Queries/GetSupplierMovements/GetSupplierMovementsQuery.cs": {
+    "mtime": 1792378015.8443487,
+    "seen": 1792526174.635104,
+    "ast_hash": "9b273904f3000d408c5be1bb3a0a5940",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PayableDocuments/Validators/CreatePayableDocumentLinesCommandValidator.cs": {
+    "mtime": 1792368735.329668,
+    "seen": 1792526174.6351051,
+    "ast_hash": "008f0b32be915eddcef609aa92c9e002",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Commands/CreatePaymentMethod/CreatePaymentMethodCommand.cs": {
+    "mtime": 1792505808.5107627,
+    "seen": 1792526174.635106,
+    "ast_hash": "933a22b61171efc5db158b424831283f",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Commands/CreatePaymentMethod/CreatePaymentMethodCommandValidator.cs": {
+    "mtime": 1792505708.0315664,
+    "seen": 1792526174.635107,
+    "ast_hash": "54b9f70c634056c8ad02ba9b69e889f5",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Commands/DeletePaymentMethod/DeletePaymentMethodCommand.cs": {
+    "mtime": 1792505753.358853,
+    "seen": 1792526174.635112,
+    "ast_hash": "8123157141c6fe4dcb3a0c88b456fe57",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Commands/UpdatePaymentMethod/UpdatePaymentMethodCommand.cs": {
+    "mtime": 1792505734.0178337,
+    "seen": 1792526174.635113,
+    "ast_hash": "97e1a7bffb7efc7f4483c4e0f80e6e5e",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Commands/UpdatePaymentMethod/UpdatePaymentMethodCommandValidator.cs": {
+    "mtime": 1792505751.5005238,
+    "seen": 1792526174.635114,
+    "ast_hash": "169755c7e782224c993f6de0554f1d58",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/DTOs/PaymentMethodDto.cs": {
+    "mtime": 1792505664.8027055,
+    "seen": 1792526174.6351147,
+    "ast_hash": "ca75e6574c50794b028e259abc858647",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Profiles/PaymentMethodProfile.cs": {
+    "mtime": 1792505756.4428086,
+    "seen": 1792526174.6351163,
+    "ast_hash": "8fb7796ee71c15f0ef3faf7c163657f4",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/PaymentMethods/Queries/GetPaymentMethods/GetPaymentMethodsQuery.cs": {
+    "mtime": 1792505755.2061298,
+    "seen": 1792526174.6351173,
+    "ast_hash": "187d96a8aa3528b819536009afbef97d",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Commands/CreateSupplier/CreateSupplierCommand.cs": {
+    "mtime": 1792385782.282,
+    "seen": 1792526174.635194,
+    "ast_hash": "fa22f6be50cea6cd177dd1762d1f57cb",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Commands/CreateSupplier/CreateSupplierCommandValidator.cs": {
+    "mtime": 1792358231.0331688,
+    "seen": 1792526174.635195,
+    "ast_hash": "f09d231cfe9ee7e567cb196bfe0d57f4",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Commands/DeleteSupplier/DeleteSupplierCommand.cs": {
+    "mtime": 1792358179.059263,
+    "seen": 1792526174.6351962,
+    "ast_hash": "3012df689032564e17a5815242ebc195",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Commands/UpdateSupplier/UpdateSupplierCommand.cs": {
+    "mtime": 1792358233.2186208,
+    "seen": 1792526174.635197,
+    "ast_hash": "9975eacf0e8e7ebd16011e5f12922ef3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Commands/UpdateSupplier/UpdateSupplierCommandValidator.cs": {
+    "mtime": 1792358229.1086829,
+    "seen": 1792526174.6351979,
+    "ast_hash": "0d5c92e9cedd253e3b4901847685707e",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/DTOs/SupplierDto.cs": {
+    "mtime": 1792358129.0350125,
+    "seen": 1792526174.6351988,
+    "ast_hash": "0fcd834567c88e1e636f0a4db25eac8d",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/DTOs/SupplierFiscalDataDto.cs": {
+    "mtime": 1792358131.5087025,
+    "seen": 1792526174.6351998,
+    "ast_hash": "aa40474ba72c203fb17842f38fa7ad44",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/DTOs/SupplierFiscalDataDtoValidator.cs": {
+    "mtime": 1792358133.8833609,
+    "seen": 1792526174.6352005,
+    "ast_hash": "63dba607f7f35199364b4bdb7caa254d",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Profiles/SupplierProfile.cs": {
+    "mtime": 1792358186.3649251,
+    "seen": 1792526174.6352012,
+    "ast_hash": "05da31127bccbaab62e7a7a53e5e57b3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Suppliers/Queries/GetSuppliers/GetSuppliersQuery.cs": {
+    "mtime": 1792358182.6224992,
+    "seen": 1792526174.6352026,
+    "ast_hash": "628125f48fbe3ca33729998dcc5315c6",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/AccountsPayable/PayableConcept.cs": {
+    "mtime": 1792359521.6090424,
+    "seen": 1792526174.6352513,
+    "ast_hash": "9d43d1e20e4f88c57ba186d81cd8c988",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/AccountsPayable/PayableDocument.cs": {
+    "mtime": 1792368440.742382,
+    "seen": 1792526174.6352522,
+    "ast_hash": "44117458f0a297f7b5d2e6076882cc37",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/AccountsPayable/PayableDocumentAttachment.cs": {
+    "mtime": 1792368445.6541786,
+    "seen": 1792526174.6352575,
+    "ast_hash": "4f5a444bd3721f63fac108e007befb09",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/AccountsPayable/PayableDocumentLine.cs": {
+    "mtime": 1792368443.1702945,
+    "seen": 1792526174.6352584,
+    "ast_hash": "418a56d55013e53fb81be5e2abce3014",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/Invoice.cs": {
+    "mtime": 1792507462.104625,
+    "seen": 1792526174.6352746,
+    "ast_hash": "cdc715b4440c9c17bcd2d867665d1401",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/InvoiceLine.cs": {
+    "mtime": 1792507337.0961275,
+    "seen": 1792526174.6352758,
+    "ast_hash": "9a697f753f352cfc81da0a6a2bdad561",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/InvoicePayment.cs": {
+    "mtime": 1792525632.622522,
+    "seen": 1792526174.6352768,
+    "ast_hash": "714d5342c1b515ecf498cc6cd7c8a0fc",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/InvoicePaymentTerms.cs": {
+    "mtime": 1792507322.6206453,
+    "seen": 1792526174.6352775,
+    "ast_hash": "95011ce4430891e1d10404c3b3f91335",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/PaymentMethod.cs": {
+    "mtime": 1792505556.8796258,
+    "seen": 1792526174.6352787,
+    "ast_hash": "72fef27a341c6652410bfdd64cdf1545",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Seeders/BasicPayableConcepts.cs": {
+    "mtime": 1792359527.502647,
+    "seen": 1792526174.6353052,
+    "ast_hash": "1756d45f0856ea7c87e51675db9208d6",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Seeders/BasicPaymentMethods.cs": {
+    "mtime": 1792505560.93933,
+    "seen": 1792526174.6353064,
+    "ast_hash": "a61cbc43f7697a48ef21730d93a5d53a",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Seeders/BasicSupplierTypes.cs": {
+    "mtime": 1792385058.4737418,
+    "seen": 1792526174.6353135,
+    "ast_hash": "3aba2c68e8a9d7be618565e0a7d75e17",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Seeders/BasicSuppliers.cs": {
+    "mtime": 1792385067.1385732,
+    "seen": 1792526174.6353142,
+    "ast_hash": "216610d3f99ee89e25d3f5f11b7fa1c2",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261018211739_AddSupplierPermissions.Designer.cs": {
+    "mtime": 1792358259.0787416,
+    "seen": 1792526174.6353414,
+    "ast_hash": "869bce9d4eee6f4baa5ceb50ee01687c",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261018211739_AddSupplierPermissions.cs": {
+    "mtime": 1792358259.0774732,
+    "seen": 1792526174.6353426,
+    "ast_hash": "a2c6ae5bba3ca814a119ef8a0a48eec4",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261018214026_AddPayableConcepts.Designer.cs": {
+    "mtime": 1792359626.1448345,
+    "seen": 1792526174.6353436,
+    "ast_hash": "0fb9fe7149d99a6c905d36ad6974b1df",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261018214026_AddPayableConcepts.cs": {
+    "mtime": 1792359626.1448345,
+    "seen": 1792526174.6353443,
+    "ast_hash": "932cface27f1a702e082c9ddd0babfd5",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261019001313_AddPayableDocuments.Designer.cs": {
+    "mtime": 1792368793.317251,
+    "seen": 1792526174.6353452,
+    "ast_hash": "2b014443b1cc8b52accf795b1b9843a6",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261019001313_AddPayableDocuments.cs": {
+    "mtime": 1792368793.316242,
+    "seen": 1792526174.635346,
+    "ast_hash": "4d2947dfc190de1a9c99315b46989fb2",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261019130044_AddBankTransactionPayableLink.Designer.cs": {
+    "mtime": 1792414844.5423162,
+    "seen": 1792526174.6353467,
+    "ast_hash": "8dace8e22f6cc4cbf3ff52e58d35c7ef",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261019130044_AddBankTransactionPayableLink.cs": {
+    "mtime": 1792414844.5423162,
+    "seen": 1792526174.6353476,
+    "ast_hash": "b56efb2c1a06ec5e8446bc558e5fae4e",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261019135105_GlobalizeJournalEntryNumber.Designer.cs": {
+    "mtime": 1792417865.6099522,
+    "seen": 1792526174.6353483,
+    "ast_hash": "c8546f2c0165eaf9871582d21233e561",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261019135105_GlobalizeJournalEntryNumber.cs": {
+    "mtime": 1792417953.0152452,
+    "seen": 1792526174.635349,
+    "ast_hash": "3d1b177c6f8e38dba1367b26e9deabf4",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261020141819_AddPaymentMethods.Designer.cs": {
+    "mtime": 1792505899.7739313,
+    "seen": 1792526174.63535,
+    "ast_hash": "334a16fc0bd2076efb7a091559cd84f5",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261020141819_AddPaymentMethods.cs": {
+    "mtime": 1792505899.7739313,
+    "seen": 1792526174.6353507,
+    "ast_hash": "8fcb99895e7ed5441ef975a4dead49b3",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261020145643_AddInvoices.Designer.cs": {
+    "mtime": 1792508203.1142976,
+    "seen": 1792526174.6353517,
+    "ast_hash": "430ced44571a0fcd3bc1bb832607b241",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261020145643_AddInvoices.cs": {
+    "mtime": 1792508203.113293,
+    "seen": 1792526174.6353528,
+    "ast_hash": "c9ed03939076fdcdb37e95c9d3a94886",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261020195016_AddInvoicePayments.Designer.cs": {
+    "mtime": 1792525816.4792907,
+    "seen": 1792526174.6353536,
+    "ast_hash": "95f569d60e985e709edf7183c9da6f76",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261020195016_AddInvoicePayments.cs": {
+    "mtime": 1792525816.478288,
+    "seen": 1792526174.635355,
+    "ast_hash": "f6737c27e0abadc8a5972edef0e08c86",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/InvoiceConfiguration.cs": {
+    "mtime": 1792507468.0967963,
+    "seen": 1792526174.6353798,
+    "ast_hash": "a11601973e6ec49ee8ff00ace0554967",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/InvoiceLineConfiguration.cs": {
+    "mtime": 1792507471.1544542,
+    "seen": 1792526174.6353805,
+    "ast_hash": "c729aedbf2ec13752d4478e0b8d6b89e",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/InvoicePaymentConfiguration.cs": {
+    "mtime": 1792525646.5488703,
+    "seen": 1792526174.6353812,
+    "ast_hash": "bbd8b4cdfbc5570e2cf8fa32b72b2af5",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/PayableConceptConfiguration.cs": {
+    "mtime": 1792359523.6926377,
+    "seen": 1792526174.6353838,
+    "ast_hash": "d4399525b8c555af32093bb69bb8d99d",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/PayableDocumentAttachmentConfiguration.cs": {
+    "mtime": 1792368465.5896928,
+    "seen": 1792526174.6353846,
+    "ast_hash": "1b2f8cdef6abbeb40b7f7272823eab26",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/PayableDocumentConfiguration.cs": {
+    "mtime": 1792368459.7428985,
+    "seen": 1792526174.6353855,
+    "ast_hash": "8f7d01190a690462055b3f53fb747c13",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/PayableDocumentLineConfiguration.cs": {
+    "mtime": 1792368462.8302927,
+    "seen": 1792526174.6353867,
+    "ast_hash": "f8d2be10a3fb145ad39d26fe6590ba90",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/PaymentMethodConfiguration.cs": {
+    "mtime": 1792505558.346778,
+    "seen": 1792526174.6353877,
+    "ast_hash": "4a19ee4b7d6884281f54d7f3be36c96f",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/TemplateBuilder/InvoicePdfBuilder.cs": {
+    "mtime": 1792508112.0613594,
+    "seen": 1792526174.63542,
+    "ast_hash": "dcc99c9b532aced377100f799384b880",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/TemplateBuilder/SupplierMovementsPdfBuilder.cs": {
+    "mtime": 1792378042.6518314,
+    "seen": 1792526174.635422,
+    "ast_hash": "4813ddab1d291c7758a3d4f135e9d5f5",
     "semantic_hash": ""
   }
 }
