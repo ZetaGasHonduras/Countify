@@ -175,6 +175,12 @@ public class Permissions
     public static readonly Permission CanEditInventoryMovementTypes = Permission.Create(133, nameof(CanEditInventoryMovementTypes), "Editar tipos de movimiento de inventario.");
     public static readonly Permission CanDeleteInventoryMovementTypes = Permission.Create(134, nameof(CanDeleteInventoryMovementTypes), "Eliminar tipos de movimiento de inventario.");
 
+    // Inventarios - Movimientos
+    public static readonly Permission CanViewInventoryMovements = Permission.Create(135, nameof(CanViewInventoryMovements), "Ver movimientos de inventario.");
+    public static readonly Permission CanCreateInventoryMovements = Permission.Create(136, nameof(CanCreateInventoryMovements), "Crear movimientos de inventario.");
+    public static readonly Permission CanEditInventoryMovements = Permission.Create(137, nameof(CanEditInventoryMovements), "Editar/eliminar movimientos de inventario.");
+    public static readonly Permission CanVoidInventoryMovements = Permission.Create(138, nameof(CanVoidInventoryMovements), "Anular movimientos de inventario.");
+
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(fieldInfo => fieldInfo.FieldType == typeof(Permission))

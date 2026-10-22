@@ -15,8 +15,10 @@ public static class BasicInventoryCatalog
     public static readonly InventoryMovementType NegativeAdjustment = NewType(
         2, "AJ-", "Ajuste Negativo", InventoryMovementDirection.Exit, checksStock: true, generatesPosting: true);
 
+    /// <summary>No cuenta para existencias: la salida física real es el AJ- que la consume.</summary>
     public static readonly InventoryMovementType Request = NewType(
-        3, "TP-", "Solicitud", InventoryMovementDirection.Exit, checksStock: false, generatesPosting: false);
+        3, "TP-", "Solicitud", InventoryMovementDirection.Exit, checksStock: false, generatesPosting: false,
+        countsForStock: false);
 
     /// <summary>Reservado para el Ingreso de Compras (Etapa 5); oculto al alta manual.</summary>
     public static readonly InventoryMovementType PurchaseEntry = NewType(
@@ -45,7 +47,7 @@ public static class BasicInventoryCatalog
 
     private static InventoryMovementType NewType(
         int id, string code, string name, InventoryMovementDirection direction,
-        bool checksStock, bool generatesPosting)
+        bool checksStock, bool generatesPosting, bool countsForStock = true)
         => new()
         {
             Id = Guid.Parse($"1a000000-0000-0000-0000-00000000000{id}"),
@@ -54,6 +56,7 @@ public static class BasicInventoryCatalog
             Direction = direction,
             ChecksStock = checksStock,
             GeneratesPosting = generatesPosting,
+            CountsForStock = countsForStock,
             IsSystem = true,
         };
 }

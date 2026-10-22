@@ -28,4 +28,5 @@ public class CompanySettingsDto
     public Guid? ReceivableForeignAccountId { get; set; }
     public Guid? CashAccountId { get; set; }
     public Guid? TaxPayableAccountId { get; set; }
+    public Guid? InventoryAdjustmentAccountId { get; set; }
 }

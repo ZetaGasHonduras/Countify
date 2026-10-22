@@ -40,4 +40,8 @@ public class CompanySettings : BaseEntity
     public Account? CashAccount { get; set; }
     public Guid? TaxPayableAccountId { get; set; }
     public Account? TaxPayableAccount { get; set; }
+
+    /// <summary>Contrapartida de los ajustes de inventario (legacy: cuenta del sp de ajuste).</summary>
+    public Guid? InventoryAdjustmentAccountId { get; set; }
+    public Account? InventoryAdjustmentAccount { get; set; }
 }

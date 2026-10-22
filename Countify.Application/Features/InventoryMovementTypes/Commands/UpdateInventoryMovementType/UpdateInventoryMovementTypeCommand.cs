@@ -14,6 +14,7 @@ public class UpdateInventoryMovementTypeCommand : IRequest<Response<bool>>
     public int Direction { get; set; } = 1;
     public bool ChecksStock { get; set; }
     public bool GeneratesPosting { get; set; }
+    public bool CountsForStock { get; set; } = true;
     public bool IsInactive { get; set; }
 }
 
@@ -58,6 +59,7 @@ public class UpdateInventoryMovementTypeCommandHandler(IUnitOfWork unitOfWork)
         type.Direction = (InventoryMovementDirection)request.Direction;
         type.ChecksStock = request.ChecksStock;
         type.GeneratesPosting = request.GeneratesPosting;
+        type.CountsForStock = request.CountsForStock;
         type.IsInactive = request.IsInactive;
 
         await unitOfWork.InventoryMovementTypes.UpdateAsync(type, cancellationToken);

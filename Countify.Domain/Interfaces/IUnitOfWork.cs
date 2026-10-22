@@ -59,6 +59,8 @@ public interface IUnitOfWork : IDisposable
     IRepository<Warehouse> Warehouses { get; }
     IRepository<Location> Locations { get; }
     IRepository<InventoryMovementType> InventoryMovementTypes { get; }
+    IRepository<InventoryMovement> InventoryMovements { get; }
+    IRepository<InventoryMovementLine> InventoryMovementLines { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

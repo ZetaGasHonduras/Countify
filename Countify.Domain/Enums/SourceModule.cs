@@ -8,5 +8,6 @@ public enum SourceModule
     Receivable = 3,
     Payable = 4,
     Payroll = 5,
-    Closing = 6
+    Closing = 6,
+    Inventory = 7
 }

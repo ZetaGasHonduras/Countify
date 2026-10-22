@@ -17,6 +17,7 @@ public class CreateInventoryMovementTypeCommand : IRequest<Response<Guid>>
 
     public bool ChecksStock { get; set; }
     public bool GeneratesPosting { get; set; }
+    public bool CountsForStock { get; set; } = true;
     public bool IsInactive { get; set; }
 }
 

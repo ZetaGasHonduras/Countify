@@ -65,12 +65,37 @@ public class CatalogSeeder(
     {
         if (!await context.InventoryMovementTypes.AnyAsync(cancellationToken))
             context.InventoryMovementTypes.AddRange(BasicInventoryCatalog.MovementTypes);
+        else
+            await RepairSystemMovementTypesAsync(cancellationToken);
 
         if (!await context.Warehouses.AnyAsync(cancellationToken))
             context.Warehouses.Add(BasicInventoryCatalog.DefaultWarehouse);
 
         if (!await context.Locations.AnyAsync(cancellationToken))
             context.Locations.Add(BasicInventoryCatalog.DefaultLocation);
+    }
+
+    /// <summary>
+    /// Reconcilia los tipos de sistema con la definición de siembra (banderas
+    /// añadidas en Etapa 2, p. ej. CountsForStock, que las BD sembradas antes no traen).
+    /// </summary>
+    private async Task RepairSystemMovementTypesAsync(CancellationToken cancellationToken)
+    {
+        var systemCodes = BasicInventoryCatalog.MovementTypes.ToDictionary(t => t.Code);
+        var existing = await context.InventoryMovementTypes
+            .Where(t => t.IsSystem)
+            .ToListAsync(cancellationToken);
+
+        foreach (var type in existing)
+        {
+            if (!systemCodes.TryGetValue(type.Code, out var seed))
+                continue;
+
+            type.Direction = seed.Direction;
+            type.ChecksStock = seed.ChecksStock;
+            type.GeneratesPosting = seed.GeneratesPosting;
+            type.CountsForStock = seed.CountsForStock;
+        }
     }
 
     private async Task SeedDepartmentsAsync(CancellationToken cancellationToken)

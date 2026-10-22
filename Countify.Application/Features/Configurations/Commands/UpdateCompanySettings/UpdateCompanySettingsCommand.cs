@@ -31,6 +31,7 @@ public class UpdateCompanySettingsCommand : IRequest<Response<bool>>
     public Guid? ReceivableForeignAccountId { get; set; }
     public Guid? CashAccountId { get; set; }
     public Guid? TaxPayableAccountId { get; set; }
+    public Guid? InventoryAdjustmentAccountId { get; set; }
 }
 
 public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
@@ -61,7 +62,7 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
         {
             request.SalesLocalAccountId, request.SalesForeignAccountId,
             request.ReceivableLocalAccountId, request.ReceivableForeignAccountId,
-            request.CashAccountId, request.TaxPayableAccountId,
+            request.CashAccountId, request.TaxPayableAccountId, request.InventoryAdjustmentAccountId,
         };
         foreach (var accountId in accountIds.Where(a => a is not null).Select(a => a!.Value).Distinct())
         {
@@ -98,7 +99,8 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
                 ReceivableLocalAccountId = request.ReceivableLocalAccountId,
                 ReceivableForeignAccountId = request.ReceivableForeignAccountId,
                 CashAccountId = request.CashAccountId,
-                TaxPayableAccountId = request.TaxPayableAccountId
+                TaxPayableAccountId = request.TaxPayableAccountId,
+                InventoryAdjustmentAccountId = request.InventoryAdjustmentAccountId
             };
 
             await unitOfWork.CompanySettings.AddAsync(settings, cancellationToken);
@@ -128,6 +130,7 @@ public class UpdateCompanySettingsCommandHandler(IUnitOfWork unitOfWork)
             settings.ReceivableForeignAccountId = request.ReceivableForeignAccountId;
             settings.CashAccountId = request.CashAccountId;
             settings.TaxPayableAccountId = request.TaxPayableAccountId;
+            settings.InventoryAdjustmentAccountId = request.InventoryAdjustmentAccountId;
 
             await unitOfWork.CompanySettings.UpdateAsync(settings, cancellationToken);
         }

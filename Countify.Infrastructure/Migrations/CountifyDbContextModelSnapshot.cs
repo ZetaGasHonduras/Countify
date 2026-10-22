@@ -474,6 +474,9 @@ namespace Countify.Infrastructure.Migrations
                     b.Property<int>("FiscalYear")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("InventoryAdjustmentAccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Mobile")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -532,6 +535,8 @@ namespace Countify.Infrastructure.Migrations
                     b.HasIndex("DefaultDepartmentId");
 
                     b.HasIndex("DefaultProjectId");
+
+                    b.HasIndex("InventoryAdjustmentAccountId");
 
                     b.HasIndex("ReceivableForeignAccountId");
 
@@ -2666,6 +2671,30 @@ namespace Countify.Infrastructure.Migrations
                             Id = 134,
                             Description = "Eliminar tipos de movimiento de inventario.",
                             Name = "CanDeleteInventoryMovementTypes"
+                        },
+                        new
+                        {
+                            Id = 135,
+                            Description = "Ver movimientos de inventario.",
+                            Name = "CanViewInventoryMovements"
+                        },
+                        new
+                        {
+                            Id = 136,
+                            Description = "Crear movimientos de inventario.",
+                            Name = "CanCreateInventoryMovements"
+                        },
+                        new
+                        {
+                            Id = 137,
+                            Description = "Editar/eliminar movimientos de inventario.",
+                            Name = "CanEditInventoryMovements"
+                        },
+                        new
+                        {
+                            Id = 138,
+                            Description = "Anular movimientos de inventario.",
+                            Name = "CanVoidInventoryMovements"
                         });
                 });
 
@@ -3353,6 +3382,26 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 134
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 135
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 136
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 137
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 138
                         });
                 });
 
@@ -3664,6 +3713,157 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("SalesJournalBatches", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Concept")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("Correlativo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsTaxExempt")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVoided")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("JournalEntryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Observations")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Reference")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid?>("SourceRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TaxAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("ToWarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Total")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("TypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("VoidReason")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("VoidedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("[Code] IS NOT NULL");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("JournalEntryId");
+
+                    b.HasIndex("SourceRequestId");
+
+                    b.HasIndex("ToWarehouseId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.HasIndex("TypeId", "Correlativo");
+
+                    b.ToTable("InventoryMovements", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovementLine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<decimal>("LineTotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MovementId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Quantity")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
+
+                    b.Property<decimal>("TaxAmount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TaxRate")
+                        .HasPrecision(9, 4)
+                        .HasColumnType("decimal(9,4)");
+
+                    b.Property<string>("Unit")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("MovementId", "Order");
+
+                    b.ToTable("InventoryMovementLines", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovementType", b =>
                 {
                     b.Property<Guid>("Id")
@@ -3677,6 +3877,9 @@ namespace Countify.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("CountsForStock")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Direction")
                         .HasColumnType("int");
@@ -4103,6 +4306,10 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("DefaultProjectId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("Countify.Domain.Entities.Accounting.Account", "InventoryAdjustmentAccount")
+                        .WithMany()
+                        .HasForeignKey("InventoryAdjustmentAccountId");
+
                     b.HasOne("Countify.Domain.Entities.Accounting.Account", "ReceivableForeignAccount")
                         .WithMany()
                         .HasForeignKey("ReceivableForeignAccountId");
@@ -4128,6 +4335,8 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("DefaultDepartment");
 
                     b.Navigation("DefaultProject");
+
+                    b.Navigation("InventoryAdjustmentAccount");
 
                     b.Navigation("ReceivableForeignAccount");
 
@@ -4611,6 +4820,80 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("JournalEntry");
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovement", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Accounting.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
+                        .WithMany()
+                        .HasForeignKey("JournalEntryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Countify.Domain.Entities.Inventory.InventoryMovement", "SourceRequest")
+                        .WithMany()
+                        .HasForeignKey("SourceRequestId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Inventory.Warehouse", "ToWarehouse")
+                        .WithMany()
+                        .HasForeignKey("ToWarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Countify.Domain.Entities.Inventory.InventoryMovementType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Inventory.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("JournalEntry");
+
+                    b.Navigation("SourceRequest");
+
+                    b.Navigation("ToWarehouse");
+
+                    b.Navigation("Type");
+
+                    b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovementLine", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Inventory.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Inventory.InventoryMovement", "Movement")
+                        .WithMany("Lines")
+                        .HasForeignKey("MovementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Countify.Domain.Entities.Accounting.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Movement");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Inventory.Location", b =>
                 {
                     b.HasOne("Countify.Domain.Entities.Accounting.Account", "Account")
@@ -4727,6 +5010,11 @@ namespace Countify.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Billing.Invoice", b =>
+                {
+                    b.Navigation("Lines");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryMovement", b =>
                 {
                     b.Navigation("Lines");
                 });

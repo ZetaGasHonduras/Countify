@@ -11,6 +11,7 @@ public class InventoryMovementTypeDto
 
     public bool ChecksStock { get; set; }
     public bool GeneratesPosting { get; set; }
+    public bool CountsForStock { get; set; } = true;
     public bool IsSystem { get; set; }
     public bool IsInactive { get; set; }
 }

@@ -22,6 +22,9 @@ public class InventoryMovementType : BaseEntity
     /// <summary>Marca que genera partida contable al guardar (los AJ± del legacy la generaban; TP− no).</summary>
     public bool GeneratesPosting { get; set; }
 
+    /// <summary>Si el movimiento afecta las existencias (TP− NO: la solicitud no mueve stock físico, el AJ− es la salida real).</summary>
+    public bool CountsForStock { get; set; } = true;
+
     /// <summary>No borrable ni renombrable (AJ+/AJ−/TP−/COM).</summary>
     public bool IsSystem { get; set; }
 

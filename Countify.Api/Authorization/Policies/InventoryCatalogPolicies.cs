@@ -19,6 +19,10 @@ internal sealed class InventoryCatalogPolicies : IConfigureOptions<Authorization
     internal const string CanCreateInventoryMovementTypes = nameof(CanCreateInventoryMovementTypes);
     internal const string CanEditInventoryMovementTypes = nameof(CanEditInventoryMovementTypes);
     internal const string CanDeleteInventoryMovementTypes = nameof(CanDeleteInventoryMovementTypes);
+    internal const string CanViewInventoryMovements = nameof(CanViewInventoryMovements);
+    internal const string CanCreateInventoryMovements = nameof(CanCreateInventoryMovements);
+    internal const string CanEditInventoryMovements = nameof(CanEditInventoryMovements);
+    internal const string CanVoidInventoryMovements = nameof(CanVoidInventoryMovements);
 
     public void Configure(AuthorizationOptions options)
     {
@@ -48,5 +52,14 @@ internal sealed class InventoryCatalogPolicies : IConfigureOptions<Authorization
             p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanEditInventoryMovementTypes)));
         options.AddPolicy(CanDeleteInventoryMovementTypes,
             p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanDeleteInventoryMovementTypes)));
+
+        options.AddPolicy(CanViewInventoryMovements,
+            p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanViewInventoryMovements)));
+        options.AddPolicy(CanCreateInventoryMovements,
+            p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanCreateInventoryMovements)));
+        options.AddPolicy(CanEditInventoryMovements,
+            p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanEditInventoryMovements)));
+        options.AddPolicy(CanVoidInventoryMovements,
+            p => p.AddRequirements(new UserRoleHasPermissionRequirement(Permissions.CanVoidInventoryMovements)));
     }
 }

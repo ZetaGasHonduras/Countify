@@ -62,6 +62,8 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     private IRepository<Warehouse>? _warehouses;
     private IRepository<Location>? _locations;
     private IRepository<InventoryMovementType>? _inventoryMovementTypes;
+    private IRepository<InventoryMovement>? _inventoryMovements;
+    private IRepository<InventoryMovementLine>? _inventoryMovementLines;
 
     public IRepository<ApplicationUser> Users =>
         _users ??= new Repository<ApplicationUser>(context);
@@ -146,6 +148,8 @@ public class UnitOfWork(CountifyDbContext context) : IUnitOfWork
     public IRepository<Warehouse> Warehouses => _warehouses ??= new Repository<Warehouse>(context);
     public IRepository<Location> Locations => _locations ??= new Repository<Location>(context);
     public IRepository<InventoryMovementType> InventoryMovementTypes => _inventoryMovementTypes ??= new Repository<InventoryMovementType>(context);
+    public IRepository<InventoryMovement> InventoryMovements => _inventoryMovements ??= new Repository<InventoryMovement>(context);
+    public IRepository<InventoryMovementLine> InventoryMovementLines => _inventoryMovementLines ??= new Repository<InventoryMovementLine>(context);
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         => await context.SaveChangesAsync(cancellationToken);
