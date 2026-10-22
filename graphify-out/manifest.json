@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "Countify.Api/DependencyInjection/ApiServiceRegistration.cs": {
-    "mtime": 1792529309.8245876,
-    "seen": 1792530649.6366868,
-    "ast_hash": "5d0f5735de8678ce0c1dc6ecf279bf1f",
+    "mtime": 1792697428.2587607,
+    "seen": 1792698882.8926082,
+    "ast_hash": "12ba076da10aac5b19a513bda9bd57d9",
     "semantic_hash": ""
   },
   "Countify.Api/Middleware/ExceptionHandlerMiddleware.cs": {
@@ -1230,9 +1230,9 @@
     "semantic_hash": "f1669d648a62e6b71287373b9def9cd3"
   },
   "Countify.Domain/Authorization/Permissions.cs": {
-    "mtime": 1792529188.7084138,
-    "seen": 1792530649.6370444,
-    "ast_hash": "82a6b3a0d4c4855d4b2772db47a940a4",
+    "mtime": 1792697371.2308803,
+    "seen": 1792698882.8937628,
+    "ast_hash": "474fd82cdbae8d4527f5ecbb39710194",
     "semantic_hash": ""
   },
   "Countify.Domain/Common/BaseEntity.cs": {
@@ -1428,9 +1428,9 @@
     "semantic_hash": "081867598bf063e449c3175c248953a3"
   },
   "Countify.Domain/Interfaces/IUnitOfWork.cs": {
-    "mtime": 1792529214.1318932,
-    "seen": 1792530649.6371014,
-    "ast_hash": "fb8c1a2f4f75536545a0d5becce9e99d",
+    "mtime": 1792697278.8724113,
+    "seen": 1792698882.8939795,
+    "ast_hash": "160a8097685f23f6b4b27093265cd5db",
     "semantic_hash": ""
   },
   "Countify.Domain/Interfaces/SeederOptions.cs": {
@@ -1614,9 +1614,9 @@
     "semantic_hash": "b1ca3d853fce60d9a8fe4992ddeae6df"
   },
   "Countify.Infrastructure/Migrations/CountifyDbContextModelSnapshot.cs": {
-    "mtime": 1792529746.77661,
-    "seen": 1792530649.637169,
-    "ast_hash": "77715ab10ce7b9dd2f94d744d83f80e8",
+    "mtime": 1792697863.5695758,
+    "seen": 1792698882.8941958,
+    "ast_hash": "ba42a2e27d5b7281a2ecc50dc4b35286",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Configurations/AccountConfiguration.cs": {
@@ -1770,9 +1770,9 @@
     "semantic_hash": "dd1890e0de38921b5fe61f22063fbf8c"
   },
   "Countify.Infrastructure/Persistence/CountifyDbContext.cs": {
-    "mtime": 1792529212.9743547,
-    "seen": 1792530649.637247,
-    "ast_hash": "5d16bede94434a5d560ea74bb6776795",
+    "mtime": 1792697277.21429,
+    "seen": 1792698882.8943944,
+    "ast_hash": "4d4a3316f2b8165acb0aa51ddebf7797",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/CountifyDbContextFactory.cs": {
@@ -1788,15 +1788,15 @@
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Services/UnitOfWork.cs": {
-    "mtime": 1792529248.0516195,
-    "seen": 1792530649.63725,
-    "ast_hash": "9b92e0f2a77dbe7601f8e2a6ee513581",
+    "mtime": 1792697339.836828,
+    "seen": 1792698882.8944027,
+    "ast_hash": "78dc487d63b9754dde1d86d426f328f9",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/CatalogSeeder.cs": {
-    "mtime": 1792505703.6371646,
-    "seen": 1792526174.6354077,
-    "ast_hash": "c6ccb96cc99f2be88fb5a295c9ee9a82",
+    "mtime": 1792697470.7095234,
+    "seen": 1792698882.8944051,
+    "ast_hash": "a806d18376345e5ef052a7c30e380bb7",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/ConfigurationSeeder.cs": {
@@ -3369,6 +3369,198 @@
     "mtime": 1792529249.6062279,
     "seen": 1792530649.6372159,
     "ast_hash": "6a79e3030711f0c0b4701fdfc39ba5fd",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Authorization/Policies/InventoryCatalogPolicies.cs": {
+    "mtime": 1792697426.3892844,
+    "seen": 1792698882.8923442,
+    "ast_hash": "562c3b3bd7e64e7ced043fcd28e2418b",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/InventoryMovementTypesController.cs": {
+    "mtime": 1792697791.7369835,
+    "seen": 1792698882.8925002,
+    "ast_hash": "ac8426fa5a3593cb25166f8d5ef2a0e3",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/LocationsController.cs": {
+    "mtime": 1792697784.8632503,
+    "seen": 1792698882.892516,
+    "ast_hash": "85e997a8e0298c3b831475ee6a43a126",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/WarehousesController.cs": {
+    "mtime": 1792697778.4807856,
+    "seen": 1792698882.8925967,
+    "ast_hash": "f1ea38e46460b743b539a4982e8f8575",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryMovementTypes/Commands/CreateInventoryMovementType/CreateInventoryMovementTypeCommand.cs": {
+    "mtime": 1792697727.1796603,
+    "seen": 1792698882.8931088,
+    "ast_hash": "a54b8a274792e3f8386f15c8cbb22cbd",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryMovementTypes/Commands/DeleteInventoryMovementType/DeleteInventoryMovementTypeCommand.cs": {
+    "mtime": 1792697707.4750092,
+    "seen": 1792698882.8931139,
+    "ast_hash": "4b17bf93e48030a2bbd6259fde9e0dc4",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryMovementTypes/Commands/UpdateInventoryMovementType/UpdateInventoryMovementTypeCommand.cs": {
+    "mtime": 1792697729.4949205,
+    "seen": 1792698882.8931181,
+    "ast_hash": "4301ea2e4f38f8768d7ba99a4119e98d",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryMovementTypes/DTOs/InventoryMovementTypeDto.cs": {
+    "mtime": 1792697541.1672857,
+    "seen": 1792698882.893121,
+    "ast_hash": "3a27d5ec3e101b9c3ce374a86c5fb652",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryMovementTypes/Profiles/InventoryMovementTypeProfile.cs": {
+    "mtime": 1792697752.6468694,
+    "seen": 1792698882.8931234,
+    "ast_hash": "bd1346bd1cb21571b65f1a39958d60a3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryMovementTypes/Queries/GetInventoryMovementTypes/GetInventoryMovementTypesQuery.cs": {
+    "mtime": 1792697749.4062705,
+    "seen": 1792698882.8931265,
+    "ast_hash": "0598e456839adc2cc31eea26b2a97f61",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Locations/Commands/CreateLocation/CreateLocationCommand.cs": {
+    "mtime": 1792697629.951205,
+    "seen": 1792698882.8932517,
+    "ast_hash": "798ad1dd600fd9b5a78a2b81f42e5a4b",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Locations/Commands/DeleteLocation/DeleteLocationCommand.cs": {
+    "mtime": 1792697644.1863856,
+    "seen": 1792698882.8932548,
+    "ast_hash": "7c8d9e3f4396abaaeacc72428b5271c5",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Locations/Commands/UpdateLocation/UpdateLocationCommand.cs": {
+    "mtime": 1792697640.4847374,
+    "seen": 1792698882.893257,
+    "ast_hash": "abb9ad89ee29c71b30f47a5fad207e2e",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Locations/DTOs/LocationDto.cs": {
+    "mtime": 1792697537.819641,
+    "seen": 1792698882.8932595,
+    "ast_hash": "3632be6041239cf99d9aa0cafa39b950",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Locations/Profiles/LocationProfile.cs": {
+    "mtime": 1792697664.8877523,
+    "seen": 1792698882.893262,
+    "ast_hash": "676a2f987ec828a16be5a8e6b6494f90",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Locations/Queries/GetLocations/GetLocationsQuery.cs": {
+    "mtime": 1792697662.1283264,
+    "seen": 1792698882.893265,
+    "ast_hash": "5026cf8917c1276ad0f84e6b1a81b924",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Warehouses/Commands/CreateWarehouse/CreateWarehouseCommand.cs": {
+    "mtime": 1792697565.8385599,
+    "seen": 1792698882.8937402,
+    "ast_hash": "b2746363b227e881f16571ef147d1c89",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Warehouses/Commands/DeleteWarehouse/DeleteWarehouseCommand.cs": {
+    "mtime": 1792697580.725288,
+    "seen": 1792698882.8937428,
+    "ast_hash": "312b45d14d85347dd987c32a5df15a1a",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Warehouses/Commands/UpdateWarehouse/UpdateWarehouseCommand.cs": {
+    "mtime": 1792697575.0385015,
+    "seen": 1792698882.8937452,
+    "ast_hash": "05e89894746d3b7758df1e7954b54a00",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Warehouses/DTOs/WarehouseDto.cs": {
+    "mtime": 1792697533.5742724,
+    "seen": 1792698882.8937485,
+    "ast_hash": "3e29a7f2422c6b23edc40912dffc9412",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Warehouses/Profiles/WarehouseProfile.cs": {
+    "mtime": 1792697607.5809262,
+    "seen": 1792698882.8937514,
+    "ast_hash": "7b051abf285e9e251d190818453d64db",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Warehouses/Queries/GetWarehouses/GetWarehousesQuery.cs": {
+    "mtime": 1792697605.026078,
+    "seen": 1792698882.8937538,
+    "ast_hash": "955ff6ec737b2cf81e4a5095c0b58564",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Inventory/InventoryMovementDirection.cs": {
+    "mtime": 1792697041.4933765,
+    "seen": 1792698882.8939254,
+    "ast_hash": "16bbb5439aae296c52773cab93a5bb6d",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Inventory/InventoryMovementType.cs": {
+    "mtime": 1792697049.4012978,
+    "seen": 1792698882.8939302,
+    "ast_hash": "492fde05ceb9fd51db9598c41acd95b2",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Inventory/Location.cs": {
+    "mtime": 1792697016.2061472,
+    "seen": 1792698882.8939345,
+    "ast_hash": "094688aa73abe3b2056b0945ad5ddfc1",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Inventory/Warehouse.cs": {
+    "mtime": 1792697009.2866495,
+    "seen": 1792698882.893939,
+    "ast_hash": "ec0df31c2c521ac0eb09bf40663b0ac5",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Seeders/BasicInventoryCatalog.cs": {
+    "mtime": 1792697175.6813505,
+    "seen": 1792698882.8940368,
+    "ast_hash": "7496e6e90febea802a1bed78d7271711",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261022193743_AddInventoryCatalogs.Designer.cs": {
+    "mtime": 1792697863.569031,
+    "seen": 1792698882.8941903,
+    "ast_hash": "30df512154da456596964abb432a3244",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261022193743_AddInventoryCatalogs.cs": {
+    "mtime": 1792697863.5684946,
+    "seen": 1792698882.894193,
+    "ast_hash": "a1caf8ae524826b5cd2d46570ba9705e",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/InventoryMovementTypeConfiguration.cs": {
+    "mtime": 1792697214.438943,
+    "seen": 1792698882.8942583,
+    "ast_hash": "ba82f57cf523edaa1f7f5e354a957785",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/LocationConfiguration.cs": {
+    "mtime": 1792697211.163908,
+    "seen": 1792698882.8943129,
+    "ast_hash": "0500e25806a072e0f30335dff4676718",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/WarehouseConfiguration.cs": {
+    "mtime": 1792697206.9986315,
+    "seen": 1792698882.8943884,
+    "ast_hash": "0f04b1bb215fe728f344d55ff1c5ea27",
     "semantic_hash": ""
   }
 }
