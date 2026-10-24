@@ -1,4 +1,5 @@
 using Countify.Api.Authorization.Policies;
+using Countify.Application.Features.Configurations.Queries.GetCompanySettings;
 using Countify.Application.Features.InventoryMovements.Commands.CreateInventoryMovement;
 using Countify.Application.Features.InventoryMovements.Commands.DeleteInventoryMovement;
 using Countify.Application.Features.InventoryMovements.Commands.UpdateInventoryMovement;
@@ -7,6 +8,7 @@ using Countify.Application.Features.InventoryMovements.Queries.GetInventoryMovem
 using Countify.Application.Features.InventoryMovements.Queries.GetInventoryMovements;
 using Countify.Application.Features.InventoryMovements.Queries.GetInventoryStock;
 using Countify.Application.Features.InventoryMovements.Queries.GetPendingInventoryRequests;
+using Countify.Infrastructure.TemplateBuilder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +39,49 @@ public class InventoryMovementsController : BaseController
             LocationId = locationId,
             ProductId = productId,
         }));
+
+    [HttpGet("stock/export")]
+    [Authorize(InventoryCatalogPolicies.CanViewInventoryMovements)]
+    public async Task<IActionResult> ExportStock(
+        [FromQuery] Guid? warehouseId, [FromQuery] Guid? locationId, [FromQuery] Guid? productId)
+    {
+        var result = await Mediator.Send(new GetInventoryStockQuery
+        {
+            WarehouseId = warehouseId,
+            LocationId = locationId,
+            ProductId = productId,
+        });
+        if (!result.IsSuccess || result.Data is null) return HandleResult(result);
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("ProductoCodigo,Producto,Almacen,UbicacionCodigo,Ubicacion,Entradas,Salidas,Existencia");
+        foreach (var s in result.Data)
+        {
+            sb.AppendLine($"{s.ProductCode},\"{s.ProductName}\",\"{s.WarehouseName}\",{s.LocationCode},\"{s.LocationName}\"," +
+                          $"{s.Inbound:0.###},{s.Outbound:0.###},{s.OnHand:0.###}");
+        }
+
+        return File(System.Text.Encoding.UTF8.GetBytes(sb.ToString()), "text/csv",
+            $"existencias-{DateTime.UtcNow:yyyyMMdd-HHmm}.csv");
+    }
+
+    [HttpGet("stock/export/pdf")]
+    [Authorize(InventoryCatalogPolicies.CanViewInventoryMovements)]
+    public async Task<IActionResult> ExportStockPdf(
+        [FromQuery] Guid? warehouseId, [FromQuery] Guid? locationId, [FromQuery] Guid? productId)
+    {
+        var result = await Mediator.Send(new GetInventoryStockQuery
+        {
+            WarehouseId = warehouseId,
+            LocationId = locationId,
+            ProductId = productId,
+        });
+        if (!result.IsSuccess || result.Data is null) return HandleResult(result);
+
+        var settings = await Mediator.Send(new GetCompanySettingsQuery());
+        return File(InventoryStockPdfBuilder.Build(result.Data, "Reporte de existencias", settings.Data), "application/pdf",
+            $"existencias-{DateTime.UtcNow:yyyyMMdd-HHmm}.pdf");
+    }
 
     /// <summary>Solicitudes TP− vigentes sin consumir (selector del ajuste negativo).</summary>
     [HttpGet("pending-requests")]

@@ -1,17 +1,17 @@
 # Graph Report - Countify  (2026-10-22)
 
 ## Corpus Check
-- 594 files · ~161,961 words
+- 614 files · ~174,923 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 3 file(s) not represented in the graph (top: (none) 2, .user 1)
 
 ## Summary
-- 6070 nodes · 11566 edges · 379 communities (340 shown, 39 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 473 edges (avg confidence: 0.85)
+- 6382 nodes · 12169 edges · 376 communities (336 shown, 40 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 491 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `88dcaa6f`
+- Built from commit: `1bb3d56c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -20,12 +20,12 @@
 - CatalogSeeder
 - UpdateCompanySettingsCommand
 - CountifyDbContext
-- .Delete
+- GetDepartmentsQueryHandler
 - InventoryMovementType
 - microsoft_entityframeworkcore
 - .Delete
 - Response
-- CustomerTypeDto
+- UpdateCustomerTypeCommand
 - JournalEntry
 - JournalEntriesController
 - SupplierTypeDto
@@ -37,7 +37,7 @@
 - .HandleResult
 - RolePermission
 - BankTransaction
-- GetTrialBalanceQuery
+- TrialBalanceDto
 - CompanySettingsDto
 - UnitOfWork
 - ValidationException
@@ -47,7 +47,7 @@
 - HistoryDto
 - IEntityTypeConfiguration
 - Countify.Infrastructure
-- LoginCommandHandler
+- AuthResponse
 - JournalEntryLine
 - AccountsReceivableDocumentDraftRequest
 - Invoice
@@ -69,7 +69,7 @@
 - ApplicationUser
 - BudgetsController
 - Supplier
-- UpdateUserCommand
+- InventoryMovement
 - ProductAccountDto
 - GetRoleByIdQueryHandler
 - PaymentMethodDto
@@ -84,7 +84,7 @@
 - http
 - JournalEntryLineRequest
 - Customer
-- UsersController
+- CreateUserCommand
 - Countify.Infrastructure.Migrations
 - UpdateLocationCommand
 - AccountsController
@@ -92,14 +92,14 @@
 - CreateAccountsReceivableConceptCommand
 - AccountsReceivableDocumentDto
 - GetUserByIdQueryHandler
-- LocalFileStorage
+- IFileStorage
 - BankReconciliation
 - AccountsReceivableDocument
 - GetProjectsQuery
-- IncomeStatementDto
+- GetIncomeStatementQuery
 - UpdateAccountCommand
 - SalesJournalBatchDto
-- AuthResponse
+- Permisos (patrón de futuras fases también)
 - CustomerDto
 - AccountsReceivableDocumentAttachment
 - UpdateAccountsReceivableDocumentCommand
@@ -108,16 +108,16 @@
 - ProjectGroup
 - GetJournalEntriesQuery
 - .Delete
-- PaginatedResponse
+- RequestParameter
 - PayableDocument
-- 20260910210705_InitialCreate.Designer.cs
-- Countify.Application.Common.Interfaces
-- SetInvoicePaymentsCommand
-- microsoft_aspnetcore_authorization
-- YearEndClosingEntry
-- 20260918135030_AddAccountingModule.Designer.cs
 - .Up
-- DepartmentsController.cs
+- Countify.Domain.Seeders
+- SetInvoicePaymentsCommand
+- Countify.Api.Authorization.Policies
+- YearEndClosingEntry
+- .Up
+- .Up
+- InventoryMovementDto
 - PayableDocumentDto
 - AccountsReceivableConcept
 - CreateAccountsReceivableDocumentCommand
@@ -131,13 +131,13 @@
 - SourceModule
 - .Delete
 - LocationDto
-- ProjectGroupsController.cs
+- InventoryMovementsController.cs
 - fluentvalidation
-- CreateProjectCommand
+- .SaveChangesAsync
 - .Validate
 - AccountsReceivableDocumentLineDto
 - AccountsReceivableConceptDto
-- AssignRoleCommand
+- CreateInventoryMovementCommand
 - PayableDocumentsController
 - UpdateInvoiceCommand
 - .OnModelCreating
@@ -148,23 +148,23 @@
 - .Close
 - .ValidateAsync
 - .BuildTargetModel
-- Countify.Infrastructure.TemplateBuilder
+- InvoicePdfBuilder.cs
 - CreateFiscalControlCommand
-- .AddInfrastructureServices
+- LocalFileStorage.cs
 - Budget
 - CreateSupplierCommand
 - .BuildModel
 - CustomerMovementApplicationDto
 - DocumentType
-- .Up
+- MigrationBuilder
 - SupplierFiscalDataDto
-- Countify.Api.Controllers
+- microsoft_aspnetcore_authorization
 - CustomerAgingDto
 - BaseController
 - BankTransactionType
 - UpdateDocumentTypeCommand
 - SupplierDto
-- CustomerTypesController.cs
+- InventoryMovementLine
 - .Delete
 - CreateInvoiceCommand
 - Countify.Domain.Entities.Auth
@@ -172,31 +172,31 @@
 - UserRoleHasPermissionRequirement
 - FiscalControl
 - CreditNoteReason
-- DocumentTypesController.cs
-- IFileStorage
+- BaseController
+- UpdateInventoryMovementCommand
 - CreateCustomerTypeCommand
 - .Handle
 - AccountsReceivableDocumentsController.cs
 - CustomerMovementsDto
 - GetCustomerMovementsQuery
-- DeleteAccountsReceivableDocumentLineCommand
+- PermissionAuthorizationHandler.cs
 - UpdatePayableDocumentCommand
 - CreatePayableDocumentCommand
 - DeleteJournalEntryCommand
-- UpdateCustomerTypeCommand
+- PaginatedResponse
 - Location
 - CreateDocumentTypeCommand
 - CreateInventoryMovementTypeCommand
 - GetPendingAccountsReceivableDocumentsQuery
-- .Delete
+- InventoryMovementLineDto
 - AccountsReceivableDocumentLine
 - EntryConceptType
 - countify_application_features_accountsreceivabledocuments_commands_createaccountsreceivabledocumentlines
-- CreateRoleCommand
+- InvoicesController.cs
 - Profile
 - .Delete
 - AccountsReceivableDocumentAttachmentDto
-- SupplierTypesController.cs
+- InventoryStockDto
 - UpdateInventoryMovementTypeCommand
 - GetAccountsReceivableDocumentByIdQuery
 - UpdateWarehouseCommand
@@ -208,30 +208,30 @@
 - 20260922133125_FixBankCurrencyForeignKeys.Designer.cs
 - CreateQualityCommand
 - InvoiceLine
-- UpdateAccountsReceivableDocumentLineCommand
+- GetInventoryStockQuery
 - InvoiceLineDto
-- Countify.Domain.Entities.AccountsPayable
+- InvoiceProfile.cs
 - .Delete
 - UpdateProjectCommand
 - PayableConcept
 - DeleteCustomerCommand
 - GetAccountsReceivableDocumentsQueryHandler
 - UpdateRolePermissionsCommand
-- ChangePasswordCommand
+- .BuildSection
 - DeleteProjectGroupCommand
 - .Delete
 - GetAccountByIdQuery
 - .AssignAsync
 - .ApplyOrder
 - InvoicePaymentDto
-- GetUserInfoQueryHandler
+- GetInventoryMovementByIdQuery
 - CloseAccountingPeriodCommand
-- GetJournalEntryByIdQuery
-- VoidAccountsReceivableDocumentCommand
+- CreateProductCommand
+- IncomeStatementDto
 - VoidJournalEntryCommand
 - PayableDocumentDraftRequest
-- DeleteDepartmentCommand
-- Countify.Application.Features.Auth.DTOs
+- InventoryMovementLineInput
+- UserInfoResponse
 - DeleteSupplierTypeCommand
 - InvoicesController
 - .ValidateAsync
@@ -239,11 +239,11 @@
 - Currency
 - UpdatePayableConceptCommand
 - DeleteDocumentTypeCommand
-- CreateUserCommand
+- DeleteInventoryMovementCommand
 - FiscalDocumentType
-- .Up
+- .BuildTargetModel
 - .Delete
-- .Up
+- 20261015211107_AddSupplierTypesAndSuppliers.Designer.cs
 - CreatePayableConceptCommand
 - UploadPayableDocumentAttachmentCommand
 - GetPayableDocumentAttachmentQuery
@@ -262,14 +262,14 @@
 - countify_application_features_accountsreceivabledocuments_queries_getpendingaccountsreceivabledocuments
 - PayableDocumentsController.cs
 - .Delete
-- BaseController
+- .Delete
 - UploadAccountsReceivableDocumentAttachmentCommand
 - countify_infrastructure_seeders
 - DeleteProductCommand
 - GetAccountsReceivableDocumentAttachmentQuery
 - PayableConceptDto
 - SupplierAgingDetailDto
-- ForgotPasswordCommandHandler
+- IEmailService
 - SupplierAgingDto
 - GetProductsQueryHandler
 - GetProjectGroupsQueryHandler
@@ -293,8 +293,8 @@
 - UpdateProjectGroupCommand
 - UpdateQualityCommand
 - MarkInvoicePrintedCommand
-- PayableConceptsController.cs
-- DeleteProjectCommand
+- GetInventoryMovementsQueryHandler
+- TrialBalanceLineDto
 - .CreateOrUpdatePostingAsync
 - VoidInvoiceCommand
 - GetInvoiceByIdQuery
@@ -308,13 +308,13 @@
 - GetInvoicesQueryHandler
 - DeletePayableConceptCommand
 - GetPayableConceptsQueryHandler
-- CustomersController.cs
-- VoidPayableDocumentCommand
+- CustomerProfile.cs
+- Product
 - GetPayableDocumentsQueryHandler
 - DeleteSupplierCommand
 - GetSuppliersQueryHandler
 - SupplierType
-- CountifyDbContextFactory
+- BasicAccounts
 - DeleteAccountsReceivableConceptCommand
 - GetAccountsReceivableConceptsQueryHandler
 - DeleteCustomerTypeCommand
@@ -325,87 +325,84 @@
 - .Build
 - BankTransactionTypeDto
 - Permissions.cs
-- PaymentMethodsController.cs
-- .BuildTargetModel
+- DeleteAccountingPeriodCommand
+- 20261018214026_AddPayableConcepts.Designer.cs
 - .Up
 - .BuildTargetModel
 - .BuildTargetModel
-- .Up
 - .BuildTargetModel
-- .BuildTargetModel
+- DeleteFiscalControlCommand
+- 20261020195016_AddInvoicePayments.Designer.cs
 - .Build
 - InvoicePaymentTerms
+- GetPendingInventoryRequestsQuery
 - .Up
-- .Up
-- Countify.Domain.Entities.Inventory
+- UpdateWarehouseCommand.cs
 - IServiceCollection
 - .GetCurrentUser
 - BankPolicies
-- GetDepartmentsQueryHandler
-- CreatePaymentMethodCommand
+- DeleteProductAccountCommand
+- DeleteQualityCommand
 - CancellationToken
 - DbSet
 - InventoryMovementTypeDto
 - HashSet
 - IdentityUserRole
-- AccountsReceivableConceptsController.cs
-- CreateDepartmentCommand
+- DeleteUserCommand
+- Warehouse
 - ILogger
 - IOptions
-- InvoicePayment
+- IncomeStatementLineDto
 - TransactionSeeder
-- AuthController
+- InventoryMovementDirection
 - DeleteInventoryMovementTypeCommand
 - GetInventoryMovementTypesQueryHandler
 - DeleteLocationCommand
-- GetLocationsQueryHandler
+- .BuildTargetModel
 - DeletePayableDocumentLineCommand
 - DeletePaymentMethodCommand
 - DeleteWarehouseCommand
-- RequestParameter
+- .BuildTargetModel
 - .Build
-- .SaveChangesAsync
+- .BuildTargetModel
 - Currency
 - Department
 - ICollection
 - Project
 - DeleteAccountCommand
-- DeleteAccountsReceivableDocumentAttachmentCommand
-- PaymentMethod
-- Project
+- Repository.cs
+- .Up
+- BasicCompanySettings
 - SupplierFiscalData
-- GetCompanySettingsQuery
+- PayableDocumentTotals
 - .Build
 - .BuildTargetModel
-- Project
+- Department
 - SupplierFiscalData
+- JournalEntry
+- Product
 - .BuildTargetModel
-- .BuildTargetModel
-- .BuildTargetModel
-- .BuildTargetModel
-- Project
-- Countify.Application.Features.Invoices.DTOs
+- Department
+- JournalEntry
+- Product
 - Warehouse
 - .Up
-- .Up
-- Account
-- CompanySettings
-- Account
-- CompanySettings
-- Account
+- Department
+- JournalEntry
+- Product
 - Dictionary
 - CountifyDbContext
 
 ## God Nodes (most connected - your core abstractions)
 1. `Response` - 279 edges
-2. `IUnitOfWork` - 253 edges
-3. `Countify.Domain.Interfaces` - 160 edges
-4. `Countify.Domain.Entities.Accounting` - 112 edges
-5. `CountifyDbContext` - 110 edges
-6. `UnitOfWork` - 100 edges
+2. `IUnitOfWork` - 268 edges
+3. `Countify.Domain.Interfaces` - 170 edges
+4. `Countify.Domain.Entities.Accounting` - 118 edges
+5. `CountifyDbContext` - 115 edges
+6. `UnitOfWork` - 104 edges
 7. `Countify.Application.Wrappers` - 98 edges
-8. `Invoice` - 64 edges
-9. `Countify.Api.Authorization.Policies` - 63 edges
+8. `Countify.Api.Authorization.Policies` - 64 edges
+9. `Invoice` - 64 edges
 10. `AccountsReceivableDocument` - 57 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -417,65 +414,65 @@
   AGENTS.md → Countify.Infrastructure/Persistence/CountifyDbContext.cs
 - `Seeding — GENERALIZADO (base para futuras entidades/fases)` --references--> `CatalogSeeder`  [INFERRED]
   AGENTS.md → Countify.Infrastructure/Seeders/CatalogSeeder.cs
-- `Seeding — GENERALIZADO (base para futuras entidades/fases)` --references--> `SeederOptions`  [INFERRED]
-  AGENTS.md → Countify.Domain/Interfaces/SeederOptions.cs
+- `Seeding — GENERALIZADO (base para futuras entidades/fases)` --references--> `BasicDocumentTypes`  [INFERRED]
+  AGENTS.md → Countify.Domain/Seeders/BasicDocumentTypes.cs
 
 ## Import Cycles
 - None detected.
 
-## Communities (379 total, 39 thin omitted)
+## Communities (376 total, 40 thin omitted)
 
 ### Community 0 - "Countify.Domain.Interfaces"
 Cohesion: 0.05
-Nodes (9): automapper, countify_application_wrappers, Countify.Application.Features.ProductAccounts.DTOs, Countify.Application.Features.ProductAccounts, Countify.Application.Extensions, Countify.Application.Wrappers, Countify.Domain.Interfaces, Countify.Application.Features.PayableDocuments.DTOs (+1 more)
+Nodes (10): automapper, automapper_queryableextensions, countify_application_wrappers, Countify.Application.Features.ProductAccounts.DTOs, Countify.Application.Features.ProductAccounts, Countify.Application.Extensions, Countify.Application.Wrappers, Countify.Domain.Interfaces (+2 more)
 
 ### Community 1 - "CatalogSeeder"
-Cohesion: 0.22
-Nodes (9): CatalogSeeder, CancellationToken, Guid, Task, Dictionary, ILogger, IOptions, ISeeder (+1 more)
+Cohesion: 0.21
+Nodes (9): CatalogSeeder, CancellationToken, Dictionary, Guid, Task, ILogger, IOptions, ISeeder (+1 more)
 
 ### Community 2 - "UpdateCompanySettingsCommand"
-Cohesion: 0.07
-Nodes (29): UpdateCompanySettingsCommand, Address, CashAccountId, CompanyName, DefaultDepartmentId, DefaultProjectId, Email, FiscalYear (+21 more)
+Cohesion: 0.06
+Nodes (32): UpdateCompanySettingsCommand, Address, CashAccountId, CompanyName, DefaultDepartmentId, DefaultProjectId, Email, FiscalYear (+24 more)
 
 ### Community 3 - "CountifyDbContext"
 Cohesion: 0.02
-Nodes (88): CountifyDbContext, AccountingPeriods, Accounts, AccountsReceivableConcepts, AccountsReceivableDocumentAttachments, AccountsReceivableDocumentLines, AccountsReceivableDocuments, BankAccounts (+80 more)
+Nodes (90): CountifyDbContext, AccountingPeriods, Accounts, AccountsReceivableConcepts, AccountsReceivableDocumentAttachments, AccountsReceivableDocumentLines, AccountsReceivableDocuments, BankAccounts (+82 more)
 
-### Community 4 - ".Delete"
-Cohesion: 0.28
-Nodes (9): DepartmentsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
+### Community 4 - "GetDepartmentsQueryHandler"
+Cohesion: 0.13
+Nodes (20): DepartmentsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+12 more)
 
 ### Community 5 - "InventoryMovementType"
-Cohesion: 0.12
-Nodes (16): InventoryMovementDirection, Entry, Exit, NoStock, InventoryMovementType, ChecksStock, Code, Direction (+8 more)
+Cohesion: 0.11
+Nodes (17): Warehouse, Location, InventoryMovementType, ChecksStock, Code, CountsForStock, Direction, GeneratesPosting (+9 more)
 
 ### Community 6 - "microsoft_entityframeworkcore"
-Cohesion: 0.10
-Nodes (6): Countify.Infrastructure.Seeders, Countify.Infrastructure.Persistence.Configurations, microsoft_entityframeworkcore, microsoft_entityframeworkcore_metadata_builders, microsoft_extensions_hosting, microsoft_extensions_logging
+Cohesion: 0.06
+Nodes (10): countify_domain_common, countify_domain_entities_accounting, Countify.Domain.Entities.Billing, Countify.Application.Features.Invoices, Countify.Application.Features.InventoryMovements, Countify.Infrastructure.Persistence.Configurations, Countify.Domain.Entities.Inventory, Countify.Domain.Entities.AccountsPayable (+2 more)
 
 ### Community 7 - ".Delete"
 Cohesion: 0.28
 Nodes (9): ProductsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
 ### Community 8 - "Response"
-Cohesion: 0.05
-Nodes (44): DeleteAccountingPeriodCommand, Id, DeleteAccountingPeriodCommandHandler, CancellationToken, Guid, Task, CreateAccountsReceivableDocumentLinesCommandHandler, CancellationToken (+36 more)
+Cohesion: 0.04
+Nodes (56): CreateAccountsReceivableDocumentLinesCommandHandler, CancellationToken, Task, DeleteAccountsReceivableDocumentAttachmentCommand, Id, DeleteAccountsReceivableDocumentAttachmentCommandHandler, CancellationToken, Guid (+48 more)
 
-### Community 9 - "CustomerTypeDto"
-Cohesion: 0.15
-Nodes (15): CustomerTypeDto, AccountingAccountCode, AccountingAccountId, AccountingAccountName, Code, Id, Name, Guid (+7 more)
+### Community 9 - "UpdateCustomerTypeCommand"
+Cohesion: 0.08
+Nodes (30): CustomerTypesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+22 more)
 
 ### Community 10 - "JournalEntry"
 Cohesion: 0.09
 Nodes (22): JournalEntry, Code, Concept, CreditTotal, DebitTotal, DifferenceAmount, EntryGid, EntryNumber (+14 more)
 
 ### Community 11 - "JournalEntriesController"
-Cohesion: 0.33
-Nodes (9): JournalEntriesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
+Cohesion: 0.26
+Nodes (12): JournalEntriesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+4 more)
 
 ### Community 12 - "SupplierTypeDto"
-Cohesion: 0.16
-Nodes (16): SupplierTypeDto, AccountingAccountCode, AccountingAccountId, AccountingAccountName, Code, Id, Name, Guid (+8 more)
+Cohesion: 0.18
+Nodes (15): SupplierTypeDto, AccountingAccountCode, AccountingAccountId, AccountingAccountName, Code, Id, Name, Guid (+7 more)
 
 ### Community 13 - "IRequest"
 Cohesion: 0.32
@@ -509,17 +506,17 @@ Nodes (14): Permission, Description, Id, Name, RolePermission, Permission, Permi
 Cohesion: 0.06
 Nodes (36): BankTransactionType, BankTransaction, Amount, AppliesToPayableId, AppliesToReceivableId, BankAccount, BankAccountId, BankReconciliation (+28 more)
 
-### Community 21 - "GetTrialBalanceQuery"
-Cohesion: 0.16
-Nodes (14): TrialBalanceDto, CreditTotal, DebitTotal, Difference, Lines, List, GetTrialBalanceQuery, DepartmentId (+6 more)
+### Community 21 - "TrialBalanceDto"
+Cohesion: 0.22
+Nodes (7): TrialBalanceDto, CreditTotal, DebitTotal, Difference, Lines, List, Countify.Application.Features.Reports.DTOs
 
 ### Community 22 - "CompanySettingsDto"
-Cohesion: 0.08
-Nodes (26): CompanySettingsDto, Address, CashAccountId, CompanyName, DefaultDepartmentId, DefaultProjectId, Email, FiscalYear (+18 more)
+Cohesion: 0.07
+Nodes (32): CompanySettingsDto, Address, CashAccountId, CompanyName, DefaultDepartmentId, DefaultProjectId, Email, FiscalYear (+24 more)
 
 ### Community 23 - "UnitOfWork"
 Cohesion: 0.02
-Nodes (92): UnitOfWork, AccountingPeriods, Accounts, AccountsReceivableConcepts, AccountsReceivableDocumentAttachments, AccountsReceivableDocumentLines, AccountsReceivableDocuments, BankAccounts (+84 more)
+Nodes (93): UnitOfWork, AccountingPeriods, Accounts, AccountsReceivableConcepts, AccountsReceivableDocumentAttachments, AccountsReceivableDocumentLines, AccountsReceivableDocuments, BankAccounts (+85 more)
 
 ### Community 24 - "ValidationException"
 Cohesion: 0.08
@@ -535,23 +532,23 @@ Nodes (28): Department, BudgetLine, Account, AccountId, April, August, Budget, B
 
 ### Community 27 - "IUnitOfWork"
 Cohesion: 0.02
-Nodes (90): IUnitOfWork, AccountingPeriods, Accounts, AccountsReceivableConcepts, AccountsReceivableDocumentAttachments, AccountsReceivableDocumentLines, AccountsReceivableDocuments, BankAccounts (+82 more)
+Nodes (92): IUnitOfWork, AccountingPeriods, Accounts, AccountsReceivableConcepts, AccountsReceivableDocumentAttachments, AccountsReceivableDocumentLines, AccountsReceivableDocuments, BankAccounts (+84 more)
 
 ### Community 28 - "HistoryDto"
 Cohesion: 0.05
 Nodes (43): HistoryController, Authorize, HttpGet, IActionResult, Task, HistoryDto, Date, Entity (+35 more)
 
 ### Community 29 - "IEntityTypeConfiguration"
-Cohesion: 0.09
-Nodes (21): Account, BudgetControlled, Code, IsAuxAsset, IsAuxCxc, IsAuxCxp, IsAuxLoan, IsBankAccount (+13 more)
+Cohesion: 0.08
+Nodes (24): Account, BudgetControlled, BudgetLine, Code, IsAuxAsset, IsAuxCxc, IsAuxCxp, IsAuxLoan (+16 more)
 
 ### Community 30 - "Countify.Infrastructure"
 Cohesion: 0.08
 Nodes (29): Countify.Api, net10.0, Countify.Application, net10.0, Microsoft.NET.Sdk, Countify.Domain, net10.0, Microsoft.NET.Sdk (+21 more)
 
-### Community 31 - "LoginCommandHandler"
-Cohesion: 0.11
-Nodes (14): IJwtService, IList, LoginCommand, LoginCommandHandler, CancellationToken, IdentityRole, RoleManager, Task (+6 more)
+### Community 31 - "AuthResponse"
+Cohesion: 0.07
+Nodes (32): IJwtService, IList, LoginCommand, LoginCommandHandler, CancellationToken, IdentityRole, RoleManager, Task (+24 more)
 
 ### Community 32 - "JournalEntryLine"
 Cohesion: 0.07
@@ -575,11 +572,11 @@ Nodes (22): UserDto, CreatedAt, Email, FirstName, FullName, Id, IsActive, LastNa
 
 ### Community 37 - "ProductAccount"
 Cohesion: 0.09
-Nodes (22): Product, Code, Name, ProductAccount, CostAccount, CostAccountId, IncomeAccount, IncomeAccountId (+14 more)
+Nodes (20): ProductAccount, CostAccount, CostAccountId, IncomeAccount, IncomeAccountId, InventoryAccount, InventoryAccountId, Product (+12 more)
 
 ### Community 38 - "ApiKeyAuthenticationHandler"
-Cohesion: 0.06
-Nodes (30): AuthenticateResult, AuthenticationHandler, AuthenticationProperties, AuthenticationSchemeOptions, AuthorizationHandler, AuthorizationHandlerContext, AuthorizeAttribute, ApiKeyAuthenticationDefaults (+22 more)
+Cohesion: 0.07
+Nodes (24): AuthenticateResult, AuthenticationHandler, AuthenticationProperties, AuthenticationSchemeOptions, AuthorizeAttribute, ApiKeyAuthenticationDefaults, ApiKeyAuthenticationHandler, IOptions (+16 more)
 
 ### Community 39 - "JournalEntryDto"
 Cohesion: 0.09
@@ -603,11 +600,11 @@ Nodes (19): JournalEntryLineDto, AccountCode, AccountId, AccountName, AppliesToP
 
 ### Community 44 - "CreateAccountCommand"
 Cohesion: 0.12
-Nodes (18): CreateAccountCommand, BudgetControlled, BudgetLine, Code, IsAuxAsset, IsAuxCxc, IsAuxCxp, IsAuxLoan (+10 more)
+Nodes (19): CreateAccountCommand, BudgetControlled, BudgetLine, Code, IsAuxAsset, IsAuxCxc, IsAuxCxp, IsAuxLoan (+11 more)
 
 ### Community 45 - "Countify.Domain.Entities.Accounting"
-Cohesion: 0.05
-Nodes (16): JournalEntryProfile, countify_domain_enums, Countify.Application.Features.JournalEntries.Commands.CreateJournalEntry, Countify.Domain.Seeders, Countify.Application.Features.JournalEntries.DTOs, Countify.Application.Features.PayableDocuments.Commands.VoidPayableDocument, Countify.Domain.Entities.AccountsReceivable, Countify.Application.Features.JournalEntries.Profiles (+8 more)
+Cohesion: 0.06
+Nodes (21): AccountsReceivableConceptProfile, FiscalControlProfile, JournalEntryProfile, countify_domain_enums, countify_domain_seeders, Countify.Application.Features.JournalEntries.Commands.CreateJournalEntry, Countify.Application.Features.AccountsReceivableConcepts.Profiles, Countify.Application.Features.AccountsReceivableConcepts.DTOs (+13 more)
 
 ### Community 46 - "AccountDto"
 Cohesion: 0.09
@@ -626,8 +623,8 @@ Cohesion: 0.11
 Nodes (18): BankAccount, AccountingAccount, AccountingAccountId, AccountNumber, Balance, CheckNumber, Code, CurrencyId (+10 more)
 
 ### Community 50 - "ApplicationUser"
-Cohesion: 0.11
-Nodes (18): ApplicationUser, CreatedAt, CreatedBy, FirstName, FullName, IsActive, LastActivity, LastName (+10 more)
+Cohesion: 0.04
+Nodes (49): GetUserInfoQueryHandler, IdentityRole, RoleManager, UserManager, AssignRoleCommand, RoleName, UserId, AssignRoleCommandHandler (+41 more)
 
 ### Community 51 - "BudgetsController"
 Cohesion: 0.14
@@ -637,33 +634,33 @@ Nodes (21): BudgetLineRequest, BudgetLineResponse, BudgetRequest, BudgetResponse
 Cohesion: 0.08
 Nodes (24): Supplier, AccountingAccount, AccountingAccountId, Address, City, Code, ContactEmail, ContactName (+16 more)
 
-### Community 53 - "UpdateUserCommand"
-Cohesion: 0.13
-Nodes (15): UpdateUserCommand, Email, FirstName, Id, IsActive, LastName, Phone, RoleId (+7 more)
+### Community 53 - "InventoryMovement"
+Cohesion: 0.06
+Nodes (34): InventoryPostingFactory, CancellationToken, CompanySettings, Task, InventoryMovement, Code, Concept, Correlativo (+26 more)
 
 ### Community 54 - "ProductAccountDto"
-Cohesion: 0.09
-Nodes (24): ProductAccountDto, CostAccountCode, CostAccountId, CostAccountName, Id, IncomeAccountCode, IncomeAccountId, IncomeAccountName (+16 more)
+Cohesion: 0.11
+Nodes (17): ProductAccountDto, CostAccountCode, CostAccountId, CostAccountName, Id, IncomeAccountCode, IncomeAccountId, IncomeAccountName (+9 more)
 
 ### Community 55 - "GetRoleByIdQueryHandler"
-Cohesion: 0.08
-Nodes (31): RolesController, Authorize, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult, Task (+23 more)
+Cohesion: 0.05
+Nodes (42): RolesController, Authorize, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult, Task (+34 more)
 
 ### Community 56 - "PaymentMethodDto"
-Cohesion: 0.17
-Nodes (15): PaymentMethodDto, Description, Id, IsDefault, IsInactive, Name, Guid, GetPaymentMethodsQuery (+7 more)
+Cohesion: 0.20
+Nodes (14): PaymentMethodDto, Description, Id, IsDefault, IsInactive, Name, Guid, GetPaymentMethodsQuery (+6 more)
 
 ### Community 57 - "IRequestHandler"
-Cohesion: 0.06
-Nodes (36): CreateAccountingPeriodCommand, Month, CreateAccountingPeriodCommandHandler, CancellationToken, DateTime, Guid, Task, UpdateAccountCommandHandler (+28 more)
+Cohesion: 0.05
+Nodes (35): UpdateAccountsReceivableConceptCommandHandler, CancellationToken, IMapper, Task, UpdateAccountsReceivableDocumentCommandHandler, IMapper, UpdateCustomerCommandHandler, CancellationToken (+27 more)
 
 ### Community 58 - "CreateCustomerCommand"
 Cohesion: 0.12
 Nodes (18): CreateCustomerCommand, AccountingAccountId, Address, Code, CreditDays, CreditLimit, CustomerTypeId, Email (+10 more)
 
 ### Community 59 - ".SaveChangesAsync"
-Cohesion: 0.18
-Nodes (7): BaseEntity, CancellationToken, History, List, Task, CancellationToken, Task
+Cohesion: 0.14
+Nodes (9): BaseEntity, CancellationToken, History, List, Task, CancellationToken, Task, CancellationToken (+1 more)
 
 ### Community 60 - "InvoiceDto"
 Cohesion: 0.04
@@ -674,15 +671,15 @@ Cohesion: 0.14
 Nodes (17): CreateLocationCommand, AccountId, Code, IsDefault, IsInactive, ManageNegativeStock, Name, Observations (+9 more)
 
 ### Community 62 - "DocumentTypeDto"
-Cohesion: 0.18
-Nodes (13): DocumentTypeDto, Code, Id, IsDefault, Name, Guid, GetDocumentTypesQuery, GetDocumentTypesQueryHandler (+5 more)
+Cohesion: 0.22
+Nodes (12): DocumentTypeDto, Code, Id, IsDefault, Name, Guid, GetDocumentTypesQuery, GetDocumentTypesQueryHandler (+4 more)
 
 ### Community 63 - "CustomerMovementDto"
 Cohesion: 0.10
 Nodes (21): CustomerMovementDto, AgingBucket, Amount, AmountLocal, Applications, AppliedAmount, ConceptDescription, Credit (+13 more)
 
 ### Community 64 - "AccountingPeriod"
-Cohesion: 0.18
+Cohesion: 0.16
 Nodes (11): AccountingPeriod, EndDate, IsClosed, Month, StartDate, DateTime, BasicAccountingPeriods, Items (+3 more)
 
 ### Community 65 - "http"
@@ -694,16 +691,16 @@ Cohesion: 0.11
 Nodes (18): JournalEntryLineRequest, AccountId, AppliesToPayableId, AppliesToReceivableId, Concept, Credit, CustomerName, Debit (+10 more)
 
 ### Community 67 - "Customer"
-Cohesion: 0.32
+Cohesion: 0.28
 Nodes (6): Customer, BasicCustomers, CashCustomer, Items, CustomerConfiguration, EntityTypeBuilder
 
-### Community 68 - "UsersController"
-Cohesion: 0.29
-Nodes (9): UsersController, Authorize, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult, Task (+1 more)
+### Community 68 - "CreateUserCommand"
+Cohesion: 0.09
+Nodes (27): UsersController, Authorize, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult, Task (+19 more)
 
 ### Community 69 - "Countify.Infrastructure.Migrations"
-Cohesion: 0.14
-Nodes (23): AddBudgetsAndBudgetPermissions, AddBanksAndBankReconciliation, AddReceivableFiscalNotesAndAttachments, AddSupplierTypesAndSuppliers, AddPayableConcepts, AddPayableDocuments, AddBankTransactionPayableLink, AddPaymentMethods (+15 more)
+Cohesion: 0.15
+Nodes (21): InitialCreate, AddAccountingModule, AddBudgetsAndBudgetPermissions, AddBanksAndBankReconciliation, AddReceivableFiscalNotesAndAttachments, AddPayableDocuments, AddBankTransactionPayableLink, AddPaymentMethods (+13 more)
 
 ### Community 70 - "UpdateLocationCommand"
 Cohesion: 0.13
@@ -714,7 +711,7 @@ Cohesion: 0.32
 Nodes (9): AccountsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
 ### Community 72 - "AccountingPeriodDto"
-Cohesion: 0.18
+Cohesion: 0.17
 Nodes (14): AccountingPeriodDto, EndDate, Id, IsClosed, Month, StartDate, DateTime, Guid (+6 more)
 
 ### Community 73 - "CreateAccountsReceivableConceptCommand"
@@ -729,9 +726,9 @@ Nodes (43): AccountsReceivableDocumentDto, Amount, AmountLocal, AppliesTo, Attac
 Cohesion: 0.16
 Nodes (13): UserDetailDto, CreatedBy, LastActivity, DateTime, GetUserByIdQuery, Id, GetUserByIdQueryHandler, CancellationToken (+5 more)
 
-### Community 76 - "LocalFileStorage"
-Cohesion: 0.44
-Nodes (4): LocalFileStorage, CancellationToken, Stream, Task
+### Community 76 - "IFileStorage"
+Cohesion: 0.22
+Nodes (8): IFileStorage, CancellationToken, Stream, Task, LocalFileStorage, CancellationToken, Stream, Task
 
 ### Community 77 - "BankReconciliation"
 Cohesion: 0.14
@@ -742,36 +739,36 @@ Cohesion: 0.04
 Nodes (47): AccountsReceivableDocument, Amount, AppliesTo, Attachments, CAI, Concept, ConceptId, CreditNoteReason (+39 more)
 
 ### Community 79 - "GetProjectsQuery"
-Cohesion: 0.20
+Cohesion: 0.18
 Nodes (13): ProjectDto, Code, GroupId, Id, Name, Guid, GetProjectsQuery, Search (+5 more)
 
-### Community 80 - "IncomeStatementDto"
-Cohesion: 0.05
-Nodes (44): IncomeStatementDto, EndDate, GrossProfit, NetResult, Sections, TotalCostOfSales, TotalExpenses, TotalRevenue (+36 more)
+### Community 80 - "GetIncomeStatementQuery"
+Cohesion: 0.19
+Nodes (11): GetIncomeStatementQuery, Date, DepartmentId, ProjectId, GetIncomeStatementQueryHandler, CancellationToken, DateTime, Guid (+3 more)
 
 ### Community 81 - "UpdateAccountCommand"
 Cohesion: 0.13
 Nodes (15): UpdateAccountCommand, BudgetControlled, BudgetLine, Code, Id, IsAuxAsset, IsAuxCxc, IsAuxCxp (+7 more)
 
 ### Community 82 - "SalesJournalBatchDto"
-Cohesion: 0.05
-Nodes (44): Authorize, SalesJournalBatchesController, Task, CreateSalesJournalBatchCommand, Notes, PeriodFrom, PeriodTo, CreateSalesJournalBatchCommandHandler (+36 more)
+Cohesion: 0.06
+Nodes (40): CreateSalesJournalBatchCommand, Notes, PeriodFrom, PeriodTo, CreateSalesJournalBatchCommandHandler, CancellationToken, DateTime, IMapper (+32 more)
 
-### Community 83 - "AuthResponse"
-Cohesion: 0.12
-Nodes (18): RefreshTokenCommand, RefreshTokenCommandHandler, CancellationToken, Task, UserManager, RefreshTokenCommandValidator, AuthResponse, AccessToken (+10 more)
+### Community 83 - "Permisos (patrón de futuras fases también)"
+Cohesion: 0.07
+Nodes (24): Arquitectura / capas, Contrato API (FASE 1), Countify — Convenciones del proyecto, Flujo de trabajo (obligatorio), Modelo contable (FASE 1 — corregido), Permisos (patrón de futuras fases también), countify_api_authorization_handlers, AccountingPeriodPolicies (+16 more)
 
 ### Community 84 - "CustomerDto"
-Cohesion: 0.10
-Nodes (20): CustomerDto, AccountingAccountCode, AccountingAccountId, AccountingAccountName, Address, Code, CreditDays, CreditLimit (+12 more)
+Cohesion: 0.11
+Nodes (19): CustomerDto, AccountingAccountCode, AccountingAccountId, AccountingAccountName, Address, Code, CreditDays, CreditLimit (+11 more)
 
 ### Community 85 - "AccountsReceivableDocumentAttachment"
 Cohesion: 0.15
 Nodes (13): AccountsReceivableDocumentAttachment, ContentType, Document, DocumentId, FileName, Size, StoragePath, UploadedBy (+5 more)
 
 ### Community 86 - "UpdateAccountsReceivableDocumentCommand"
-Cohesion: 0.11
-Nodes (19): UpdateAccountsReceivableDocumentCommand, Amount, AppliesTo, ConceptId, CreditNoteReason, CurrencyId, CustomerId, Date (+11 more)
+Cohesion: 0.10
+Nodes (20): UpdateAccountsReceivableDocumentCommand, Amount, AppliesTo, ConceptId, CreditNoteReason, CurrencyId, CustomerId, Date (+12 more)
 
 ### Community 87 - "UpdateCustomerCommand"
 Cohesion: 0.13
@@ -793,57 +790,57 @@ Nodes (16): GetJournalEntriesQuery, FromDate, Search, Status, ToDate, GetJournal
 Cohesion: 0.28
 Nodes (9): QualitiesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
-### Community 92 - "PaginatedResponse"
+### Community 92 - "RequestParameter"
 Cohesion: 0.13
-Nodes (18): RoleDto, Id, Name, PermissionCount, GetRolesQuery, GetRolesQueryHandler, CancellationToken, IMapper (+10 more)
+Nodes (17): RoleDto, Id, Name, PermissionCount, GetRolesQuery, GetRolesQueryHandler, CancellationToken, IMapper (+9 more)
 
 ### Community 93 - "PayableDocument"
 Cohesion: 0.05
-Nodes (42): PayableDocumentTotals, PayableDocument, Amount, AppliesTo, Attachments, CAI, Concept, ConceptId (+34 more)
+Nodes (41): PayableDocument, Amount, AppliesTo, Attachments, CAI, Concept, ConceptId, Correlative (+33 more)
 
-### Community 94 - "20260910210705_InitialCreate.Designer.cs"
-Cohesion: 0.15
-Nodes (9): DateTime, DateTimeOffset, Guid, MigrationBuilder, InitialCreate, DateTime, DateTimeOffset, Guid (+1 more)
+### Community 94 - ".Up"
+Cohesion: 0.33
+Nodes (4): DateTime, DateTimeOffset, Guid, MigrationBuilder
 
-### Community 95 - "Countify.Application.Common.Interfaces"
-Cohesion: 0.07
-Nodes (28): IPermissionService, HashSet, Task, ApplicationServiceRegistration, IServiceCollection, PermissionService, HashSet, Task (+20 more)
+### Community 95 - "Countify.Domain.Seeders"
+Cohesion: 0.09
+Nodes (23): ApplicationServiceRegistration, IServiceCollection, Countify.Infrastructure.Persistence.Services, Countify.Api.DependencyInjection, Countify.Application.DependencyInjection, Countify.Domain.Seeders, Countify.Infrastructure.Seeders, Countify.Infrastructure.Persistence (+15 more)
 
 ### Community 96 - "SetInvoicePaymentsCommand"
-Cohesion: 0.17
-Nodes (14): InvoicePaymentInput, Amount, PaymentMethodId, SetInvoicePaymentsCommand, InvoiceId, Payments, SetInvoicePaymentsCommandHandler, CancellationToken (+6 more)
+Cohesion: 0.05
+Nodes (40): InvoicePaymentInput, Amount, PaymentMethodId, SetInvoicePaymentsCommand, InvoiceId, Payments, SetInvoicePaymentsCommandHandler, CancellationToken (+32 more)
 
-### Community 97 - "microsoft_aspnetcore_authorization"
+### Community 97 - "Countify.Api.Authorization.Policies"
 Cohesion: 0.21
-Nodes (6): countify_api_authorization_requirements, Countify.Domain.Authorization, Countify.Api.Authorization.Requirements, Countify.Api.Authorization.Policies, microsoft_aspnetcore_authorization, microsoft_extensions_options
+Nodes (5): countify_api_authorization_requirements, Countify.Domain.Authorization, Countify.Api.Authorization.Requirements, Countify.Api.Authorization.Policies, microsoft_extensions_options
 
 ### Community 98 - "YearEndClosingEntry"
-Cohesion: 0.22
+Cohesion: 0.20
 Nodes (9): YearEndClosingEntry, GeneratedBy, JournalEntryId, PeriodId, Guid, BasicYearEndClosingEntries, Items, YearEndClosingEntryConfiguration (+1 more)
 
-### Community 99 - "20260918135030_AddAccountingModule.Designer.cs"
-Cohesion: 0.17
-Nodes (8): DateTime, Guid, MigrationBuilder, AddAccountingModule, DateTime, DateTimeOffset, Guid, ModelBuilder
+### Community 99 - ".Up"
+Cohesion: 0.40
+Nodes (3): DateTime, Guid, MigrationBuilder
 
 ### Community 100 - ".Up"
 Cohesion: 0.40
 Nodes (3): DateTime, Guid, MigrationBuilder
 
-### Community 101 - "DepartmentsController.cs"
-Cohesion: 0.15
-Nodes (9): CreateDepartmentCommandValidator, UpdateDepartmentCommandValidator, DepartmentProfile, Countify.Application.Features.Departments.Commands.UpdateDepartment, Countify.Application.Features.Departments.Profiles, Countify.Application.Features.Departments.Commands.CreateDepartment, Countify.Application.Features.Departments.DTOs, Countify.Application.Features.Departments.Queries.GetDepartments (+1 more)
+### Community 101 - "InventoryMovementDto"
+Cohesion: 0.06
+Nodes (33): InventoryMovementDto, Code, Concept, Correlativo, Date, DepartmentId, DepartmentName, Direction (+25 more)
 
 ### Community 102 - "PayableDocumentDto"
 Cohesion: 0.05
 Nodes (42): PayableDocumentDto, Amount, AmountLocal, AppliesTo, Attachments, CAI, ConceptDescription, ConceptId (+34 more)
 
 ### Community 103 - "AccountsReceivableConcept"
-Cohesion: 0.11
+Cohesion: 0.10
 Nodes (19): AccountsReceivableConcept, Account, AccountId, Description, GeneratePosting, IsFiscalNote, IsInactive, IsReceipt (+11 more)
 
 ### Community 104 - "CreateAccountsReceivableDocumentCommand"
-Cohesion: 0.10
-Nodes (22): CreateAccountsReceivableDocumentCommand, Amount, AppliesTo, ConceptId, CreditNoteReason, CurrencyId, CustomerId, Date (+14 more)
+Cohesion: 0.09
+Nodes (23): CreateAccountsReceivableDocumentCommand, Amount, AppliesTo, ConceptId, CreditNoteReason, CurrencyId, CustomerId, Date (+15 more)
 
 ### Community 105 - "UpdateSupplierCommand"
 Cohesion: 0.07
@@ -858,7 +855,7 @@ Cohesion: 0.11
 Nodes (17): BudgetLineRequest, AccountId, April, August, December, DepartmentId, February, January (+9 more)
 
 ### Community 108 - "Customer"
-Cohesion: 0.10
+Cohesion: 0.09
 Nodes (21): Customer, AccountingAccount, AccountingAccountId, Address, Code, CreditDays, CreditLimit, CustomerType (+13 more)
 
 ### Community 109 - "UpdateFiscalControlCommand"
@@ -874,28 +871,28 @@ Cohesion: 0.26
 Nodes (10): AccountsReceivableDocumentsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+2 more)
 
 ### Community 112 - "SourceModule"
-Cohesion: 0.22
-Nodes (8): SourceModule, Bank, Closing, Invoice, Manually, Payable, Payroll, Receivable
+Cohesion: 0.20
+Nodes (9): SourceModule, Bank, Closing, Inventory, Invoice, Manually, Payable, Payroll (+1 more)
 
 ### Community 113 - ".Delete"
 Cohesion: 0.28
 Nodes (9): CustomersController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
 ### Community 114 - "LocationDto"
-Cohesion: 0.12
-Nodes (16): LocationDto, AccountCode, AccountId, AccountName, Code, Id, IsDefault, IsInactive (+8 more)
+Cohesion: 0.11
+Nodes (23): LocationDto, AccountCode, AccountId, AccountName, Code, Id, IsDefault, IsInactive (+15 more)
 
-### Community 115 - "ProjectGroupsController.cs"
+### Community 115 - "InventoryMovementsController.cs"
 Cohesion: 0.10
-Nodes (14): CreateProjectCommandValidator, CreateProjectGroupCommandValidator, DeleteProjectCommandValidator, UpdateProjectCommandValidator, ProjectProfile, Countify.Application.Features.Projects.Queries.GetProjects, Countify.Application.Features.Projects.Commands.UpdateProject, Countify.Application.Features.Projects.Profiles (+6 more)
+Nodes (20): VoidInventoryMovementCommand, Id, Reason, VoidInventoryMovementCommandHandler, VoidInventoryMovementCommandValidator, CancellationToken, Guid, Response (+12 more)
 
 ### Community 116 - "fluentvalidation"
-Cohesion: 0.03
-Nodes (67): AbstractValidator, CloseAccountingPeriodCommandValidator, CreateAccountingPeriodCommandValidator, DeleteAccountingPeriodCommandValidator, CreateAccountCommandValidator, DeleteAccountCommandValidator, UpdateAccountCommandValidator, CreateAccountsReceivableDocumentCommandValidator (+59 more)
+Cohesion: 0.02
+Nodes (90): AbstractValidator, CloseAccountingPeriodCommandValidator, CreateAccountingPeriodCommandValidator, DeleteAccountingPeriodCommandValidator, DeleteAccountCommandValidator, UpdateAccountCommandValidator, CreateAccountsReceivableConceptCommandValidator, UpdateAccountsReceivableConceptCommandValidator (+82 more)
 
-### Community 117 - "CreateProjectCommand"
-Cohesion: 0.27
-Nodes (9): CreateProjectCommand, Code, GroupId, Name, CreateProjectCommandHandler, CancellationToken, Guid, IMapper (+1 more)
+### Community 117 - ".SaveChangesAsync"
+Cohesion: 0.06
+Nodes (36): CreateAccountingPeriodCommand, Month, CreateAccountingPeriodCommandHandler, CancellationToken, DateTime, Guid, Task, UpdateAccountCommandHandler (+28 more)
 
 ### Community 118 - ".Validate"
 Cohesion: 0.36
@@ -909,9 +906,9 @@ Nodes (14): AccountsReceivableDocumentLineDto, Amount, AppliedAmount, AppliedCon
 Cohesion: 0.14
 Nodes (14): AccountsReceivableConceptDto, AccountCode, AccountId, AccountName, Description, GeneratePosting, Id, IsFiscalNote (+6 more)
 
-### Community 121 - "AssignRoleCommand"
-Cohesion: 0.29
-Nodes (7): AssignRoleCommand, RoleName, UserId, AssignRoleCommandHandler, CancellationToken, Task, UserManager
+### Community 121 - "CreateInventoryMovementCommand"
+Cohesion: 0.13
+Nodes (23): CreateInventoryMovementCommand, Concept, Date, DepartmentId, IsTaxExempt, Lines, Observations, Reference (+15 more)
 
 ### Community 122 - "PayableDocumentsController"
 Cohesion: 0.23
@@ -946,28 +943,28 @@ Cohesion: 0.33
 Nodes (8): AccountingPeriodsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, IActionResult, Task
 
 ### Community 130 - ".ValidateAsync"
-Cohesion: 0.25
-Nodes (7): JournalEntryAuxValidator, Account, CancellationToken, Guid, Task, IReadOnlyCollection, IReadOnlyDictionary
+Cohesion: 0.15
+Nodes (14): StockCalculator, StockKey, CancellationToken, Dictionary, Guid, Task, JournalEntryAuxValidator, Account (+6 more)
 
 ### Community 131 - ".BuildTargetModel"
 Cohesion: 0.40
 Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
-### Community 132 - "Countify.Infrastructure.TemplateBuilder"
-Cohesion: 0.41
-Nodes (7): countify_application_features_configurations_dtos, Countify.Infrastructure.TemplateBuilder, Countify.Application.Features.Banks, questpdf_fluent, questpdf_helpers, questpdf_infrastructure, system_globalization
+### Community 132 - "InvoicePdfBuilder.cs"
+Cohesion: 0.31
+Nodes (7): countify_application_features_configurations_dtos, Countify.Application.Features.Configurations.DTOs, Countify.Application.Features.Banks, questpdf_fluent, questpdf_helpers, questpdf_infrastructure, system_globalization
 
 ### Community 133 - "CreateFiscalControlCommand"
 Cohesion: 0.10
 Nodes (23): CreateFiscalControlCommand, Branch, CAI, DocumentCode, DocumentType, EmissionDate, EmissionLimitDate, EmissionPoint (+15 more)
 
-### Community 134 - ".AddInfrastructureServices"
-Cohesion: 0.14
-Nodes (12): SeederOptions, Enabled, SeedConfiguration, SeedTransactions, IConfiguration, IdentityRole, IServiceCollection, ConfigurationSeeder (+4 more)
+### Community 134 - "LocalFileStorage.cs"
+Cohesion: 0.40
+Nodes (3): FileStorageOptions, RootPath, Countify.Infrastructure.Storage
 
 ### Community 135 - "Budget"
-Cohesion: 0.15
-Nodes (13): BudgetLine, Budget, FiscalYear, Lines, Name, List, BasicBudgets, Items (+5 more)
+Cohesion: 0.17
+Nodes (10): Budget, FiscalYear, Lines, Name, List, BasicBudgets, Items, Guid (+2 more)
 
 ### Community 136 - "CreateSupplierCommand"
 Cohesion: 0.08
@@ -982,20 +979,20 @@ Cohesion: 0.18
 Nodes (11): CustomerMovementApplicationDto, Amount, Id, RelatedConcept, RelatedDate, RelatedDocumentId, RelatedDocumentNo, RelatedIsCredit (+3 more)
 
 ### Community 139 - "DocumentType"
-Cohesion: 0.25
+Cohesion: 0.22
 Nodes (8): DocumentType, Code, IsDefault, Name, BasicDocumentTypes, Items, DocumentTypeConfiguration, EntityTypeBuilder
 
-### Community 140 - ".Up"
-Cohesion: 0.25
-Nodes (4): DateTime, Guid, Guid, MigrationBuilder
+### Community 140 - "MigrationBuilder"
+Cohesion: 0.11
+Nodes (10): DateTime, Guid, Guid, DateTime, DateTimeOffset, Guid, ModelBuilder, DateTime (+2 more)
 
 ### Community 141 - "SupplierFiscalDataDto"
-Cohesion: 0.09
-Nodes (19): CreateSupplierCommandValidator, UpdateSupplierCommandValidator, SupplierFiscalDataDto, Branch, CAI, Correlative, EmissionLimitDate, Id (+11 more)
+Cohesion: 0.18
+Nodes (11): SupplierFiscalDataDto, Branch, CAI, Correlative, EmissionLimitDate, Id, IsActive, RangeFrom (+3 more)
 
-### Community 142 - "Countify.Api.Controllers"
-Cohesion: 0.05
-Nodes (36): countify_application_features_configurations_queries_getcompanysettings, Countify.Application.Features.FiscalControls.Commands.DeleteFiscalControl, Countify.Application.Features.Suppliers.Queries.GetSuppliers, Countify.Application.Features.Configurations.Queries.GetCompanySettings, Countify.Application.Features.Warehouses.Queries.GetWarehouses, Countify.Application.Features.JournalEntries.Queries.GetAccountMovements, Countify.Application.Features.JournalEntries.Queries.GetJournalEntries, Countify.Api.Controllers (+28 more)
+### Community 142 - "microsoft_aspnetcore_authorization"
+Cohesion: 0.04
+Nodes (48): Countify.Application.Features.PaymentMethods.Queries.GetPaymentMethods, Countify.Application.Features.FiscalControls.Commands.DeleteFiscalControl, Countify.Application.Features.Suppliers.Queries.GetSuppliers, Countify.Application.Features.SupplierTypes.Commands.DeleteSupplierType, Countify.Application.Features.Customers.Commands.DeleteCustomer, Countify.Application.Features.PaymentMethods.Commands.DeletePaymentMethod, Countify.Application.Features.AccountingPeriods.Queries.GetAccountingPeriods, Countify.Application.Features.Projects.Queries.GetProjects (+40 more)
 
 ### Community 143 - "CustomerAgingDto"
 Cohesion: 0.18
@@ -1006,7 +1003,7 @@ Cohesion: 0.15
 Nodes (15): ControllerBase, BaseController, Mediator, ReportsController, Authorize, HttpGet, IActionResult, Task (+7 more)
 
 ### Community 145 - "BankTransactionType"
-Cohesion: 0.22
+Cohesion: 0.20
 Nodes (9): BankTransactionType, Code, MovementType, TransactionType, BasicBanks, Accounts, TransactionTypes, BankTransactionTypeConfiguration (+1 more)
 
 ### Community 146 - "UpdateDocumentTypeCommand"
@@ -1017,29 +1014,29 @@ Nodes (10): UpdateDocumentTypeCommand, Code, Id, IsDefault, Name, UpdateDocument
 Cohesion: 0.07
 Nodes (28): SupplierDto, AccountingAccountCode, AccountingAccountId, AccountingAccountName, Address, City, Code, ContactEmail (+20 more)
 
-### Community 148 - "CustomerTypesController.cs"
-Cohesion: 0.18
-Nodes (8): CreateCustomerTypeCommandValidator, UpdateCustomerTypeCommandValidator, CustomerTypeProfile, Countify.Application.Features.CustomerTypes.Commands.DeleteCustomerType, Countify.Application.Features.CustomerTypes.Commands.UpdateCustomerType, Countify.Application.Features.CustomerTypes.Commands.CreateCustomerType, Countify.Application.Features.CustomerTypes.Profiles, Countify.Application.Features.CustomerTypes.Queries.GetCustomerTypes
+### Community 148 - "InventoryMovementLine"
+Cohesion: 0.09
+Nodes (19): InventoryMovementLineExtensions, InventoryMovementTotals, InventoryMovementLine, Description, LineTotal, LocationId, Movement, MovementId (+11 more)
 
 ### Community 149 - ".Delete"
 Cohesion: 0.28
 Nodes (9): ProductAccountsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
 ### Community 150 - "CreateInvoiceCommand"
-Cohesion: 0.10
-Nodes (24): CreateInvoiceCommand, CurrencyId, CustomerId, Date, DepartmentId, DueDate, ExchangeRate, IsExonerated (+16 more)
+Cohesion: 0.09
+Nodes (25): CreateInvoiceCommand, CurrencyId, CustomerId, Date, DepartmentId, DueDate, ExchangeRate, IsExonerated (+17 more)
 
 ### Community 151 - "Countify.Domain.Entities.Auth"
-Cohesion: 0.11
-Nodes (10): automapper_queryableextensions, UserProfile, Countify.Application.Features.Users.Commands.UpdateUser, Countify.Application.Features.Users.Commands.CreateUser, Countify.Application.Features.Users.DTOs, Countify.Application.Features.Users.Profiles, Countify.Application.Features.Roles.DTOs, Countify.Domain.Entities.Auth (+2 more)
+Cohesion: 0.08
+Nodes (20): RoleProfile, UserProfile, countify_domain_entities_accountspayable, countify_domain_entities_accountsreceivable, countify_domain_entities_audit, countify_domain_entities_auth, countify_domain_entities_billing, Countify.Application.Features.Users.Commands.UpdateUser (+12 more)
 
 ### Community 152 - "PayableDocumentLine"
 Cohesion: 0.07
 Nodes (30): CreateAccountsReceivableDocumentLinesCommand, DocumentId, Lines, LineItem, Amount, AppliedDocumentId, Guid, List (+22 more)
 
 ### Community 153 - "UserRoleHasPermissionRequirement"
-Cohesion: 0.04
-Nodes (66): Arquitectura / capas, Contrato API (FASE 1), Countify — Convenciones del proyecto, Flujo de trabajo (obligatorio), Modelo contable (FASE 1 — corregido), Permisos (patrón de futuras fases también), AuthorizationOptions, countify_api_authorization_handlers (+58 more)
+Cohesion: 0.05
+Nodes (42): AuthorizationOptions, AccountsReceivableConceptPolicies, AuthorizationOptions, AccountsReceivableDocumentPolicies, AuthorizationOptions, BudgetPolicies, AuthorizationOptions, CustomerPolicies (+34 more)
 
 ### Community 154 - "FiscalControl"
 Cohesion: 0.11
@@ -1049,13 +1046,13 @@ Nodes (18): FiscalControl, Branch, CAI, DocumentCode, DocumentType, EmissionDate
 Cohesion: 0.33
 Nodes (5): CreditNoteReason, Annulment, Discounts, Other, Return
 
-### Community 156 - "DocumentTypesController.cs"
-Cohesion: 0.20
-Nodes (7): CreateDocumentTypeCommandValidator, UpdateDocumentTypeCommandValidator, DocumentTypeProfile, Countify.Application.Features.DocumentTypes.Commands.CreateDocumentType, Countify.Application.Features.DocumentTypes.Profiles, Countify.Application.Features.DocumentTypes.Queries.GetDocumentTypes, Countify.Application.Features.DocumentTypes.Commands.UpdateDocumentType
+### Community 156 - "BaseController"
+Cohesion: 0.25
+Nodes (12): Authorize, BaseController, InventoryMovementsController, Guid, Task, SalesJournalBatchesController, Task, HttpDelete (+4 more)
 
-### Community 157 - "IFileStorage"
-Cohesion: 0.36
-Nodes (4): IFileStorage, CancellationToken, Stream, Task
+### Community 157 - "UpdateInventoryMovementCommand"
+Cohesion: 0.11
+Nodes (20): UpdateInventoryMovementCommand, Concept, Date, DepartmentId, Id, IsTaxExempt, Lines, Observations (+12 more)
 
 ### Community 158 - "CreateCustomerTypeCommand"
 Cohesion: 0.27
@@ -1066,8 +1063,8 @@ Cohesion: 0.09
 Nodes (24): CreateProductAccountCommand, CreateProductAccountCommandHandler, CancellationToken, Guid, IMapper, Task, UpdateProductAccountCommand, Id (+16 more)
 
 ### Community 160 - "AccountsReceivableDocumentsController.cs"
-Cohesion: 0.12
-Nodes (15): AccountsReceivableDocumentProfile, Countify.Application.Features.AccountsReceivableDocuments.Queries.GetAccountsReceivableDocumentById, Countify.Application.Features.AccountsReceivableDocuments.Queries.GetCustomerMovements, Countify.Application.Features.AccountsReceivableDocuments.DTOs, Countify.Application.Features.AccountsReceivableDocuments.Commands.VoidAccountsReceivableDocument, Countify.Application.Features.AccountsReceivableDocuments.Queries.GetAccountsReceivableDocumentAttachment, Countify.Application.Features.AccountsReceivableDocuments.Commands.UpdateAccountsReceivableDocumentLine, Countify.Application.Features.AccountsReceivableDocuments.Commands.UpdateAccountsReceivableDocument (+7 more)
+Cohesion: 0.07
+Nodes (19): AccountsReceivableDocumentProfile, CreateAccountsReceivableDocumentLinesCommandValidator, Countify.Application.Features.AccountsReceivableDocuments.Queries.GetAccountsReceivableDocumentById, Countify.Application.Features.AccountsReceivableDocuments.Validators, Countify.Application.Features.AccountsReceivableDocuments.Queries.GetCustomerMovements, Countify.Application.Features.AccountsReceivableDocuments.Commands.UpdateReceiptNumber, Countify.Application.Features.AccountsReceivableDocuments.DTOs, Countify.Application.Features.AccountsReceivableDocuments.Commands.VoidAccountsReceivableDocument (+11 more)
 
 ### Community 161 - "CustomerMovementsDto"
 Cohesion: 0.18
@@ -1077,25 +1074,25 @@ Nodes (11): CustomerMovementsDto, Aging, CustomerCode, CustomerId, CustomerName,
 Cohesion: 0.28
 Nodes (9): GetCustomerMovementsQuery, CustomerId, FromDate, ToDate, GetCustomerMovementsQueryHandler, CancellationToken, DateTime, Guid (+1 more)
 
-### Community 163 - "DeleteAccountsReceivableDocumentLineCommand"
-Cohesion: 0.33
-Nodes (6): DeleteAccountsReceivableDocumentLineCommand, Id, DeleteAccountsReceivableDocumentLineCommandHandler, CancellationToken, Guid, Task
+### Community 163 - "PermissionAuthorizationHandler.cs"
+Cohesion: 0.12
+Nodes (13): AuthorizationHandler, AuthorizationHandlerContext, PermissionAuthorizationHandler, Task, IPermissionService, HashSet, Task, PermissionService (+5 more)
 
 ### Community 164 - "UpdatePayableDocumentCommand"
-Cohesion: 0.10
-Nodes (22): UpdatePayableDocumentCommand, Amount, AppliesTo, ConceptId, CurrencyId, Date, DepartmentId, DueDate (+14 more)
+Cohesion: 0.09
+Nodes (23): UpdatePayableDocumentCommand, Amount, AppliesTo, ConceptId, CurrencyId, Date, DepartmentId, DueDate (+15 more)
 
 ### Community 165 - "CreatePayableDocumentCommand"
 Cohesion: 0.11
-Nodes (21): CreatePayableDocumentCommand, Amount, AppliesTo, ConceptId, CurrencyId, Date, DepartmentId, DueDate (+13 more)
+Nodes (22): CreatePayableDocumentCommand, Amount, AppliesTo, ConceptId, CurrencyId, Date, DepartmentId, DueDate (+14 more)
 
 ### Community 166 - "DeleteJournalEntryCommand"
 Cohesion: 0.33
 Nodes (6): DeleteJournalEntryCommand, Id, DeleteJournalEntryCommandHandler, CancellationToken, Guid, Task
 
-### Community 167 - "UpdateCustomerTypeCommand"
-Cohesion: 0.20
-Nodes (10): UpdateCustomerTypeCommand, AccountingAccountId, Code, Id, Name, UpdateCustomerTypeCommandHandler, CancellationToken, Guid (+2 more)
+### Community 167 - "PaginatedResponse"
+Cohesion: 0.15
+Nodes (15): GetProductAccountsQuery, Search, GetProductAccountsQueryHandler, CancellationToken, IMapper, List, Task, PaginatedResponse (+7 more)
 
 ### Community 168 - "Location"
 Cohesion: 0.13
@@ -1106,16 +1103,16 @@ Cohesion: 0.27
 Nodes (9): CreateDocumentTypeCommand, Code, IsDefault, Name, CreateDocumentTypeCommandHandler, CancellationToken, Guid, IMapper (+1 more)
 
 ### Community 170 - "CreateInventoryMovementTypeCommand"
-Cohesion: 0.18
-Nodes (14): CreateInventoryMovementTypeCommand, ChecksStock, Code, Direction, GeneratesPosting, IsInactive, Name, CreateInventoryMovementTypeCommandHandler (+6 more)
+Cohesion: 0.17
+Nodes (15): CreateInventoryMovementTypeCommand, ChecksStock, Code, CountsForStock, Direction, GeneratesPosting, IsInactive, Name (+7 more)
 
 ### Community 171 - "GetPendingAccountsReceivableDocumentsQuery"
 Cohesion: 0.27
 Nodes (9): GetPendingAccountsReceivableDocumentsQuery, CustomerId, ExcludeDocumentIds, GetPendingAccountsReceivableDocumentsQueryHandler, CancellationToken, Guid, IMapper, List (+1 more)
 
-### Community 172 - ".Delete"
-Cohesion: 0.28
-Nodes (9): CustomerTypesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
+### Community 172 - "InventoryMovementLineDto"
+Cohesion: 0.12
+Nodes (16): InventoryMovementLineDto, Description, Id, LineTotal, LocationCode, LocationId, LocationName, Order (+8 more)
 
 ### Community 173 - "AccountsReceivableDocumentLine"
 Cohesion: 0.22
@@ -1125,13 +1122,13 @@ Nodes (9): AccountsReceivableDocumentLine, Amount, AppliedDocument, AppliedDocum
 Cohesion: 0.40
 Nodes (4): EntryConceptType, Credit, Debit, Other
 
-### Community 176 - "CreateRoleCommand"
-Cohesion: 0.29
-Nodes (7): CreateRoleCommand, Name, CreateRoleCommandHandler, CancellationToken, IdentityRole, RoleManager, Task
+### Community 176 - "InvoicesController.cs"
+Cohesion: 0.13
+Nodes (12): countify_application_features_configurations_queries_getcompanysettings, Countify.Application.Features.Configurations.Queries.GetCompanySettings, Countify.Application.Features.JournalEntries.Queries.GetAccountMovements, Countify.Application.Features.JournalEntries.Queries.GetJournalEntries, Countify.Application.Features.Accounts.Queries.GetAccounts, Countify.Application.Features.Invoices.Commands.MarkInvoicePrinted, Countify.Infrastructure.TemplateBuilder, Countify.Application.Features.JournalEntries.Queries.GetJournalEntryById (+4 more)
 
 ### Community 177 - "Profile"
-Cohesion: 0.04
-Nodes (35): AccountingPeriodProfile, AccountProfile, AccountsReceivableConceptProfile, BankAccountProfile, SettingsProfile, CurrencyProfile, FiscalControlProfile, ProductAccountProfile (+27 more)
+Cohesion: 0.03
+Nodes (47): AccountingPeriodProfile, AccountProfile, BankAccountProfile, SettingsProfile, CurrencyProfile, CustomerTypeProfile, DocumentTypeProfile, InventoryMovementTypeProfile (+39 more)
 
 ### Community 178 - ".Delete"
 Cohesion: 0.28
@@ -1141,20 +1138,20 @@ Nodes (9): FiscalControlsController, Authorize, Guid, HttpDelete, HttpGet, HttpP
 Cohesion: 0.18
 Nodes (10): AccountsReceivableDocumentAttachmentDto, ContentType, DocumentId, FileName, Id, Size, UploadedBy, UploadedOn (+2 more)
 
-### Community 180 - "SupplierTypesController.cs"
-Cohesion: 0.18
-Nodes (8): CreateSupplierTypeCommandValidator, UpdateSupplierTypeCommandValidator, SupplierTypeProfile, Countify.Application.Features.SupplierTypes.Commands.DeleteSupplierType, Countify.Application.Features.SupplierTypes.Commands.UpdateSupplierType, Countify.Application.Features.SupplierTypes.Queries.GetSupplierTypes, Countify.Application.Features.SupplierTypes.Profiles, Countify.Application.Features.SupplierTypes.Commands.CreateSupplierType
+### Community 180 - "InventoryStockDto"
+Cohesion: 0.14
+Nodes (13): InventoryStockDto, Inbound, LocationCode, LocationId, LocationName, OnHand, Outbound, ProductCode (+5 more)
 
 ### Community 181 - "UpdateInventoryMovementTypeCommand"
-Cohesion: 0.16
-Nodes (14): UpdateInventoryMovementTypeCommand, ChecksStock, Code, Direction, GeneratesPosting, Id, IsInactive, Name (+6 more)
+Cohesion: 0.15
+Nodes (15): UpdateInventoryMovementTypeCommand, ChecksStock, Code, CountsForStock, Direction, GeneratesPosting, Id, IsInactive (+7 more)
 
 ### Community 182 - "GetAccountsReceivableDocumentByIdQuery"
 Cohesion: 0.29
 Nodes (7): GetAccountsReceivableDocumentByIdQuery, Id, GetAccountsReceivableDocumentByIdQueryHandler, CancellationToken, Guid, IMapper, Task
 
 ### Community 183 - "UpdateWarehouseCommand"
-Cohesion: 0.20
+Cohesion: 0.19
 Nodes (12): UpdateWarehouseCommand, Code, Id, IsDefault, IsInactive, Name, UpdateWarehouseCommandHandler, UpdateWarehouseCommandValidator (+4 more)
 
 ### Community 184 - "GetCustomersQueryHandler"
@@ -1182,24 +1179,24 @@ Cohesion: 0.20
 Nodes (6): MigrationBuilder, FixBankCurrencyForeignKeys, DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 190 - "CreateQualityCommand"
-Cohesion: 0.19
-Nodes (12): CreateQualityCommand, Code, Name, CreateQualityCommandHandler, CancellationToken, Guid, IMapper, Task (+4 more)
+Cohesion: 0.31
+Nodes (8): CreateQualityCommand, Code, Name, CreateQualityCommandHandler, CancellationToken, Guid, IMapper, Task
 
 ### Community 191 - "InvoiceLine"
 Cohesion: 0.10
 Nodes (20): InvoiceLine, Code, Description, DiscountAmount, DiscountPercent, Invoice, InvoiceId, IsTaxable (+12 more)
 
-### Community 192 - "UpdateAccountsReceivableDocumentLineCommand"
-Cohesion: 0.29
-Nodes (7): UpdateAccountsReceivableDocumentLineCommand, Amount, Id, UpdateAccountsReceivableDocumentLineCommandHandler, CancellationToken, Guid, Task
+### Community 192 - "GetInventoryStockQuery"
+Cohesion: 0.27
+Nodes (10): GetInventoryStockQuery, LocationId, ProductId, WarehouseId, GetInventoryStockQueryHandler, CancellationToken, Guid, List (+2 more)
 
 ### Community 193 - "InvoiceLineDto"
 Cohesion: 0.12
 Nodes (16): InvoiceLineDto, Code, Description, DiscountAmount, DiscountPercent, Id, IsTaxable, LineTotal (+8 more)
 
-### Community 194 - "Countify.Domain.Entities.AccountsPayable"
-Cohesion: 0.07
-Nodes (15): InvoiceProfile, PayableConceptProfile, SalesJournalBatchProfile, countify_domain_common, countify_domain_seeders, Countify.Application.Features.Invoices.Commands.UpdateInvoice, Countify.Domain.Entities.Billing, Countify.Application.Features.Invoices (+7 more)
+### Community 194 - "InvoiceProfile.cs"
+Cohesion: 0.33
+Nodes (4): InvoiceProfile, Countify.Application.Features.Invoices.Commands.UpdateInvoice, Countify.Application.Features.Invoices.Commands.CreateInvoice, Countify.Application.Features.Invoices.Profiles
 
 ### Community 195 - ".Delete"
 Cohesion: 0.28
@@ -1210,7 +1207,7 @@ Cohesion: 0.20
 Nodes (10): UpdateProjectCommand, Code, GroupId, Id, Name, UpdateProjectCommandHandler, CancellationToken, Guid (+2 more)
 
 ### Community 197 - "PayableConcept"
-Cohesion: 0.13
+Cohesion: 0.12
 Nodes (16): PayableConcept, AccountId, Description, GeneratePosting, IsInactive, IsPayment, Observations, Type (+8 more)
 
 ### Community 198 - "DeleteCustomerCommand"
@@ -1225,9 +1222,9 @@ Nodes (6): GetAccountsReceivableDocumentsQuery, GetAccountsReceivableDocumentsQu
 Cohesion: 0.22
 Nodes (9): UpdateRolePermissionsCommand, PermissionIds, RoleId, UpdateRolePermissionsCommandHandler, CancellationToken, IdentityRole, List, RoleManager (+1 more)
 
-### Community 201 - "ChangePasswordCommand"
-Cohesion: 0.25
-Nodes (8): ChangePasswordCommand, CurrentPassword, Id, NewPassword, ChangePasswordCommandHandler, CancellationToken, Task, UserManager
+### Community 201 - ".BuildSection"
+Cohesion: 0.22
+Nodes (9): IncomeStatementSectionDto, Code, Lines, Name, Total, List, Dictionary, List (+1 more)
 
 ### Community 202 - "DeleteProjectGroupCommand"
 Cohesion: 0.33
@@ -1250,40 +1247,40 @@ Cohesion: 0.46
 Nodes (5): QueryableExtensions, Dictionary, Expression, Func, IQueryable
 
 ### Community 207 - "InvoicePaymentDto"
-Cohesion: 0.17
+Cohesion: 0.16
 Nodes (16): InvoicePaymentDto, Amount, Id, InvoiceId, PaymentMethodId, PaymentMethodName, Guid, GetInvoicePaymentsQuery (+8 more)
 
-### Community 208 - "GetUserInfoQueryHandler"
-Cohesion: 0.12
-Nodes (17): Authorize, HttpGet, UserInfoResponse, Email, FullName, Permissions, Roles, UserId (+9 more)
+### Community 208 - "GetInventoryMovementByIdQuery"
+Cohesion: 0.31
+Nodes (8): GetInventoryMovementByIdQuery, Id, GetInventoryMovementByIdQueryHandler, CancellationToken, Guid, IMapper, Response, Task
 
 ### Community 209 - "CloseAccountingPeriodCommand"
 Cohesion: 0.33
 Nodes (6): CloseAccountingPeriodCommand, Id, CloseAccountingPeriodCommandHandler, CancellationToken, Guid, Task
 
-### Community 210 - "GetJournalEntryByIdQuery"
-Cohesion: 0.29
-Nodes (7): GetJournalEntryByIdQuery, Id, GetJournalEntryByIdQueryHandler, CancellationToken, Guid, IMapper, Task
+### Community 210 - "CreateProductCommand"
+Cohesion: 0.31
+Nodes (8): CreateProductCommand, Code, Name, CreateProductCommandHandler, CancellationToken, Guid, IMapper, Task
 
-### Community 211 - "VoidAccountsReceivableDocumentCommand"
-Cohesion: 0.33
-Nodes (6): VoidAccountsReceivableDocumentCommand, Id, VoidAccountsReceivableDocumentCommandHandler, CancellationToken, Guid, Task
+### Community 211 - "IncomeStatementDto"
+Cohesion: 0.22
+Nodes (9): IncomeStatementDto, EndDate, GrossProfit, NetResult, Sections, TotalCostOfSales, TotalExpenses, TotalRevenue (+1 more)
 
 ### Community 212 - "VoidJournalEntryCommand"
 Cohesion: 0.33
-Nodes (6): VoidJournalEntryCommand, Id, VoidJournalEntryCommandHandler, CancellationToken, Guid, Task
+Nodes (5): VoidJournalEntryCommand, Id, Guid, VoidJournalEntryCommandValidator, Countify.Application.Features.JournalEntries.Commands.VoidJournalEntry
 
 ### Community 213 - "PayableDocumentDraftRequest"
 Cohesion: 0.12
 Nodes (16): PayableDocumentDraftRequest, Amount, AppliesTo, ConceptId, CurrencyId, Date, DepartmentId, DueDate (+8 more)
 
-### Community 214 - "DeleteDepartmentCommand"
-Cohesion: 0.33
-Nodes (6): DeleteDepartmentCommand, Id, DeleteDepartmentCommandHandler, CancellationToken, Guid, Task
+### Community 214 - "InventoryMovementLineInput"
+Cohesion: 0.25
+Nodes (8): InventoryMovementLineInput, Description, LocationId, ProductId, Quantity, TaxRate, Unit, UnitCost
 
-### Community 215 - "Countify.Application.Features.Auth.DTOs"
-Cohesion: 0.11
-Nodes (13): ForgotPasswordRequest, Email, LoginRequest, Password, Username, RefreshTokenRequest, AccessToken, RefreshToken (+5 more)
+### Community 215 - "UserInfoResponse"
+Cohesion: 0.06
+Nodes (30): AuthController, Authorize, HttpGet, HttpPost, IActionResult, Task, ForgotPasswordRequest, Email (+22 more)
 
 ### Community 216 - "DeleteSupplierTypeCommand"
 Cohesion: 0.36
@@ -1302,7 +1299,7 @@ Cohesion: 0.38
 Nodes (4): AccountsReceivableDocumentDraftFactory, DraftCreationResult, CancellationToken, Task
 
 ### Community 220 - "Currency"
-Cohesion: 0.38
+Cohesion: 0.32
 Nodes (5): Currency, BasicCurrencies, Items, CurrencyConfiguration, EntityTypeBuilder
 
 ### Community 221 - "UpdatePayableConceptCommand"
@@ -1313,25 +1310,25 @@ Nodes (15): UpdatePayableConceptCommand, AccountId, Description, GeneratePosting
 Cohesion: 0.33
 Nodes (6): DeleteDocumentTypeCommand, Id, DeleteDocumentTypeCommandHandler, CancellationToken, Guid, Task
 
-### Community 223 - "CreateUserCommand"
-Cohesion: 0.13
-Nodes (15): CreateUserCommand, Email, FirstName, LastName, Password, Phone, RoleId, Username (+7 more)
+### Community 223 - "DeleteInventoryMovementCommand"
+Cohesion: 0.36
+Nodes (7): DeleteInventoryMovementCommand, Id, DeleteInventoryMovementCommandHandler, CancellationToken, Guid, Response, Task
 
 ### Community 224 - "FiscalDocumentType"
 Cohesion: 0.29
 Nodes (6): FiscalDocumentType, CreditNote, DebitNote, DispatchGuide, Invoicing, Retention
 
-### Community 225 - ".Up"
-Cohesion: 0.40
-Nodes (3): DateTime, Guid, MigrationBuilder
+### Community 225 - ".BuildTargetModel"
+Cohesion: 0.18
+Nodes (7): DateTime, Guid, MigrationBuilder, DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 226 - ".Delete"
 Cohesion: 0.28
 Nodes (9): WarehousesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
-### Community 227 - ".Up"
-Cohesion: 0.40
-Nodes (3): DateTime, Guid, MigrationBuilder
+### Community 227 - "20261015211107_AddSupplierTypesAndSuppliers.Designer.cs"
+Cohesion: 0.17
+Nodes (8): DateTime, Guid, MigrationBuilder, AddSupplierTypesAndSuppliers, DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 228 - "CreatePayableConceptCommand"
 Cohesion: 0.18
@@ -1350,7 +1347,7 @@ Cohesion: 0.13
 Nodes (14): PayableDocumentLineDto, Amount, AppliedAmount, AppliedConcept, AppliedCurrencyCode, AppliedDate, AppliedDocumentId, AppliedDocumentNo (+6 more)
 
 ### Community 232 - ".CreateOrUpdatePostingAsync"
-Cohesion: 0.20
+Cohesion: 0.18
 Nodes (9): PayablePostingFactory, CancellationToken, Task, Supplier, BasicSuppliers, Items, Dictionary, SupplierConfiguration (+1 more)
 
 ### Community 233 - "GetSupplierMovementsQuery"
@@ -1362,8 +1359,8 @@ Cohesion: 0.15
 Nodes (13): PayableDocumentAttachment, ContentType, Document, DocumentId, FileName, Size, StoragePath, UploadedBy (+5 more)
 
 ### Community 235 - "BaseEntity"
-Cohesion: 0.10
-Nodes (20): BaseEntity, Account, SupplierType, AccountingAccount, AccountingAccountId, Code, Name, Guid (+12 more)
+Cohesion: 0.15
+Nodes (13): BaseEntity, Account, SupplierType, AccountingAccount, AccountingAccountId, Code, Name, Guid (+5 more)
 
 ### Community 236 - "OrderColumns"
 Cohesion: 0.50
@@ -1378,16 +1375,16 @@ Cohesion: 0.28
 Nodes (9): PayableConceptsController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
 ### Community 244 - "PayableDocumentsController.cs"
-Cohesion: 0.12
-Nodes (14): countify_application_common_interfaces, PayableDocumentProfile, Countify.Application.Features.PayableDocuments.Commands.UploadPayableDocumentAttachment, Countify.Application.Features.PayableDocuments.Commands.DeletePayableDocumentAttachment, Countify.Application.Features.PayableDocuments.Queries.GetSupplierMovements, Countify.Application.Features.PayableDocuments.Commands.UpdatePayableDocument, Countify.Application.Features.PayableDocuments.Queries.GetPendingPayableDocuments, Countify.Application.Features.PayableDocuments.Profiles (+6 more)
+Cohesion: 0.08
+Nodes (18): countify_application_common_interfaces, PayableDocumentProfile, CreatePayableDocumentLinesCommandValidator, Countify.Application.Features.PayableDocuments.Commands.CreatePayableDocumentLines, Countify.Application.Features.PayableDocuments.Commands.UploadPayableDocumentAttachment, Countify.Application.Features.PayableDocuments.Commands.DeletePayableDocumentAttachment, Countify.Application.Features.PayableDocuments.Queries.GetSupplierMovements, Countify.Application.Features.PayableDocuments.Commands.UpdatePayableDocument (+10 more)
 
 ### Community 245 - ".Delete"
 Cohesion: 0.28
 Nodes (9): SuppliersController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
-### Community 246 - "BaseController"
-Cohesion: 0.25
-Nodes (10): BaseController, SupplierTypesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut (+2 more)
+### Community 246 - ".Delete"
+Cohesion: 0.28
+Nodes (9): SupplierTypesController, Authorize, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+1 more)
 
 ### Community 247 - "UploadAccountsReceivableDocumentAttachmentCommand"
 Cohesion: 0.19
@@ -1409,9 +1406,9 @@ Nodes (13): PayableConceptDto, AccountCode, AccountId, AccountName, Description,
 Cohesion: 0.15
 Nodes (13): SupplierAgingDetailDto, AmountLocal, AppliedAmount, BucketKey, ConceptDescription, CurrencyCode, Date, DaysOverdue (+5 more)
 
-### Community 253 - "ForgotPasswordCommandHandler"
-Cohesion: 0.19
-Nodes (9): IEmailService, Task, ForgotPasswordCommand, ForgotPasswordCommandHandler, CancellationToken, Task, UserManager, EmailService (+1 more)
+### Community 253 - "IEmailService"
+Cohesion: 0.33
+Nodes (4): IEmailService, Task, EmailService, Task
 
 ### Community 254 - "SupplierAgingDto"
 Cohesion: 0.18
@@ -1422,8 +1419,8 @@ Cohesion: 0.24
 Nodes (11): ProductDto, Code, Id, Name, Guid, GetProductsQuery, GetProductsQueryHandler, CancellationToken (+3 more)
 
 ### Community 256 - "GetProjectGroupsQueryHandler"
-Cohesion: 0.18
-Nodes (12): ProjectGroupDto, Code, Id, Name, Guid, GetProjectGroupsQuery, GetProjectGroupsQueryHandler, CancellationToken (+4 more)
+Cohesion: 0.22
+Nodes (11): ProjectGroupDto, Code, Id, Name, Guid, GetProjectGroupsQuery, GetProjectGroupsQueryHandler, CancellationToken (+3 more)
 
 ### Community 257 - "GetQualitiesQueryHandler"
 Cohesion: 0.24
@@ -1466,8 +1463,8 @@ Cohesion: 0.20
 Nodes (6): MigrationBuilder, AddSupplierPermissions, DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 267 - ".BuildTargetModel"
-Cohesion: 0.19
-Nodes (6): Guid, MigrationBuilder, DateTime, DateTimeOffset, Guid, ModelBuilder
+Cohesion: 0.40
+Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 268 - "20261019135105_GlobalizeJournalEntryNumber.Designer.cs"
 Cohesion: 0.20
@@ -1505,21 +1502,21 @@ Nodes (9): UpdateQualityCommand, Code, Id, Name, UpdateQualityCommandHandler, Ca
 Cohesion: 0.36
 Nodes (7): MarkInvoicePrintedCommand, Id, MarkInvoicePrintedCommandHandler, CancellationToken, Guid, Response, Task
 
-### Community 277 - "PayableConceptsController.cs"
-Cohesion: 0.22
-Nodes (6): CreatePayableConceptCommandValidator, UpdatePayableConceptCommandValidator, Countify.Application.Features.PayableConcepts.Commands.UpdatePayableConcept, Countify.Application.Features.PayableConcepts.Commands.DeletePayableConcept, Countify.Application.Features.PayableConcepts.Commands.CreatePayableConcept, Countify.Application.Features.PayableConcepts.Queries.GetPayableConcepts
+### Community 277 - "GetInventoryMovementsQueryHandler"
+Cohesion: 0.43
+Nodes (7): GetInventoryMovementsQuery, GetInventoryMovementsQueryHandler, CancellationToken, IMapper, List, Response, Task
 
-### Community 278 - "DeleteProjectCommand"
-Cohesion: 0.33
-Nodes (6): DeleteProjectCommand, Id, DeleteProjectCommandHandler, CancellationToken, Guid, Task
+### Community 278 - "TrialBalanceLineDto"
+Cohesion: 0.25
+Nodes (8): TrialBalanceLineDto, AccountCode, AccountId, AccountName, Balance, Credit, Debit, Guid
 
 ### Community 279 - ".CreateOrUpdatePostingAsync"
 Cohesion: 0.36
 Nodes (6): AccountsReceivablePostingFactory, AccountsReceivableConcept, AccountsReceivableDocument, CancellationToken, Customer, Task
 
 ### Community 280 - "VoidInvoiceCommand"
-Cohesion: 0.31
-Nodes (8): VoidInvoiceCommand, Id, Reason, VoidInvoiceCommandHandler, CancellationToken, Guid, Response, Task
+Cohesion: 0.21
+Nodes (10): VoidInvoiceCommand, Id, Reason, VoidInvoiceCommandHandler, CancellationToken, Guid, Response, Task (+2 more)
 
 ### Community 281 - "GetInvoiceByIdQuery"
 Cohesion: 0.31
@@ -1550,28 +1547,28 @@ Cohesion: 0.31
 Nodes (8): CreateProjectGroupCommand, Code, Name, CreateProjectGroupCommandHandler, CancellationToken, Guid, IMapper, Task
 
 ### Community 288 - "UpdateReceiptNumberCommand"
-Cohesion: 0.24
-Nodes (8): UpdateReceiptNumberCommand, Id, ReceiptNumber, UpdateReceiptNumberCommandHandler, CancellationToken, Guid, Task, Countify.Application.Features.AccountsReceivableDocuments.Commands.UpdateReceiptNumber
+Cohesion: 0.29
+Nodes (7): UpdateReceiptNumberCommand, Id, ReceiptNumber, UpdateReceiptNumberCommandHandler, CancellationToken, Guid, Task
 
 ### Community 289 - "GetInvoicesQueryHandler"
 Cohesion: 0.43
 Nodes (7): GetInvoicesQuery, GetInvoicesQueryHandler, CancellationToken, IMapper, List, Response, Task
 
 ### Community 290 - "DeletePayableConceptCommand"
-Cohesion: 0.36
-Nodes (7): DeletePayableConceptCommand, Id, DeletePayableConceptCommandHandler, CancellationToken, Guid, Response, Task
+Cohesion: 0.29
+Nodes (8): DeletePayableConceptCommand, Id, DeletePayableConceptCommandHandler, CancellationToken, Guid, Response, Task, Countify.Application.Features.PayableConcepts.Commands.DeletePayableConcept
 
 ### Community 291 - "GetPayableConceptsQueryHandler"
 Cohesion: 0.43
 Nodes (7): GetPayableConceptsQuery, GetPayableConceptsQueryHandler, CancellationToken, IMapper, List, Response, Task
 
-### Community 292 - "CustomersController.cs"
+### Community 292 - "CustomerProfile.cs"
 Cohesion: 0.18
-Nodes (8): CreateCustomerCommandValidator, UpdateCustomerCommandValidator, CustomerProfile, Countify.Application.Features.Customers.Commands.DeleteCustomer, Countify.Application.Features.Customers.Queries.GetCustomers, Countify.Application.Features.Customers.Profiles, Countify.Application.Features.Customers.Commands.UpdateCustomer, Countify.Application.Features.Customers.Commands.CreateCustomer
+Nodes (7): CreateCustomerCommandValidator, UpdateCustomerCommandValidator, CustomerProfile, Countify.Application.Features.Customers.Profiles, Countify.Application.Features.Customers.Commands.UpdateCustomer, Countify.Application.Features.Customers.DTOs, Countify.Application.Features.Customers.Commands.CreateCustomer
 
-### Community 293 - "VoidPayableDocumentCommand"
-Cohesion: 0.36
-Nodes (7): VoidPayableDocumentCommand, Id, VoidPayableDocumentCommandHandler, CancellationToken, Guid, Response, Task
+### Community 293 - "Product"
+Cohesion: 0.29
+Nodes (6): Product, Code, Name, BasicProducts, ProductConfiguration, EntityTypeBuilder
 
 ### Community 294 - "GetPayableDocumentsQueryHandler"
 Cohesion: 0.43
@@ -1586,12 +1583,12 @@ Cohesion: 0.43
 Nodes (7): GetSuppliersQuery, GetSuppliersQueryHandler, CancellationToken, IMapper, List, Response, Task
 
 ### Community 297 - "SupplierType"
-Cohesion: 0.32
+Cohesion: 0.28
 Nodes (6): SupplierType, BasicSupplierTypes, Items, Dictionary, SupplierTypeConfiguration, EntityTypeBuilder
 
-### Community 298 - "CountifyDbContextFactory"
-Cohesion: 0.29
-Nodes (6): CountifyDbContextFactory, DesignTimeCurrentUserService, Guid, UserId, UserName, IDesignTimeDbContextFactory
+### Community 298 - "BasicAccounts"
+Cohesion: 0.36
+Nodes (4): BasicAccounts, Items, Account, system_linq
 
 ### Community 299 - "DeleteAccountsReceivableConceptCommand"
 Cohesion: 0.33
@@ -1618,8 +1615,8 @@ Cohesion: 0.38
 Nodes (4): PayableDocumentDraftFactory, PayableDraftCreationResult, CancellationToken, Task
 
 ### Community 305 - "Seeding — GENERALIZADO (base para futuras entidades/fases)"
-Cohesion: 0.12
-Nodes (15): Seeding — GENERALIZADO (base para futuras entidades/fases), ISeeder, CancellationToken, Task, BasicAccounts, Items, Account, BasicRoles (+7 more)
+Cohesion: 0.08
+Nodes (24): Seeding — GENERALIZADO (base para futuras entidades/fases), ISeeder, CancellationToken, Task, SeederOptions, Enabled, SeedConfiguration, SeedTransactions (+16 more)
 
 ### Community 307 - "BankTransactionTypeDto"
 Cohesion: 0.40
@@ -1629,13 +1626,13 @@ Nodes (5): BankTransactionTypeDto, Code, Id, MovementType, TransactionType
 Cohesion: 0.40
 Nodes (4): Permissions, Items, Permission, system_reflection
 
-### Community 309 - "PaymentMethodsController.cs"
-Cohesion: 0.18
-Nodes (8): CreatePaymentMethodCommandValidator, UpdatePaymentMethodCommandValidator, PaymentMethodProfile, Countify.Application.Features.PaymentMethods.Queries.GetPaymentMethods, Countify.Application.Features.PaymentMethods.Commands.DeletePaymentMethod, Countify.Application.Features.PaymentMethods.Commands.UpdatePaymentMethod, Countify.Application.Features.PaymentMethods.Profiles, Countify.Application.Features.PaymentMethods.Commands.CreatePaymentMethod
+### Community 309 - "DeleteAccountingPeriodCommand"
+Cohesion: 0.33
+Nodes (6): DeleteAccountingPeriodCommand, Id, DeleteAccountingPeriodCommandHandler, CancellationToken, Guid, Task
 
-### Community 310 - ".BuildTargetModel"
-Cohesion: 0.40
-Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
+### Community 310 - "20261018214026_AddPayableConcepts.Designer.cs"
+Cohesion: 0.18
+Nodes (7): Guid, MigrationBuilder, AddPayableConcepts, DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 311 - ".Up"
 Cohesion: 0.40
@@ -1649,69 +1646,73 @@ Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 Cohesion: 0.40
 Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
-### Community 314 - ".Up"
-Cohesion: 0.40
-Nodes (3): DateTime, Guid, MigrationBuilder
+### Community 314 - ".BuildTargetModel"
+Cohesion: 0.18
+Nodes (7): DateTime, Guid, MigrationBuilder, DateTime, DateTimeOffset, Guid, ModelBuilder
 
-### Community 315 - ".BuildTargetModel"
-Cohesion: 0.40
-Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
+### Community 315 - "DeleteFiscalControlCommand"
+Cohesion: 0.33
+Nodes (6): DeleteFiscalControlCommand, Id, DeleteFiscalControlCommandHandler, CancellationToken, Guid, Task
 
-### Community 316 - ".BuildTargetModel"
-Cohesion: 0.40
-Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
+### Community 316 - "20261020195016_AddInvoicePayments.Designer.cs"
+Cohesion: 0.18
+Nodes (7): Guid, MigrationBuilder, AddInvoicePayments, DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 318 - "InvoicePaymentTerms"
 Cohesion: 0.50
 Nodes (3): InvoicePaymentTerms, Contado, Credito
 
-### Community 321 - "Countify.Domain.Entities.Inventory"
-Cohesion: 0.07
-Nodes (23): InventoryMovementTypeProfile, LocationProfile, WarehouseProfile, countify_domain_entities_accounting, countify_domain_entities_accountspayable, countify_domain_entities_accountsreceivable, countify_domain_entities_audit, countify_domain_entities_auth (+15 more)
+### Community 319 - "GetPendingInventoryRequestsQuery"
+Cohesion: 0.52
+Nodes (6): GetPendingInventoryRequestsQuery, GetPendingInventoryRequestsQueryHandler, CancellationToken, List, Response, Task
+
+### Community 321 - "UpdateWarehouseCommand.cs"
+Cohesion: 0.25
+Nodes (5): WarehouseProfile, Countify.Application.Features.Warehouses.Commands.UpdateWarehouse, Countify.Application.Features.Warehouses.Commands.CreateWarehouse, Countify.Application.Features.Warehouses.Profiles, Countify.Application.Features.Warehouses.DTOs
 
 ### Community 323 - ".GetCurrentUser"
-Cohesion: 0.17
-Nodes (9): ICurrentUserService, Guid, UserId, UserName, CurrentUserService, Guid, UserId, UserName (+1 more)
+Cohesion: 0.11
+Nodes (15): ICurrentUserService, Guid, UserId, UserName, CountifyDbContextFactory, DesignTimeCurrentUserService, Guid, UserId (+7 more)
 
 ### Community 324 - "BankPolicies"
 Cohesion: 0.43
 Nodes (4): BankPolicies, AuthorizationOptions, CurrencyPolicies, AuthorizationOptions
 
-### Community 325 - "GetDepartmentsQueryHandler"
-Cohesion: 0.24
-Nodes (11): DepartmentDto, Code, Id, Name, Guid, GetDepartmentsQuery, GetDepartmentsQueryHandler, CancellationToken (+3 more)
+### Community 325 - "DeleteProductAccountCommand"
+Cohesion: 0.33
+Nodes (6): DeleteProductAccountCommand, Id, DeleteProductAccountCommandHandler, CancellationToken, Guid, Task
 
-### Community 326 - "CreatePaymentMethodCommand"
-Cohesion: 0.24
-Nodes (11): CreatePaymentMethodCommand, Description, IsDefault, IsInactive, Name, CreatePaymentMethodCommandHandler, CancellationToken, Guid (+3 more)
+### Community 326 - "DeleteQualityCommand"
+Cohesion: 0.33
+Nodes (6): DeleteQualityCommand, Id, DeleteQualityCommandHandler, CancellationToken, Guid, Task
 
 ### Community 327 - "CancellationToken"
 Cohesion: 0.33
 Nodes (3): AccountsReceivableDocumentDraftRequest, CancellationToken, Task
 
 ### Community 329 - "InventoryMovementTypeDto"
-Cohesion: 0.20
-Nodes (10): InventoryMovementTypeDto, ChecksStock, Code, Direction, GeneratesPosting, Id, IsInactive, IsSystem (+2 more)
+Cohesion: 0.18
+Nodes (11): InventoryMovementTypeDto, ChecksStock, Code, CountsForStock, Direction, GeneratesPosting, Id, IsInactive (+3 more)
 
-### Community 332 - "AccountsReceivableConceptsController.cs"
-Cohesion: 0.22
-Nodes (6): CreateAccountsReceivableConceptCommandValidator, UpdateAccountsReceivableConceptCommandValidator, Countify.Application.Features.AccountsReceivableConcepts.Commands.DeleteAccountsReceivableConcept, Countify.Application.Features.AccountsReceivableConcepts.Commands.CreateAccountsReceivableConcept, Countify.Application.Features.AccountsReceivableConcepts.Commands.UpdateAccountsReceivableConcept, Countify.Application.Features.AccountsReceivableConcepts.Queries.GetAccountsReceivableConcepts
+### Community 332 - "DeleteUserCommand"
+Cohesion: 0.33
+Nodes (6): DeleteUserCommand, Id, DeleteUserCommandHandler, CancellationToken, Task, UserManager
 
-### Community 333 - "CreateDepartmentCommand"
-Cohesion: 0.31
-Nodes (8): CreateDepartmentCommand, Code, Name, CreateDepartmentCommandHandler, CancellationToken, Guid, IMapper, Task
+### Community 333 - "Warehouse"
+Cohesion: 0.29
+Nodes (7): Warehouse, Code, IsDefault, IsInactive, Locations, Name, ICollection
 
-### Community 336 - "InvoicePayment"
-Cohesion: 0.25
-Nodes (8): InvoicePayment, Amount, Invoice, InvoiceId, PaymentMethodId, Guid, InvoicePaymentConfiguration, EntityTypeBuilder
+### Community 336 - "IncomeStatementLineDto"
+Cohesion: 0.33
+Nodes (6): IncomeStatementLineDto, AccountCode, AccountId, AccountName, Balance, Guid
 
 ### Community 337 - "TransactionSeeder"
 Cohesion: 0.47
 Nodes (5): TransactionSeeder, CancellationToken, ILogger, IOptions, Task
 
-### Community 338 - "AuthController"
-Cohesion: 0.57
-Nodes (4): AuthController, HttpPost, IActionResult, Task
+### Community 338 - "InventoryMovementDirection"
+Cohesion: 0.40
+Nodes (4): InventoryMovementDirection, Entry, Exit, NoStock
 
 ### Community 339 - "DeleteInventoryMovementTypeCommand"
 Cohesion: 0.36
@@ -1725,9 +1726,9 @@ Nodes (7): GetInventoryMovementTypesQuery, GetInventoryMovementTypesQueryHandler
 Cohesion: 0.36
 Nodes (7): DeleteLocationCommand, Id, DeleteLocationCommandHandler, CancellationToken, Guid, Response, Task
 
-### Community 342 - "GetLocationsQueryHandler"
-Cohesion: 0.43
-Nodes (7): GetLocationsQuery, GetLocationsQueryHandler, CancellationToken, IMapper, List, Response, Task
+### Community 342 - ".BuildTargetModel"
+Cohesion: 0.40
+Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 343 - "DeletePayableDocumentLineCommand"
 Cohesion: 0.36
@@ -1741,43 +1742,23 @@ Nodes (7): DeletePaymentMethodCommand, Id, DeletePaymentMethodCommandHandler, Ca
 Cohesion: 0.36
 Nodes (7): DeleteWarehouseCommand, Id, DeleteWarehouseCommandHandler, CancellationToken, Guid, Response, Task
 
-### Community 346 - "RequestParameter"
-Cohesion: 0.25
-Nodes (7): RequestParameter, All, Column, Order, PageNumber, PageSize, Parameter
+### Community 346 - ".BuildTargetModel"
+Cohesion: 0.40
+Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
+
+### Community 348 - ".BuildTargetModel"
+Cohesion: 0.40
+Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
 ### Community 353 - "DeleteAccountCommand"
 Cohesion: 0.33
 Nodes (6): DeleteAccountCommand, Id, DeleteAccountCommandHandler, CancellationToken, Guid, Task
 
-### Community 354 - "DeleteAccountsReceivableDocumentAttachmentCommand"
-Cohesion: 0.33
-Nodes (6): DeleteAccountsReceivableDocumentAttachmentCommand, Id, DeleteAccountsReceivableDocumentAttachmentCommandHandler, CancellationToken, Guid, Task
-
-### Community 355 - "PaymentMethod"
-Cohesion: 0.38
-Nodes (5): PaymentMethod, BasicPaymentMethods, Items, PaymentMethodConfiguration, EntityTypeBuilder
-
-### Community 358 - "GetCompanySettingsQuery"
-Cohesion: 0.40
-Nodes (5): GetCompanySettingsQuery, GetCompanySettingsQueryHandler, CancellationToken, IMapper, Task
-
 ### Community 360 - ".BuildTargetModel"
 Cohesion: 0.40
 Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
-### Community 363 - ".BuildTargetModel"
-Cohesion: 0.40
-Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
-
-### Community 364 - ".BuildTargetModel"
-Cohesion: 0.40
-Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
-
 ### Community 365 - ".BuildTargetModel"
-Cohesion: 0.40
-Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
-
-### Community 366 - ".BuildTargetModel"
 Cohesion: 0.40
 Nodes (4): DateTime, DateTimeOffset, Guid, ModelBuilder
 
@@ -1786,24 +1767,24 @@ Cohesion: 0.67
 Nodes (3): Warehouse, WarehouseConfiguration, EntityTypeBuilder
 
 ## Knowledge Gaps
-- **2061 isolated node(s):** `Code`, `Name`, `Direction`, `ChecksStock`, `GeneratesPosting` (+2056 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 3338 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **39 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **2204 isolated node(s):** `CompanyName`, `TaxId`, `Address`, `Phone`, `Mobile` (+2199 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 3529 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **40 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `IUnitOfWork` connect `IUnitOfWork` to `UpdateCompanySettingsCommand`, `InventoryMovementType`, `Response`, `CustomerTypeDto`, `SupplierTypeDto`, `IRequest`, `CurrencyFeatures.cs`, `GetTrialBalanceQuery`, `UnitOfWork`, `AccountMovementsResponse`, `HistoryDto`, `LoginCommandHandler`, `UserDto`, `UpdateJournalEntryCommand`, `CreateAccountCommand`, `AccountDto`, `CreateJournalEntryCommand`, `BudgetsController`, `ProductAccountDto`, `GetRoleByIdQueryHandler`, `PaymentMethodDto`, `IRequestHandler`, `CreateCustomerCommand`, `CreateLocationCommand`, `DocumentTypeDto`, `UpdateLocationCommand`, `AccountingPeriodDto`, `CreateAccountsReceivableConceptCommand`, `GetProjectsQuery`, `IncomeStatementDto`, `SalesJournalBatchDto`, `GetJournalEntriesQuery`, `PaginatedResponse`, `SetInvoicePaymentsCommand`, `CreateAccountsReceivableDocumentCommand`, `UpdateSupplierCommand`, `CreateProjectCommand`, `UpdateInvoiceCommand`, `WarehouseDto`, `CreateSupplierTypeCommand`, `.ValidateAsync`, `CreateFiscalControlCommand`, `CreateSupplierCommand`, `UpdateDocumentTypeCommand`, `CreateInvoiceCommand`, `PayableDocumentLine`, `UserRoleHasPermissionRequirement`, `CreateCustomerTypeCommand`, `.Handle`, `GetCustomerMovementsQuery`, `DeleteAccountsReceivableDocumentLineCommand`, `UpdatePayableDocumentCommand`, `CreatePayableDocumentCommand`, `DeleteJournalEntryCommand`, `UpdateCustomerTypeCommand`, `Location`, `CreateDocumentTypeCommand`, `CreateInventoryMovementTypeCommand`, `GetPendingAccountsReceivableDocumentsQuery`, `UpdateInventoryMovementTypeCommand`, `GetAccountsReceivableDocumentByIdQuery`, `UpdateWarehouseCommand`, `GetCustomersQueryHandler`, `CreateQualityCommand`, `UpdateAccountsReceivableDocumentLineCommand`, `UpdateProjectCommand`, `DeleteCustomerCommand`, `GetAccountsReceivableDocumentsQueryHandler`, `UpdateRolePermissionsCommand`, `DeleteProjectGroupCommand`, `GetAccountByIdQuery`, `.AssignAsync`, `InvoicePaymentDto`, `GetUserInfoQueryHandler`, `CloseAccountingPeriodCommand`, `GetJournalEntryByIdQuery`, `VoidAccountsReceivableDocumentCommand`, `VoidJournalEntryCommand`, `DeleteDepartmentCommand`, `DeleteSupplierTypeCommand`, `.ValidateAsync`, `.CreateAsync`, `UpdatePayableConceptCommand`, `DeleteDocumentTypeCommand`, `CreatePayableConceptCommand`, `UploadPayableDocumentAttachmentCommand`, `GetPayableDocumentAttachmentQuery`, `.CreateOrUpdatePostingAsync`, `GetSupplierMovementsQuery`, `UploadAccountsReceivableDocumentAttachmentCommand`, `DeleteProductCommand`, `GetAccountsReceivableDocumentAttachmentQuery`, `GetProductsQueryHandler`, `GetProjectGroupsQueryHandler`, `GetQualitiesQueryHandler`, `UpdateSupplierTypeCommand`, `UpdatePaymentMethodCommand`, `GetPendingPayableDocumentsQuery`, `UpdateDepartmentCommand`, `UpdateProductCommand`, `UpdateProjectGroupCommand`, `UpdateQualityCommand`, `MarkInvoicePrintedCommand`, `DeleteProjectCommand`, `.CreateOrUpdatePostingAsync`, `VoidInvoiceCommand`, `GetInvoiceByIdQuery`, `.CreateForInvoiceAsync`, `CreateWarehouseCommand`, `DeletePayableDocumentAttachmentCommand`, `UpdatePayableDocumentLineCommand`, `GetPayableDocumentByIdQuery`, `CreateProjectGroupCommand`, `UpdateReceiptNumberCommand`, `GetInvoicesQueryHandler`, `DeletePayableConceptCommand`, `GetPayableConceptsQueryHandler`, `VoidPayableDocumentCommand`, `GetPayableDocumentsQueryHandler`, `DeleteSupplierCommand`, `GetSuppliersQueryHandler`, `DeleteAccountsReceivableConceptCommand`, `GetAccountsReceivableConceptsQueryHandler`, `DeleteCustomerTypeCommand`, `GetFiscalControlsQueryHandler`, `.AssignAsync`, `.CreateAsync`, `Countify.Domain.Entities.Inventory`, `GetDepartmentsQueryHandler`, `CreatePaymentMethodCommand`, `CreateDepartmentCommand`, `DeleteInventoryMovementTypeCommand`, `GetInventoryMovementTypesQueryHandler`, `DeleteLocationCommand`, `GetLocationsQueryHandler`, `DeletePayableDocumentLineCommand`, `DeletePaymentMethodCommand`, `DeleteWarehouseCommand`, `DeleteAccountCommand`, `DeleteAccountsReceivableDocumentAttachmentCommand`, `GetCompanySettingsQuery`, `Warehouse`?**
-  _High betweenness centrality (0.206) - this node is a cross-community bridge._
-- **Why does `Response` connect `Response` to `CustomerTypeDto`, `CurrencyFeatures.cs`, `.HandleResult`, `GetTrialBalanceQuery`, `AccountMovementsResponse`, `HistoryDto`, `LoginCommandHandler`, `CreateAccountCommand`, `BudgetsController`, `UpdateUserCommand`, `GetRoleByIdQueryHandler`, `IRequestHandler`, `CreateCustomerCommand`, `DocumentTypeDto`, `AccountingPeriodDto`, `CreateAccountsReceivableConceptCommand`, `GetUserByIdQueryHandler`, `IncomeStatementDto`, `UpdateAccountCommand`, `AuthResponse`, `UpdateAccountsReceivableDocumentCommand`, `UpdateCustomerCommand`, `PaginatedResponse`, `CreateAccountsReceivableDocumentCommand`, `UpdateFiscalControlCommand`, `UpdateRoleCommand`, `CreateProjectCommand`, `AssignRoleCommand`, `UpdateDocumentTypeCommand`, `PayableDocumentLine`, `CreateCustomerTypeCommand`, `.Handle`, `GetCustomerMovementsQuery`, `DeleteAccountsReceivableDocumentLineCommand`, `DeleteJournalEntryCommand`, `UpdateCustomerTypeCommand`, `CreateDocumentTypeCommand`, `GetPendingAccountsReceivableDocumentsQuery`, `CreateRoleCommand`, `GetAccountsReceivableDocumentByIdQuery`, `GetCustomersQueryHandler`, `CreateQualityCommand`, `UpdateAccountsReceivableDocumentLineCommand`, `UpdateProjectCommand`, `DeleteCustomerCommand`, `GetAccountsReceivableDocumentsQueryHandler`, `UpdateRolePermissionsCommand`, `ChangePasswordCommand`, `DeleteProjectGroupCommand`, `GetAccountByIdQuery`, `.AssignAsync`, `GetUserInfoQueryHandler`, `CloseAccountingPeriodCommand`, `GetJournalEntryByIdQuery`, `VoidAccountsReceivableDocumentCommand`, `VoidJournalEntryCommand`, `DeleteDepartmentCommand`, `DeleteDocumentTypeCommand`, `CreateUserCommand`, `UploadAccountsReceivableDocumentAttachmentCommand`, `DeleteProductCommand`, `GetAccountsReceivableDocumentAttachmentQuery`, `ForgotPasswordCommandHandler`, `GetProductsQueryHandler`, `GetProjectGroupsQueryHandler`, `GetQualitiesQueryHandler`, `UpdateAccountsReceivableConceptCommand`, `UpdateDepartmentCommand`, `UpdateProductCommand`, `UpdateProjectGroupCommand`, `UpdateQualityCommand`, `DeleteProjectCommand`, `CreateProjectGroupCommand`, `UpdateReceiptNumberCommand`, `DeleteAccountsReceivableConceptCommand`, `GetAccountsReceivableConceptsQueryHandler`, `DeleteCustomerTypeCommand`, `GetFiscalControlsQueryHandler`, `GetDepartmentsQueryHandler`, `CreateDepartmentCommand`, `DeleteAccountCommand`, `DeleteAccountsReceivableDocumentAttachmentCommand`, `GetCompanySettingsQuery`?**
-  _High betweenness centrality (0.121) - this node is a cross-community bridge._
-- **Why does `Countify.Domain.Entities.Accounting` connect `Countify.Domain.Entities.Accounting` to `Countify.Domain.Interfaces`, `microsoft_aspnetcore_authorization`, `Countify.Domain.Entities.AccountsPayable`, `DepartmentsController.cs`, `microsoft_entityframeworkcore`, `IRequest`, `Profile`, `CurrencyFeatures.cs`, `ProjectGroupsController.cs`, `DocumentTypesController.cs`?**
-  _High betweenness centrality (0.062) - this node is a cross-community bridge._
-- **What connects `Code`, `Name`, `Direction` to the rest of the system?**
-  _2061 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `IUnitOfWork` connect `IUnitOfWork` to `UpdateCompanySettingsCommand`, `GetDepartmentsQueryHandler`, `InventoryMovementType`, `Response`, `UpdateCustomerTypeCommand`, `SupplierTypeDto`, `IRequest`, `CurrencyFeatures.cs`, `CompanySettingsDto`, `UnitOfWork`, `AccountMovementsResponse`, `HistoryDto`, `AuthResponse`, `UserDto`, `UpdateJournalEntryCommand`, `CreateAccountCommand`, `AccountDto`, `CreateJournalEntryCommand`, `ApplicationUser`, `BudgetsController`, `InventoryMovement`, `GetRoleByIdQueryHandler`, `PaymentMethodDto`, `IRequestHandler`, `CreateCustomerCommand`, `CreateLocationCommand`, `DocumentTypeDto`, `UpdateLocationCommand`, `AccountingPeriodDto`, `CreateAccountsReceivableConceptCommand`, `GetProjectsQuery`, `GetIncomeStatementQuery`, `SalesJournalBatchDto`, `Permisos (patrón de futuras fases también)`, `GetJournalEntriesQuery`, `RequestParameter`, `SetInvoicePaymentsCommand`, `CreateAccountsReceivableDocumentCommand`, `UpdateSupplierCommand`, `LocationDto`, `InventoryMovementsController.cs`, `.SaveChangesAsync`, `CreateInventoryMovementCommand`, `UpdateInvoiceCommand`, `WarehouseDto`, `CreateSupplierTypeCommand`, `.ValidateAsync`, `CreateFiscalControlCommand`, `CreateSupplierCommand`, `UpdateDocumentTypeCommand`, `InventoryMovementLine`, `CreateInvoiceCommand`, `Countify.Domain.Entities.Auth`, `PayableDocumentLine`, `UpdateInventoryMovementCommand`, `CreateCustomerTypeCommand`, `.Handle`, `GetCustomerMovementsQuery`, `UpdatePayableDocumentCommand`, `CreatePayableDocumentCommand`, `DeleteJournalEntryCommand`, `PaginatedResponse`, `CreateDocumentTypeCommand`, `CreateInventoryMovementTypeCommand`, `GetPendingAccountsReceivableDocumentsQuery`, `UpdateInventoryMovementTypeCommand`, `GetAccountsReceivableDocumentByIdQuery`, `UpdateWarehouseCommand`, `GetCustomersQueryHandler`, `CreateQualityCommand`, `GetInventoryStockQuery`, `UpdateProjectCommand`, `DeleteCustomerCommand`, `GetAccountsReceivableDocumentsQueryHandler`, `UpdateRolePermissionsCommand`, `DeleteProjectGroupCommand`, `GetAccountByIdQuery`, `.AssignAsync`, `InvoicePaymentDto`, `GetInventoryMovementByIdQuery`, `CloseAccountingPeriodCommand`, `CreateProductCommand`, `DeleteSupplierTypeCommand`, `.ValidateAsync`, `.CreateAsync`, `UpdatePayableConceptCommand`, `DeleteDocumentTypeCommand`, `DeleteInventoryMovementCommand`, `CreatePayableConceptCommand`, `UploadPayableDocumentAttachmentCommand`, `GetPayableDocumentAttachmentQuery`, `.CreateOrUpdatePostingAsync`, `GetSupplierMovementsQuery`, `UploadAccountsReceivableDocumentAttachmentCommand`, `DeleteProductCommand`, `GetAccountsReceivableDocumentAttachmentQuery`, `GetProductsQueryHandler`, `GetProjectGroupsQueryHandler`, `GetQualitiesQueryHandler`, `UpdateSupplierTypeCommand`, `UpdatePaymentMethodCommand`, `GetPendingPayableDocumentsQuery`, `UpdateDepartmentCommand`, `UpdateProductCommand`, `UpdateProjectGroupCommand`, `UpdateQualityCommand`, `MarkInvoicePrintedCommand`, `GetInventoryMovementsQueryHandler`, `.CreateOrUpdatePostingAsync`, `VoidInvoiceCommand`, `GetInvoiceByIdQuery`, `.CreateForInvoiceAsync`, `CreateWarehouseCommand`, `DeletePayableDocumentAttachmentCommand`, `UpdatePayableDocumentLineCommand`, `GetPayableDocumentByIdQuery`, `CreateProjectGroupCommand`, `UpdateReceiptNumberCommand`, `GetInvoicesQueryHandler`, `DeletePayableConceptCommand`, `GetPayableConceptsQueryHandler`, `GetPayableDocumentsQueryHandler`, `DeleteSupplierCommand`, `GetSuppliersQueryHandler`, `DeleteAccountsReceivableConceptCommand`, `GetAccountsReceivableConceptsQueryHandler`, `DeleteCustomerTypeCommand`, `GetFiscalControlsQueryHandler`, `.AssignAsync`, `.CreateAsync`, `DeleteAccountingPeriodCommand`, `DeleteFiscalControlCommand`, `GetPendingInventoryRequestsQuery`, `DeleteProductAccountCommand`, `DeleteQualityCommand`, `DeleteInventoryMovementTypeCommand`, `GetInventoryMovementTypesQueryHandler`, `DeleteLocationCommand`, `DeletePayableDocumentLineCommand`, `DeletePaymentMethodCommand`, `DeleteWarehouseCommand`, `DeleteAccountCommand`?**
+  _High betweenness centrality (0.200) - this node is a cross-community bridge._
+- **Why does `Response` connect `Response` to `GetProjectGroupsQueryHandler`, `GetQualitiesQueryHandler`, `UpdateAccountsReceivableConceptCommand`, `GetDepartmentsQueryHandler`, `UpdateCustomerTypeCommand`, `JournalEntriesController`, `UpdateDepartmentCommand`, `CurrencyFeatures.cs`, `.HandleResult`, `UpdateDocumentTypeCommand`, `UpdateProductCommand`, `UpdateProjectGroupCommand`, `CompanySettingsDto`, `UpdateQualityCommand`, `PayableDocumentLine`, `AccountMovementsResponse`, `HistoryDto`, `CreateCustomerTypeCommand`, `AuthResponse`, `UpdateReceiptNumberCommand`, `.Handle`, `GetCustomerMovementsQuery`, `CreateProjectGroupCommand`, `DeleteJournalEntryCommand`, `PaginatedResponse`, `CreateDocumentTypeCommand`, `DeleteAccountsReceivableConceptCommand`, `CreateAccountCommand`, `GetAccountsReceivableConceptsQueryHandler`, `GetPendingAccountsReceivableDocumentsQuery`, `DeleteCustomerTypeCommand`, `GetFiscalControlsQueryHandler`, `ApplicationUser`, `BudgetsController`, `DeleteAccountingPeriodCommand`, `GetAccountsReceivableDocumentByIdQuery`, `GetRoleByIdQueryHandler`, `GetCustomersQueryHandler`, `IRequestHandler`, `CreateCustomerCommand`, `DeleteFiscalControlCommand`, `DocumentTypeDto`, `CreateQualityCommand`, `UpdateProjectCommand`, `DeleteProductAccountCommand`, `DeleteCustomerCommand`, `GetAccountsReceivableDocumentsQueryHandler`, `AccountingPeriodDto`, `CreateAccountsReceivableConceptCommand`, `DeleteProjectGroupCommand`, `DeleteQualityCommand`, `GetAccountByIdQuery`, `.AssignAsync`, `UpdateRolePermissionsCommand`, `DeleteUserCommand`, `GetIncomeStatementQuery`, `CloseAccountingPeriodCommand`, `UpdateAccountCommand`, `CreateProductCommand`, `VoidJournalEntryCommand`, `UpdateAccountsReceivableDocumentCommand`, `UserInfoResponse`, `UpdateCustomerCommand`, `CreateUserCommand`, `DeleteDocumentTypeCommand`, `DeleteAccountCommand`, `GetUserByIdQueryHandler`, `CreateAccountsReceivableDocumentCommand`, `UpdateFiscalControlCommand`, `UpdateRoleCommand`, `.SaveChangesAsync`, `UploadAccountsReceivableDocumentAttachmentCommand`, `DeleteProductCommand`, `GetAccountsReceivableDocumentAttachmentQuery`, `GetProductsQueryHandler`?**
+  _High betweenness centrality (0.116) - this node is a cross-community bridge._
+- **Why does `Countify.Domain.Entities.Accounting` connect `Countify.Domain.Entities.Accounting` to `Countify.Domain.Interfaces`, `microsoft_entityframeworkcore`, `Budget`, `DocumentType`, `IRequest`, `microsoft_aspnetcore_authorization`, `CurrencyFeatures.cs`, `BankTransactionType`, `Countify.Domain.Entities.Auth`, `BudgetLine`, `ProductAccount`, `Product`, `BasicAccounts`, `Profile`, `AccountingPeriod`, `ProjectGroup`, `Currency`, `YearEndClosingEntry`, `BasicCompanySettings`, `fluentvalidation`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+- **What connects `CompanyName`, `TaxId`, `Address` to the rest of the system?**
+  _2204 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Countify.Domain.Interfaces` be split into smaller, more focused modules?**
-  _Cohesion score 0.05499507874015748 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.053203793661808926 - nodes in this community are weakly interconnected._
 - **Should `UpdateCompanySettingsCommand` be split into smaller, more focused modules?**
-  _Cohesion score 0.0735632183908046 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06417112299465241 - nodes in this community are weakly interconnected._
 - **Should `CountifyDbContext` be split into smaller, more focused modules?**
-  _Cohesion score 0.022727272727272728 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.022222222222222223 - nodes in this community are weakly interconnected._
