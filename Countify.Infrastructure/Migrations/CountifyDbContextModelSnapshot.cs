@@ -2695,6 +2695,18 @@ namespace Countify.Infrastructure.Migrations
                             Id = 138,
                             Description = "Anular movimientos de inventario.",
                             Name = "CanVoidInventoryMovements"
+                        },
+                        new
+                        {
+                            Id = 139,
+                            Description = "Ver períodos de inventario.",
+                            Name = "CanViewInventoryPeriods"
+                        },
+                        new
+                        {
+                            Id = 140,
+                            Description = "Crear/cerrar/reabrir períodos de inventario.",
+                            Name = "CanManageInventoryPeriods"
                         });
                 });
 
@@ -3402,6 +3414,16 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 138
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 139
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 140
                         });
                 });
 
@@ -3909,6 +3931,39 @@ namespace Countify.Infrastructure.Migrations
                     b.ToTable("InventoryMovementTypes", (string)null);
                 });
 
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.InventoryPeriod", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Month")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("PeriodFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PeriodTo")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Month")
+                        .IsUnique();
+
+                    b.ToTable("InventoryPeriods", (string)null);
+                });
+
             modelBuilder.Entity("Countify.Domain.Entities.Inventory.Location", b =>
                 {
                     b.Property<Guid>("Id")
@@ -3957,6 +4012,43 @@ namespace Countify.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Locations", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.ProductCostHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Cost")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("InventoryPeriodId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryPeriodId", "ProductId")
+                        .IsUnique();
+
+                    b.ToTable("ProductCostHistories", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Inventory.Warehouse", b =>
@@ -4917,6 +5009,17 @@ namespace Countify.Infrastructure.Migrations
                     b.Navigation("Project");
 
                     b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Inventory.ProductCostHistory", b =>
+                {
+                    b.HasOne("Countify.Domain.Entities.Inventory.InventoryPeriod", "InventoryPeriod")
+                        .WithMany()
+                        .HasForeignKey("InventoryPeriodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryPeriod");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

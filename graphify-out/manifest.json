@@ -3564,9 +3564,9 @@
     "semantic_hash": ""
   },
   "Countify.Api/Controllers/InventoryMovementsController.cs": {
-    "mtime": 1792701056.71629,
-    "seen": 1792702048.6926334,
-    "ast_hash": "1c7156cc40267318cc087bc1cdcee151",
+    "mtime": 1792848614.0488331,
+    "seen": 1792848972.3822494,
+    "ast_hash": "50b2d3f3f9f3c2c7d8cb80059057ce64",
     "semantic_hash": ""
   },
   "Countify.Application/Features/InventoryMovements/Commands/CreateInventoryMovement/CreateInventoryMovementCommand.cs": {
@@ -3681,6 +3681,12 @@
     "mtime": 1792700186.5794554,
     "seen": 1792702048.6931508,
     "ast_hash": "31c2c2614ebc17d6bca6c30b22324159",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/TemplateBuilder/InventoryStockPdfBuilder.cs": {
+    "mtime": 1792848647.1439595,
+    "seen": 1792848972.3830597,
+    "ast_hash": "ae14357d8acc0dc3ba4dc8a00e9b3531",
     "semantic_hash": ""
   }
 }

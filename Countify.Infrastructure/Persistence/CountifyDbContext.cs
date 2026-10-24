@@ -67,6 +67,8 @@ public DbSet<FiscalControl> FiscalControls { get; set; }
     public DbSet<InventoryMovementType> InventoryMovementTypes { get; set; }
     public DbSet<InventoryMovement> InventoryMovements { get; set; }
     public DbSet<InventoryMovementLine> InventoryMovementLines { get; set; }
+    public DbSet<InventoryPeriod> InventoryPeriods { get; set; }
+    public DbSet<ProductCostHistory> ProductCostHistories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

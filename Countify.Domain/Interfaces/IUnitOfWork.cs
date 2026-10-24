@@ -61,6 +61,8 @@ public interface IUnitOfWork : IDisposable
     IRepository<InventoryMovementType> InventoryMovementTypes { get; }
     IRepository<InventoryMovement> InventoryMovements { get; }
     IRepository<InventoryMovementLine> InventoryMovementLines { get; }
+    IRepository<InventoryPeriod> InventoryPeriods { get; }
+    IRepository<ProductCostHistory> ProductCostHistories { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

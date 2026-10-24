@@ -181,6 +181,10 @@ public class Permissions
     public static readonly Permission CanEditInventoryMovements = Permission.Create(137, nameof(CanEditInventoryMovements), "Editar/eliminar movimientos de inventario.");
     public static readonly Permission CanVoidInventoryMovements = Permission.Create(138, nameof(CanVoidInventoryMovements), "Anular movimientos de inventario.");
 
+    // Inventarios - Períodos y costeo
+    public static readonly Permission CanViewInventoryPeriods = Permission.Create(139, nameof(CanViewInventoryPeriods), "Ver períodos de inventario.");
+    public static readonly Permission CanManageInventoryPeriods = Permission.Create(140, nameof(CanManageInventoryPeriods), "Crear/cerrar/reabrir períodos de inventario.");
+
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(fieldInfo => fieldInfo.FieldType == typeof(Permission))
