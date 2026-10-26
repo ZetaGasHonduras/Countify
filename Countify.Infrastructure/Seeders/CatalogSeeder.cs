@@ -33,6 +33,7 @@ public class CatalogSeeder(
             await SeedDocumentTypeAsync(cancellationToken);
             await SeedPaymentMethodsAsync(cancellationToken);
             await SeedInventoryCatalogAsync(cancellationToken);
+            await SeedPosCatalogAsync(cancellationToken);
         }
 
         if (options.Value.SeedTransactions)
@@ -73,6 +74,19 @@ public class CatalogSeeder(
 
         if (!await context.Locations.AnyAsync(cancellationToken))
             context.Locations.Add(BasicInventoryCatalog.DefaultLocation);
+    }
+
+    private async Task SeedPosCatalogAsync(CancellationToken cancellationToken)
+    {
+        if (await context.CashRegisters.AnyAsync(cancellationToken))
+            return;
+
+        context.CashRegisters.Add(new Countify.Domain.Entities.Billing.CashRegister
+        {
+            Code = "CAJA1",
+            Name = "Caja Principal",
+            IsDefault = true,
+        });
     }
 
     /// <summary>
@@ -210,6 +224,11 @@ public class CatalogSeeder(
             }
 
             context.Customers.AddRange(BasicCustomers.Items);
+        }
+        else if (!await context.Customers.AnyAsync(c => c.Code == BasicCustomers.ConsumerFinal.Code, cancellationToken))
+        {
+            // Bases ya sembradas antes de FASE 5-B: se agrega el Consumidor Final que les falta.
+            context.Customers.Add(BasicCustomers.ConsumerFinal);
         }
     }
 

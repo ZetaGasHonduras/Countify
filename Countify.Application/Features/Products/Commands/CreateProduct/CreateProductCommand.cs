@@ -10,6 +10,9 @@ public class CreateProductCommand : IRequest<Response<Guid>>
 {
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
+
+    /// <summary>Precio de venta por defecto (legacy Preciounit). 0 = sin precio.</summary>
+    public decimal SalePrice { get; set; }
 }
 
 public class CreateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)

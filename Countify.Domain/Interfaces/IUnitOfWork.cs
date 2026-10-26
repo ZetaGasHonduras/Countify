@@ -63,6 +63,8 @@ public interface IUnitOfWork : IDisposable
     IRepository<InventoryMovementLine> InventoryMovementLines { get; }
     IRepository<InventoryPeriod> InventoryPeriods { get; }
     IRepository<ProductCostHistory> ProductCostHistories { get; }
+    IRepository<CashRegister> CashRegisters { get; }
+    IRepository<Cashier> Cashiers { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

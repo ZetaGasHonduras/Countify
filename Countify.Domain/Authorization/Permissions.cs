@@ -185,6 +185,16 @@ public class Permissions
     public static readonly Permission CanViewInventoryPeriods = Permission.Create(139, nameof(CanViewInventoryPeriods), "Ver períodos de inventario.");
     public static readonly Permission CanManageInventoryPeriods = Permission.Create(140, nameof(CanManageInventoryPeriods), "Crear/cerrar/reabrir períodos de inventario.");
 
+    // FASE 5-B Caja/POS - Catálogos
+    public static readonly Permission CanViewCashRegisters = Permission.Create(141, nameof(CanViewCashRegisters), "Ver cajas.");
+    public static readonly Permission CanCreateCashRegisters = Permission.Create(142, nameof(CanCreateCashRegisters), "Crear cajas.");
+    public static readonly Permission CanEditCashRegisters = Permission.Create(143, nameof(CanEditCashRegisters), "Editar cajas.");
+    public static readonly Permission CanDeleteCashRegisters = Permission.Create(144, nameof(CanDeleteCashRegisters), "Eliminar cajas.");
+    public static readonly Permission CanViewCashiers = Permission.Create(145, nameof(CanViewCashiers), "Ver cajeros.");
+    public static readonly Permission CanCreateCashiers = Permission.Create(146, nameof(CanCreateCashiers), "Crear cajeros.");
+    public static readonly Permission CanEditCashiers = Permission.Create(147, nameof(CanEditCashiers), "Editar cajeros.");
+    public static readonly Permission CanDeleteCashiers = Permission.Create(148, nameof(CanDeleteCashiers), "Eliminar cajeros.");
+
     public static Permission[] Items { get; } = typeof(Permissions)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
         .Where(fieldInfo => fieldInfo.FieldType == typeof(Permission))

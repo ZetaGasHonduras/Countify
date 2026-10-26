@@ -38,6 +38,7 @@ public static class ApiServiceRegistration
         services.ConfigureOptions<InvoicePolicies>();
         services.ConfigureOptions<SalesJournalBatchPolicies>();
         services.ConfigureOptions<InventoryCatalogPolicies>();
+        services.ConfigureOptions<PosCatalogPolicies>();
 
         services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
         return services;

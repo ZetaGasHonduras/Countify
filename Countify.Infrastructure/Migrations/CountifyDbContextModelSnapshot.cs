@@ -834,10 +834,18 @@ namespace Countify.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<decimal>("LastCost")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("SalePrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -2720,6 +2728,54 @@ namespace Countify.Infrastructure.Migrations
                             Id = 140,
                             Description = "Crear/cerrar/reabrir períodos de inventario.",
                             Name = "CanManageInventoryPeriods"
+                        },
+                        new
+                        {
+                            Id = 141,
+                            Description = "Ver cajas.",
+                            Name = "CanViewCashRegisters"
+                        },
+                        new
+                        {
+                            Id = 142,
+                            Description = "Crear cajas.",
+                            Name = "CanCreateCashRegisters"
+                        },
+                        new
+                        {
+                            Id = 143,
+                            Description = "Editar cajas.",
+                            Name = "CanEditCashRegisters"
+                        },
+                        new
+                        {
+                            Id = 144,
+                            Description = "Eliminar cajas.",
+                            Name = "CanDeleteCashRegisters"
+                        },
+                        new
+                        {
+                            Id = 145,
+                            Description = "Ver cajeros.",
+                            Name = "CanViewCashiers"
+                        },
+                        new
+                        {
+                            Id = 146,
+                            Description = "Crear cajeros.",
+                            Name = "CanCreateCashiers"
+                        },
+                        new
+                        {
+                            Id = 147,
+                            Description = "Editar cajeros.",
+                            Name = "CanEditCashiers"
+                        },
+                        new
+                        {
+                            Id = 148,
+                            Description = "Eliminar cajeros.",
+                            Name = "CanDeleteCashiers"
                         });
                 });
 
@@ -3437,7 +3493,114 @@ namespace Countify.Infrastructure.Migrations
                         {
                             RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
                             PermissionId = 140
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 141
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 142
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 143
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 144
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 145
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 146
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 147
+                        },
+                        new
+                        {
+                            RoleId = "f3d1e2c4-0000-0000-0000-000000000001",
+                            PermissionId = 148
                         });
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Billing.CashRegister", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("CashRegisters", (string)null);
+                });
+
+            modelBuilder.Entity("Countify.Domain.Entities.Billing.Cashier", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<bool>("IsInactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UserId")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Cashiers", (string)null);
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.Billing.Invoice", b =>

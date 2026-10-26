@@ -62,6 +62,8 @@ public DbSet<FiscalControl> FiscalControls { get; set; }
     public DbSet<InvoiceLine> InvoiceLines { get; set; }
     public DbSet<InvoicePayment> InvoicePayments { get; set; }
     public DbSet<SalesJournalBatch> SalesJournalBatches { get; set; }
+    public DbSet<CashRegister> CashRegisters { get; set; }
+    public DbSet<Cashier> Cashiers { get; set; }
     public DbSet<Warehouse> Warehouses { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<InventoryMovementType> InventoryMovementTypes { get; set; }

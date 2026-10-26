@@ -19,7 +19,13 @@ public static class BasicCustomers
         rtn: "08019000001234", email: "info@palmero.hn", phone: "2235-1000",
         address: "Zona Vivero, San Pedro Sula");
 
-    public static Customer[] Items { get; } = [Lempira, SanJorge, Palmero];
+    public static Customer[] Items { get; } = [Lempira, SanJorge, Palmero, ConsumerFinal];
+
+    /// <summary>Venta de mostrador sin cliente identificado (el legacy usaba un cliente genérico).</summary>
+    public static readonly Customer ConsumerFinal = NewCustomer(
+        "CLI-999", "Consumidor Final",
+        rtn: "05019999900101",
+        address: "Venta de mostrador");
 
     public static Customer CashCustomer => Palmero;
 

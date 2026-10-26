@@ -11,6 +11,9 @@ public class UpdateProductCommand : IRequest<Response<bool>>
     public Guid Id { get; set; }
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
+
+    /// <summary>Precio de venta por defecto (legacy Preciounit). 0 = sin precio.</summary>
+    public decimal SalePrice { get; set; }
 }
 
 public class UpdateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)

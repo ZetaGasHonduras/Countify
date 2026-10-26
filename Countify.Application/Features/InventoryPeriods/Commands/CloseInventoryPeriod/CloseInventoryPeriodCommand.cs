@@ -61,6 +61,11 @@ public class CloseInventoryPeriodCommandHandler(IUnitOfWork unitOfWork)
             var product = products.FirstOrDefault(p => p.Id == productId);
             if (product is null) continue;
 
+            // Paridad legacy: el promedio cerrado queda cargado en el producto
+            // (legacy Productos.Costo/Costopro) para prellenar costos en ajustes/POS.
+            product.LastCost = cost;
+            await unitOfWork.Products.UpdateAsync(product, cancellationToken);
+
             await unitOfWork.ProductCostHistories.AddAsync(new ProductCostHistory
             {
                 InventoryPeriodId = period.Id,
