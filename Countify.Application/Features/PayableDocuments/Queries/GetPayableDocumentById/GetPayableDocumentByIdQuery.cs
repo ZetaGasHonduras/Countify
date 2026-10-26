@@ -25,6 +25,13 @@ public class GetPayableDocumentByIdQueryHandler(IUnitOfWork unitOfWork, IMapper 
                 .Include(d => d.Department)
                 .Include(d => d.Project)
                 .Include(d => d.Currency)
+                .Include(d => d.Warehouse)
+                .Include(d => d.InventoryMovement)
+                    .ThenInclude(m => m!.Lines)
+                        .ThenInclude(l => l.Product)
+                .Include(d => d.InventoryMovement)
+                    .ThenInclude(m => m!.Lines)
+                        .ThenInclude(l => l.Location)
                 .Include(d => d.Lines)
                     .ThenInclude(l => l.AppliedDocument)
                         .ThenInclude(a => a.Concept)
@@ -39,6 +46,32 @@ public class GetPayableDocumentByIdQueryHandler(IUnitOfWork unitOfWork, IMapper 
             return Response<PayableDocumentDto>.NotFound($"Documento por pagar {request.Id} no encontrado.");
 
         var dto = mapper.Map<PayableDocumentDto>(document);
+
+        // Líneas del ingreso (producto/ubicación snapshot del movimiento COM).
+        if (document.InventoryMovement is not null)
+        {
+            dto.PurchaseEntryLines = document.InventoryMovement.Lines
+                .OrderBy(l => l.Order)
+                .Select(l => new PurchaseEntryLineDto
+                {
+                    Id = l.Id,
+                    ProductId = l.ProductId,
+                    ProductCode = l.Product?.Code,
+                    ProductName = l.Product?.Name,
+                    Description = l.Description,
+                    Unit = l.Unit,
+                    LocationId = l.LocationId,
+                    LocationCode = l.Location?.Code,
+                    LocationName = l.Location?.Name,
+                    Quantity = l.Quantity,
+                    UnitCost = l.UnitCost,
+                    TaxRate = l.TaxRate,
+                    TaxAmount = l.TaxAmount,
+                    LineTotal = l.LineTotal,
+                })
+                .ToList();
+        }
+
         var total = Math.Round(document.Amount + document.Tax, 2);
 
         decimal paid = 0, applied = 0;

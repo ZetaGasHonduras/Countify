@@ -1063,6 +1063,12 @@ namespace Countify.Infrastructure.Migrations
                         .HasPrecision(18, 6)
                         .HasColumnType("decimal(18,6)");
 
+                    b.Property<Guid?>("InventoryMovementId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsPurchaseEntry")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsVoided")
                         .HasColumnType("bit");
 
@@ -1107,6 +1113,9 @@ namespace Countify.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid?>("WarehouseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ConceptId");
@@ -1118,11 +1127,15 @@ namespace Countify.Infrastructure.Migrations
                     b.HasIndex("DocumentNo")
                         .IsUnique();
 
+                    b.HasIndex("InventoryMovementId");
+
                     b.HasIndex("JournalEntryId");
 
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("SupplierId");
+
+                    b.HasIndex("WarehouseId");
 
                     b.ToTable("PayableDocuments", (string)null);
                 });
@@ -4573,6 +4586,11 @@ namespace Countify.Infrastructure.Migrations
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Countify.Domain.Entities.Inventory.InventoryMovement", "InventoryMovement")
+                        .WithMany()
+                        .HasForeignKey("InventoryMovementId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Countify.Domain.Entities.Accounting.JournalEntry", "JournalEntry")
                         .WithMany()
                         .HasForeignKey("JournalEntryId")
@@ -4589,17 +4607,26 @@ namespace Countify.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Countify.Domain.Entities.Inventory.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Concept");
 
                     b.Navigation("Currency");
 
                     b.Navigation("Department");
 
+                    b.Navigation("InventoryMovement");
+
                     b.Navigation("JournalEntry");
 
                     b.Navigation("Project");
 
                     b.Navigation("Supplier");
+
+                    b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("Countify.Domain.Entities.AccountsPayable.PayableDocumentAttachment", b =>

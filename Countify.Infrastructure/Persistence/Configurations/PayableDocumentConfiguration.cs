@@ -94,5 +94,15 @@ public class PayableDocumentConfiguration : IEntityTypeConfiguration<PayableDocu
             .WithMany()
             .HasForeignKey(x => x.JournalEntryId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(x => x.Warehouse)
+            .WithMany()
+            .HasForeignKey(x => x.WarehouseId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(x => x.InventoryMovement)
+            .WithMany()
+            .HasForeignKey(x => x.InventoryMovementId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

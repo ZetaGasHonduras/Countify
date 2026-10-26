@@ -1,5 +1,6 @@
 using Countify.Domain.Entities.Accounting;
 using Countify.Domain.Entities.AccountsPayable;
+using Countify.Domain.Entities.Inventory;
 using Countify.Domain.Enums;
 using Countify.Domain.Interfaces;
 using Countify.Domain.Seeders;
@@ -7,15 +8,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Countify.Application.Features.PayableDocuments;
 
-internal static class PayablePostingFactory
+/// <summary>
+/// Partida de un documento de CxP. Espejo modernizado del patrón legacy de
+/// <c>CXPDocumentos</c> + partida (Débito cuenta del concepto / Crédito proveedor;
+/// pagos: invertido). Los Ingresos de Compras usan la rama
+/// <see cref="CreateOrUpdatePurchaseEntryAsync"/> (débitos por cuenta de inventario).
+/// </summary>
+internal static partial class PayablePostingFactory
 {
     public static async Task<string?> CreateOrUpdatePostingAsync(
         IUnitOfWork unitOfWork,
         PayableDocument document,
         Supplier supplier,
         PayableConcept concept,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        InventoryMovement? purchaseMovement = null)
     {
+        // Ingreso de Compras: la partida va por cuenta de inventario de producto,
+        // no por la cuenta del concepto (rama propia en .PurchaseEntry.cs).
+        if (document.IsPurchaseEntry)
+        {
+            var movement = purchaseMovement;
+
+            if (movement is null)
+            {
+                if (document.InventoryMovementId is not Guid movementId)
+                    return "El ingreso de compras no tiene movimiento de inventario enlazado.";
+
+                movement = await unitOfWork.InventoryMovements.Query()
+                    .Include(m => m.Lines)
+                    .FirstOrDefaultAsync(m => m.Id == movementId, cancellationToken);
+            }
+
+            if (movement is null)
+                return "No se pudo cargar el movimiento de inventario del ingreso de compras.";
+
+            return await CreateOrUpdatePurchaseEntryAsync(unitOfWork, document, supplier, movement, cancellationToken);
+        }
+
         if (!concept.GeneratePosting)
             return null;
 

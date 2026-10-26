@@ -55,6 +55,18 @@ public class PayableDocumentDto
     public string? Correlative { get; set; }
     public DateTime? EmissionLimitDate { get; set; }
 
+    public Guid? JournalEntryId { get; set; }
+
+    // --- Ingreso de Compras (FASE 6 Etapa 5) ---
+    public bool IsPurchaseEntry { get; set; }
+    public Guid? WarehouseId { get; set; }
+    public string? WarehouseName { get; set; }
+    public Guid? InventoryMovementId { get; set; }
+    public string? InventoryMovementCode { get; set; }
+
+    /// <summary>Líneas del 'COM' enlazado (producto/ubicación/cantidad/costo/ISV).</summary>
+    public List<PurchaseEntryLineDto> PurchaseEntryLines { get; set; } = [];
+
     public List<PayableDocumentLineDto> Lines { get; set; } = [];
     public List<PayableDocumentAttachmentDto> Attachments { get; set; } = [];
 }

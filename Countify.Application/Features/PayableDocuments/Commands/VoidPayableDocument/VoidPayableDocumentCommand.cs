@@ -21,6 +21,7 @@ public class VoidPayableDocumentCommandHandler(IUnitOfWork unitOfWork)
         var document = await unitOfWork.PayableDocuments.FirstOrDefaultAsync(
             unitOfWork.PayableDocuments.Query()
                 .Include(d => d.JournalEntry)
+                .Include(d => d.InventoryMovement)
                 .Where(d => d.Id == request.Id),
             cancellationToken);
         if (document is null)
@@ -36,6 +37,16 @@ public class VoidPayableDocumentCommandHandler(IUnitOfWork unitOfWork)
         document.IsVoided = true;
         if (document.JournalEntry is not null)
             document.JournalEntry.Status = JournalEntryStatus.Voided;
+
+        // Ingreso de Compras: el movimiento 'COM' se anula junto con el documento
+        // (las existencias se recalculan solas: el calculador excluye anulados).
+        if (document.InventoryMovement is { IsVoided: false } movement)
+        {
+            movement.IsVoided = true;
+            movement.VoidedAt = DateTime.UtcNow;
+            movement.VoidReason = $"Anulado junto con el documento CxP {document.DocumentNo}.";
+            await unitOfWork.InventoryMovements.UpdateAsync(movement, cancellationToken);
+        }
 
         await unitOfWork.PayableDocuments.UpdateAsync(document, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);

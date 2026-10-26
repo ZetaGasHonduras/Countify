@@ -1230,9 +1230,9 @@
     "semantic_hash": "f1669d648a62e6b71287373b9def9cd3"
   },
   "Countify.Domain/Authorization/Permissions.cs": {
-    "mtime": 1792700334.284014,
-    "seen": 1792702048.693011,
-    "ast_hash": "a68a8efcfb73ebe7e6344d1609e543f7",
+    "mtime": 1792849314.780387,
+    "seen": 1792850833.559114,
+    "ast_hash": "227fb257742536194f2040b0e0751e51",
     "semantic_hash": ""
   },
   "Countify.Domain/Common/BaseEntity.cs": {
@@ -1428,9 +1428,9 @@
     "semantic_hash": "081867598bf063e449c3175c248953a3"
   },
   "Countify.Domain/Interfaces/IUnitOfWork.cs": {
-    "mtime": 1792700290.6107721,
-    "seen": 1792702048.6930668,
-    "ast_hash": "501e3cadd18e373ca391e80dbf81f493",
+    "mtime": 1792849265.8726764,
+    "seen": 1792850833.5591784,
+    "ast_hash": "60e398a65bccd8d983b57d9e4f1c6ed1",
     "semantic_hash": ""
   },
   "Countify.Domain/Interfaces/SeederOptions.cs": {
@@ -1614,9 +1614,9 @@
     "semantic_hash": "b1ca3d853fce60d9a8fe4992ddeae6df"
   },
   "Countify.Infrastructure/Migrations/CountifyDbContextModelSnapshot.cs": {
-    "mtime": 1792701174.0861473,
-    "seen": 1792702048.6931305,
-    "ast_hash": "d7993a44ccb50f3f37e7836a0c0029b8",
+    "mtime": 1792849558.6843493,
+    "seen": 1792850833.5592523,
+    "ast_hash": "a3b674d00a45b58c11b688aa1531d96a",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Configurations/AccountConfiguration.cs": {
@@ -1770,9 +1770,9 @@
     "semantic_hash": "dd1890e0de38921b5fe61f22063fbf8c"
   },
   "Countify.Infrastructure/Persistence/CountifyDbContext.cs": {
-    "mtime": 1792700289.4424362,
-    "seen": 1792702048.6931796,
-    "ast_hash": "d6f166a69a5be833242d40d5c1c45fbc",
+    "mtime": 1792849261.5758502,
+    "seen": 1792850833.5593076,
+    "ast_hash": "0e451004be6a625b1eaaf7cf77a79998",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/CountifyDbContextFactory.cs": {
@@ -1788,9 +1788,9 @@
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Services/UnitOfWork.cs": {
-    "mtime": 1792700312.6445997,
-    "seen": 1792702048.6931827,
-    "ast_hash": "7f2b9600409dd9ad4f906b2d1e176fe2",
+    "mtime": 1792849309.1896644,
+    "seen": 1792850833.5593107,
+    "ast_hash": "f3560c83c1c793651736ebff3d34734a",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/CatalogSeeder.cs": {
@@ -3372,9 +3372,9 @@
     "semantic_hash": ""
   },
   "Countify.Api/Authorization/Policies/InventoryCatalogPolicies.cs": {
-    "mtime": 1792700357.0573254,
-    "seen": 1792702048.6925943,
-    "ast_hash": "3cfbf59e59b87dd42842dc2752445cc8",
+    "mtime": 1792849331.542809,
+    "seen": 1792850833.5586474,
+    "ast_hash": "5f1406afa8dcd9ad300cd805e7a0982b",
     "semantic_hash": ""
   },
   "Countify.Api/Controllers/InventoryMovementTypesController.cs": {
@@ -3687,6 +3687,90 @@
     "mtime": 1792848647.1439595,
     "seen": 1792848972.3830597,
     "ast_hash": "ae14357d8acc0dc3ba4dc8a00e9b3531",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/InventoryPeriodsController.cs": {
+    "mtime": 1792849463.9872928,
+    "seen": 1792850833.558691,
+    "ast_hash": "22b2c2dbe92d0640d4776506950ea480",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/Commands/CloseInventoryPeriod/CloseInventoryPeriodCommand.cs": {
+    "mtime": 1792849421.9895926,
+    "seen": 1792850833.5588992,
+    "ast_hash": "314538dfd794d062d108fb763ae63496",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/Commands/CreateInventoryPeriod/CreateInventoryPeriodCommand.cs": {
+    "mtime": 1792849359.407972,
+    "seen": 1792850833.5589,
+    "ast_hash": "e04f16c30c4bc042939669b6bfb4e74b",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/Commands/ReopenInventoryPeriod/ReopenInventoryPeriodCommand.cs": {
+    "mtime": 1792849425.0263822,
+    "seen": 1792850833.5589015,
+    "ast_hash": "bb274e910ef56431aff586ba3f170469",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/DTOs/InventoryPeriodDto.cs": {
+    "mtime": 1792849361.9811687,
+    "seen": 1792850833.5589023,
+    "ast_hash": "5d957c614dd034d3302ea64efed8fe8e",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/Queries/GetInventoryPeriodCosts/GetInventoryPeriodCostsQuery.cs": {
+    "mtime": 1792849446.5049846,
+    "seen": 1792850833.5589032,
+    "ast_hash": "2135c8e05320f3287800de0f748f2436",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/Queries/GetInventoryPeriods/GetInventoryPeriodsQuery.cs": {
+    "mtime": 1792849443.5718763,
+    "seen": 1792850833.5589044,
+    "ast_hash": "99eb93e7549ccea519c5eaf82443920d",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/InventoryPeriods/WeightedAverageCostCalculator.cs": {
+    "mtime": 1792849460.7441885,
+    "seen": 1792850833.5589054,
+    "ast_hash": "fb1569f29abaf438ae6ebb5d3626cea5",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Inventory/InventoryPeriod.cs": {
+    "mtime": 1792849217.9381063,
+    "seen": 1792850833.5591664,
+    "ast_hash": "d83c1d23d661b43aefd2534315bba85d",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Inventory/ProductCostHistory.cs": {
+    "mtime": 1792849220.1520603,
+    "seen": 1792850833.5591686,
+    "ast_hash": "dd1378f43e4858007d5902d74bd92a6d",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261024134558_AddInventoryPeriods.Designer.cs": {
+    "mtime": 1792849558.6833496,
+    "seen": 1792850833.5592504,
+    "ast_hash": "fa508f9ace977c6c40144e6ebf4c1cbe",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261024134558_AddInventoryPeriods.cs": {
+    "mtime": 1792849558.6833496,
+    "seen": 1792850833.5592513,
+    "ast_hash": "2deced529dfef1ba4f15ba423fd3ea4d",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/InventoryPeriodConfiguration.cs": {
+    "mtime": 1792849242.1889708,
+    "seen": 1792850833.5592766,
+    "ast_hash": "08fdbd7e5a29aad14519a6e410b6a1e0",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/ProductCostHistoryConfiguration.cs": {
+    "mtime": 1792849244.4702582,
+    "seen": 1792850833.5592933,
+    "ast_hash": "7b580966ca279a43b9114e4a1fb30b91",
     "semantic_hash": ""
   }
 }

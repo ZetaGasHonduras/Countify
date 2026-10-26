@@ -22,6 +22,7 @@ public class GetPayableDocumentsQueryHandler(IUnitOfWork unitOfWork, IMapper map
                 .Include(d => d.Department)
                 .Include(d => d.Project)
                 .Include(d => d.Currency)
+                .Include(d => d.Warehouse)
                 .OrderByDescending(d => d.DocumentNo),
             cancellationToken);
 

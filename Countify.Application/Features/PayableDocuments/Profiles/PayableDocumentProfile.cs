@@ -19,6 +19,8 @@ public class PayableDocumentProfile : Profile
             .ForMember(d => d.ProjectName, o => o.MapFrom(s => s.Project != null ? s.Project.Name : null))
             .ForMember(d => d.CurrencyCode, o => o.MapFrom(s => s.Currency != null ? s.Currency.Code : null))
             .ForMember(d => d.AmountLocal, o => o.MapFrom(s => Math.Round(s.Amount * s.ExchangeRate, 2)))
+            .ForMember(d => d.WarehouseName, o => o.MapFrom(s => s.Warehouse != null ? s.Warehouse.Name : null))
+            .ForMember(d => d.InventoryMovementCode, o => o.MapFrom(s => s.InventoryMovement != null ? s.InventoryMovement.Code : null))
             .ForMember(d => d.Total, o => o.MapFrom(s => Math.Round(s.Amount + s.Tax, 2)))
             .ForMember(d => d.TotalLocal, o => o.MapFrom(s => Math.Round(s.Amount * s.ExchangeRate + s.TaxLocal, 2)))
             .ForMember(d => d.OutstandingAmount, o => o.MapFrom(s =>

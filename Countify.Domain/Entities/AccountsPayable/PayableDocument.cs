@@ -1,5 +1,6 @@
 using Countify.Domain.Common;
 using Countify.Domain.Entities.Accounting;
+using Countify.Domain.Entities.Inventory;
 
 namespace Countify.Domain.Entities.AccountsPayable;
 
@@ -57,6 +58,21 @@ public class PayableDocument : BaseEntity
 
     public Guid? JournalEntryId { get; set; }
     public JournalEntry? JournalEntry { get; set; }
+
+    // --- Ingreso de Compras (FASE 6 Etapa 5) ---
+    /// <summary>
+    /// Documento de compra que además ingresa mercancía al almacén: genera (o enlaza)
+    /// un <see cref="InventoryMovement"/> 'COM' cuya suma de líneas alimenta
+    /// <see cref="Amount"/>/<see cref="Tax"/>. Espejo del "Ingreso de Compras" de CXPDocumentosPadre.
+    /// </summary>
+    public bool IsPurchaseEntry { get; set; }
+
+    public Guid? WarehouseId { get; set; }
+    public Warehouse? Warehouse { get; set; }
+
+    /// <summary>Movimiento de inventario 'COM' generado/actualizado por este documento.</summary>
+    public Guid? InventoryMovementId { get; set; }
+    public InventoryMovement? InventoryMovement { get; set; }
 
     public ICollection<PayableDocumentLine> Lines { get; set; } = new List<PayableDocumentLine>();
     public ICollection<PayableDocumentAttachment> Attachments { get; set; } = new List<PayableDocumentAttachment>();
