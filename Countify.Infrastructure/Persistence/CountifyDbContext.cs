@@ -41,13 +41,13 @@ public class CountifyDbContext(DbContextOptions<CountifyDbContext> options, ICur
     public DbSet<BankTransaction> BankTransactions { get; set; }
     public DbSet<BankReconciliation> BankReconciliations { get; set; }
     public DbSet<Currency> Currencies { get; set; }
-public DbSet<CustomerType> CustomerTypes { get; set; }
-public DbSet<Customer> Customers { get; set; }
-public DbSet<AccountsReceivableConcept> AccountsReceivableConcepts { get; set; }
-public DbSet<AccountsReceivableDocument> AccountsReceivableDocuments { get; set; }
-public DbSet<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; set; }
-public DbSet<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments { get; set; }
-public DbSet<FiscalControl> FiscalControls { get; set; }
+    public DbSet<CustomerType> CustomerTypes { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<AccountsReceivableConcept> AccountsReceivableConcepts { get; set; }
+    public DbSet<AccountsReceivableDocument> AccountsReceivableDocuments { get; set; }
+    public DbSet<AccountsReceivableDocumentLine> AccountsReceivableDocumentLines { get; set; }
+    public DbSet<AccountsReceivableDocumentAttachment> AccountsReceivableDocumentAttachments { get; set; }
+    public DbSet<FiscalControl> FiscalControls { get; set; }
 
     public DbSet<SupplierType> SupplierTypes { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }

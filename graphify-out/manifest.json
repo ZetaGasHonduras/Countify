@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "Countify.Api/DependencyInjection/ApiServiceRegistration.cs": {
-    "mtime": 1792697428.2587607,
-    "seen": 1792698882.8926082,
-    "ast_hash": "12ba076da10aac5b19a513bda9bd57d9",
+    "mtime": 1792987207.0852838,
+    "seen": 1793020899.2360725,
+    "ast_hash": "608653d527385fc1f7093f19144b1e2e",
     "semantic_hash": ""
   },
   "Countify.Api/Middleware/ExceptionHandlerMiddleware.cs": {
@@ -870,10 +870,10 @@
     "semantic_hash": "79a52f83c0594d9f31fa86713a483ac1"
   },
   "Countify.Application/Features/Products/Commands/CreateProduct/CreateProductCommand.cs": {
-    "mtime": 1789679999.1223109,
-    "seen": 1789825500.090112,
-    "ast_hash": "7d616cc2a66e9586a86d771d79b9decb",
-    "semantic_hash": "7d616cc2a66e9586a86d771d79b9decb"
+    "mtime": 1792987551.780556,
+    "seen": 1793020899.2365324,
+    "ast_hash": "08482331f7f247ace73ac0446ab56f56",
+    "semantic_hash": ""
   },
   "Countify.Application/Features/Products/Commands/DeleteProduct/DeleteProductCommand.cs": {
     "mtime": 1789680002.8762562,
@@ -882,16 +882,16 @@
     "semantic_hash": "6cfe933d9819c2219bcb69687ff92ece"
   },
   "Countify.Application/Features/Products/Commands/UpdateProduct/UpdateProductCommand.cs": {
-    "mtime": 1789680000.8745232,
-    "seen": 1789825500.0901136,
-    "ast_hash": "f94b679335fa24e7af727046372b842d",
-    "semantic_hash": "f94b679335fa24e7af727046372b842d"
+    "mtime": 1792987557.8212287,
+    "seen": 1793020899.2365355,
+    "ast_hash": "93095daf5f6c7ab0048b6c11386b8dfe",
+    "semantic_hash": ""
   },
   "Countify.Application/Features/Products/DTOs/ProductDto.cs": {
-    "mtime": 1789679997.591674,
-    "seen": 1789825500.0901146,
-    "ast_hash": "885c86acab038f4cde4fda573b9ee96c",
-    "semantic_hash": "885c86acab038f4cde4fda573b9ee96c"
+    "mtime": 1792987546.4488268,
+    "seen": 1793020899.2365375,
+    "ast_hash": "4b0ef69df155bfc4617b3e1bb74c9e28",
+    "semantic_hash": ""
   },
   "Countify.Application/Features/Products/Profiles/ProductProfile.cs": {
     "mtime": 1789680005.078763,
@@ -1230,9 +1230,9 @@
     "semantic_hash": "f1669d648a62e6b71287373b9def9cd3"
   },
   "Countify.Domain/Authorization/Permissions.cs": {
-    "mtime": 1792849314.780387,
-    "seen": 1792850833.559114,
-    "ast_hash": "227fb257742536194f2040b0e0751e51",
+    "mtime": 1792987158.8851416,
+    "seen": 1793020899.2367082,
+    "ast_hash": "e87a50df1a8014eb3b46dfc3c38b05b9",
     "semantic_hash": ""
   },
   "Countify.Domain/Common/BaseEntity.cs": {
@@ -1338,10 +1338,10 @@
     "semantic_hash": "85b904c652b99517cd75cd97c60f2da8"
   },
   "Countify.Domain/Entities/Accounting/Product.cs": {
-    "mtime": 1789679938.0842657,
-    "seen": 1789825500.0901961,
-    "ast_hash": "607bffb8c176bea9ff8c63afd7ec3511",
-    "semantic_hash": "607bffb8c176bea9ff8c63afd7ec3511"
+    "mtime": 1792986987.2484891,
+    "seen": 1793020899.2367406,
+    "ast_hash": "c0e1d5cbbec29586b91e4280061eb1ae",
+    "semantic_hash": ""
   },
   "Countify.Domain/Entities/Accounting/ProductAccount.cs": {
     "mtime": 1789679938.113313,
@@ -1428,9 +1428,9 @@
     "semantic_hash": "081867598bf063e449c3175c248953a3"
   },
   "Countify.Domain/Interfaces/IUnitOfWork.cs": {
-    "mtime": 1792849265.8726764,
-    "seen": 1792850833.5591784,
-    "ast_hash": "60e398a65bccd8d983b57d9e4f1c6ed1",
+    "mtime": 1792987047.1248958,
+    "seen": 1793020899.236821,
+    "ast_hash": "63cdd94a6d6c10491ce8734e0bdcc3fa",
     "semantic_hash": ""
   },
   "Countify.Domain/Interfaces/SeederOptions.cs": {
@@ -1614,9 +1614,9 @@
     "semantic_hash": "b1ca3d853fce60d9a8fe4992ddeae6df"
   },
   "Countify.Infrastructure/Migrations/CountifyDbContextModelSnapshot.cs": {
-    "mtime": 1792973617.3472648,
-    "seen": 1792974524.4698038,
-    "ast_hash": "7793b73dfc5ceb51da750bdf0fa41b2d",
+    "mtime": 1792987771.0367205,
+    "seen": 1793020899.2369523,
+    "ast_hash": "167a727e88d358d2611385fb58190093",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Configurations/AccountConfiguration.cs": {
@@ -1722,10 +1722,10 @@
     "semantic_hash": "34ebb187e600bcb702ce8f52b9ab285e"
   },
   "Countify.Infrastructure/Persistence/Configurations/ProductConfiguration.cs": {
-    "mtime": 1789679940.3978631,
-    "seen": 1789825500.0902612,
-    "ast_hash": "e231a54a3e1fca3a23b199439288800d",
-    "semantic_hash": "e231a54a3e1fca3a23b199439288800d"
+    "mtime": 1792987045.3917725,
+    "seen": 1793020899.2370274,
+    "ast_hash": "10325bff0eb94348c92fe65a4dca85d0",
+    "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Configurations/ProjectConfiguration.cs": {
     "mtime": 1789159303.8529267,
@@ -1770,9 +1770,9 @@
     "semantic_hash": "dd1890e0de38921b5fe61f22063fbf8c"
   },
   "Countify.Infrastructure/Persistence/CountifyDbContext.cs": {
-    "mtime": 1792849261.5758502,
-    "seen": 1792850833.5593076,
-    "ast_hash": "0e451004be6a625b1eaaf7cf77a79998",
+    "mtime": 1792987046.310978,
+    "seen": 1793020899.2370448,
+    "ast_hash": "943ad03c37835729cd7b6bc9f04a6d1a",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/CountifyDbContextFactory.cs": {
@@ -1788,15 +1788,15 @@
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Persistence/Services/UnitOfWork.cs": {
-    "mtime": 1792849309.1896644,
-    "seen": 1792850833.5593107,
-    "ast_hash": "f3560c83c1c793651736ebff3d34734a",
+    "mtime": 1792987143.7097414,
+    "seen": 1793020899.2370498,
+    "ast_hash": "0115c070b1114e640c5256682d84fdef",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/CatalogSeeder.cs": {
-    "mtime": 1792701306.179387,
-    "seen": 1792702048.6931832,
-    "ast_hash": "47cb0974d5fc995b0488555ff3ff6e1c",
+    "mtime": 1792987479.6872375,
+    "seen": 1793020899.2370515,
+    "ast_hash": "e4097cdc82a59bf93442ad35d6e8dadb",
     "semantic_hash": ""
   },
   "Countify.Infrastructure/Seeders/ConfigurationSeeder.cs": {
@@ -2052,9 +2052,9 @@
     "semantic_hash": ""
   },
   "Countify.Domain/Seeders/BasicCustomers.cs": {
-    "mtime": 1790088002.2124717,
-    "seen": 1790088023.339196,
-    "ast_hash": "470a83d6c10702b9eb94c667ab2853dd",
+    "mtime": 1792987023.2425435,
+    "seen": 1793020899.2368371,
+    "ast_hash": "534f8833da2406b04fc9d78cf5fa0b09",
     "semantic_hash": ""
   },
   "Countify.Api/Authorization/Policies/AccountsReceivableConceptPolicies.cs": {
@@ -3696,9 +3696,9 @@
     "semantic_hash": ""
   },
   "Countify.Application/Features/InventoryPeriods/Commands/CloseInventoryPeriod/CloseInventoryPeriodCommand.cs": {
-    "mtime": 1792849421.9895926,
-    "seen": 1792850833.5588992,
-    "ast_hash": "314538dfd794d062d108fb763ae63496",
+    "mtime": 1792987566.0049627,
+    "seen": 1793020899.236333,
+    "ast_hash": "0d1f65d113aaa5cf1b8ad88b055f72f9",
     "semantic_hash": ""
   },
   "Countify.Application/Features/InventoryPeriods/Commands/CreateInventoryPeriod/CreateInventoryPeriodCommand.cs": {
@@ -3801,6 +3801,132 @@
     "mtime": 1792973615.7740295,
     "seen": 1792974524.469793,
     "ast_hash": "c9e092a519c65841e6dbcaa0d68f0f02",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Authorization/Policies/PosCatalogPolicies.cs": {
+    "mtime": 1792987206.393437,
+    "seen": 1793020899.235981,
+    "ast_hash": "68287a73538da3dfb01ef5bfa39d6b61",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/CashRegistersController.cs": {
+    "mtime": 1792987734.9573188,
+    "seen": 1793020899.2360086,
+    "ast_hash": "7e7d6a45fc18d67ca65d971715ae022b",
+    "semantic_hash": ""
+  },
+  "Countify.Api/Controllers/CashiersController.cs": {
+    "mtime": 1792987739.4783957,
+    "seen": 1793020899.2360106,
+    "ast_hash": "afc2de3a8b00dd12bdd0aa1bcd013bdb",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/CashRegisters/Commands/CreateCashRegister/CreateCashRegisterCommand.cs": {
+    "mtime": 1792987588.1975558,
+    "seen": 1793020899.2362046,
+    "ast_hash": "a48bd0cb90e96bd1d727a1551771a6be",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/CashRegisters/Commands/DeleteCashRegister/DeleteCashRegisterCommand.cs": {
+    "mtime": 1792987597.8820307,
+    "seen": 1793020899.2362058,
+    "ast_hash": "99ea360d77e939034546d7932132fc0c",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/CashRegisters/Commands/UpdateCashRegister/UpdateCashRegisterCommand.cs": {
+    "mtime": 1792987594.4635794,
+    "seen": 1793020899.236207,
+    "ast_hash": "15ba8e6df325d67ca2dfb73dad26c5b9",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/CashRegisters/DTOs/CashRegisterDto.cs": {
+    "mtime": 1792987575.969301,
+    "seen": 1793020899.2362084,
+    "ast_hash": "33cc11ff178d0fa789bb5a83339010ca",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/CashRegisters/Profiles/CashRegisterProfile.cs": {
+    "mtime": 1792987577.6889517,
+    "seen": 1793020899.23621,
+    "ast_hash": "5038c201a65dc2fbaca17b4fed763ca3",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/CashRegisters/Queries/GetCashRegisters/GetCashRegistersQuery.cs": {
+    "mtime": 1792987580.0962474,
+    "seen": 1793020899.2362115,
+    "ast_hash": "1ee584fd9963d95518adb793f1520c26",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Cashiers/Commands/CreateCashier/CreateCashierCommand.cs": {
+    "mtime": 1792987715.6989098,
+    "seen": 1793020899.236213,
+    "ast_hash": "65da4f86377536a7652826d636809e82",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Cashiers/Commands/DeleteCashier/DeleteCashierCommand.cs": {
+    "mtime": 1792987627.9597127,
+    "seen": 1793020899.2362146,
+    "ast_hash": "21beba7ee15154fae1866622ff7c8801",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Cashiers/Commands/UpdateCashier/UpdateCashierCommand.cs": {
+    "mtime": 1792987725.5253892,
+    "seen": 1793020899.2362165,
+    "ast_hash": "6d1c3c2d46afe053e460cb6c70965674",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Cashiers/DTOs/CashierDto.cs": {
+    "mtime": 1792987697.166006,
+    "seen": 1793020899.2362187,
+    "ast_hash": "b62670c9fe282bfac29559c2e26915ca",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Cashiers/Profiles/CashierProfile.cs": {
+    "mtime": 1792987605.7364428,
+    "seen": 1793020899.23622,
+    "ast_hash": "7e56953cc2f62fe0776eab0ccacb124e",
+    "semantic_hash": ""
+  },
+  "Countify.Application/Features/Cashiers/Queries/GetCashiers/GetCashiersQuery.cs": {
+    "mtime": 1792987704.4351783,
+    "seen": 1793020899.236221,
+    "ast_hash": "e392eeaa25968e487ffc1c2066a0a626",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/CashRegister.cs": {
+    "mtime": 1792986988.7016733,
+    "seen": 1793020899.236781,
+    "ast_hash": "e40556d6e0c34f7c6b217887a6459b5b",
+    "semantic_hash": ""
+  },
+  "Countify.Domain/Entities/Billing/Cashier.cs": {
+    "mtime": 1792987674.4685583,
+    "seen": 1793020899.2367823,
+    "ast_hash": "53991882a08d40be3d7d4f77ffd9a049",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261026040930_AddPosCatalogs.Designer.cs": {
+    "mtime": 1792987771.0367205,
+    "seen": 1793020899.236949,
+    "ast_hash": "8f48f71c89cb1901f0f869405194d9bf",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Migrations/20261026040930_AddPosCatalogs.cs": {
+    "mtime": 1792987771.0362163,
+    "seen": 1793020899.2369509,
+    "ast_hash": "a3344783d11ab40f575fb962444cf1ff",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/CashRegisterConfiguration.cs": {
+    "mtime": 1792987020.149696,
+    "seen": 1793020899.2369792,
+    "ast_hash": "8c5639602d7f423361fdae18245543c8",
+    "semantic_hash": ""
+  },
+  "Countify.Infrastructure/Persistence/Configurations/CashierConfiguration.cs": {
+    "mtime": 1792987686.972342,
+    "seen": 1793020899.2369812,
+    "ast_hash": "ed309298eb76d92249667bca6cee5754",
     "semantic_hash": ""
   }
 }
